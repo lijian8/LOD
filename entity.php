@@ -141,18 +141,19 @@ if (isset($name) && $name != '') {
         }
 
         $width = 200;
-       
+
 
         echo '<div class="media">';
-        echo '<a class="pull-left" href="search.php?keywords=' . $name . '">';
 
-        $image_file = 'img/' . $name.'.jpg';
-        if (!is_file(iconv('utf-8', 'gb2312', $image_file))){
-            $image_file = 'img/NA.jpg';
+        $image_file = 'img/' . $name . '.jpg';
+        if (is_file(iconv('utf-8', 'gb2312', $image_file))) {
+            //$image_file = 'img/NA.jpg';
+            echo '<a class="pull-left" href="search.php?keywords=' . $name . '">';
+            echo '<img width="' . $width . '" class="media-object" src="' . $image_file . '" data-src="holder.js/64x64">';
+            echo '</a>';
         }
 
-        echo '<img width="' . $width . '" class="media-object" src="' . $image_file . '" data-src="holder.js/64x64">';
-        echo '</a>';
+
         echo '<div class="media-body"  align ="left">';
         echo '<h2>' . $name . '</h2>';
         echo '<h4>' . $def . '</h4>';
