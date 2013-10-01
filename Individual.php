@@ -39,8 +39,8 @@ function render_property($graph, $me, $p) {
 
     //echo "<p>" . $property->label('zh') . ":&nbsp;";
     echo "<p>" . get_label($property) . ":&nbsp;";
-    
-    
+
+
 
     foreach ($me->all($property) as $o) {
         $label = $o->label();
@@ -76,7 +76,7 @@ function num_of_instances($graph, $type) {
     return count($instances);
 }
 
-$localname = isset($_GET['localname']) ? $_GET['localname'] : 'Syndrome';
+$localname = isset($_GET['localname']) ? $_GET['localname'] : 'kideny_yang_deficiency';
 
 
 $graph = new EasyRdf_Graph("http://localhost/lod/tcmdemoen.rdf");
@@ -85,44 +85,43 @@ $graph->load();
 <div class="container">
 
 
-<?php
-echo "<h1>类:&nbsp;" . $localname . "</h1>";
+    <?php
+    echo "<h1>实例:&nbsp;" . $localname . "</h1>";
 
-$me = $graph->resource('http://www.example.com/' . $localname);
+    $me = $graph->resource('http://www.example.com/' . $localname);
 //echo "<p>" . $me->get('rdfs:comment') . "</p>";
 
-render_literals($graph, $me, 'rdfs:comment');
+    render_literals($graph, $me, 'rdfs:comment');
 
-echo "<p>中文标签: " . $me->label('zh') . "</p>";
-echo "<p>英文标签: " . $me->label('en') . "</p>";
+    echo "<p>中文标签: " . $me->label('zh') . "</p>";
+    echo "<p>英文标签: " . $me->label('en') . "</p>";
 //echo "<p>http://www.example.com/Huperzia_Serrata 的标签是: " . $me->get('rdfs:label') . "</p>";
-render_property($graph, $me, 'rdfs:subClassOf');
+    render_property($graph, $me, 'rdf:type');
 
-echo '<div class="well"><p>实例：&nbsp;|';
-list_instances($graph, 'http://www.example.com/' . $localname);
-echo '</p>';
-echo '</div>';
+//print_r($me->propertyUris());
+    foreach ($me->propertyUris() as $p) {
 
+        $pp = $graph->resource($p);
+        echo "<p>" . get_label($pp) . "</p>";
 
+        foreach ($me->all($pp) as $o) {
+            echo "<p>$me,&nbsp;$p,&nbsp;$o</p>";
+        }
 
-
-
-
-
-
-print_r($me->propertyUris());
-foreach ($me->propertyUris() as $p) {
-    echo "<p>" . $p . "</p>";
-    $pp = $graph->resource($p);
-
-    foreach ($me->all($pp) as $o) {
-        echo "<p>$me,&nbsp;$p,&nbsp;$o</p>";
+        echo '<div class="panel panel-success">';
+        echo '<div class="panel-heading">';
+        echo '<h3 class="panel-title">' . get_label($pp) . '</h3>';
+        echo '</div>';
+        echo '<div class="panel-body">';
+        foreach ($me->all($pp) as $o) {
+          echo "<p>$me,&nbsp;$p,&nbsp;$o</p>";
+        }
+        echo '</div></div>';
     }
-}
-?>
+    ?>
 
 </div>
 
-    <?php
-    include_once ("./foot.php");
-    ?>
+<?php
+include_once ("./foot.php");
+?>
