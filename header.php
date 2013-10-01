@@ -91,7 +91,7 @@ and open the template in the editor.
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav">
                         <li class="active"><a href="index.php">首页</a></li>
-                        <li class="active"><a href="index.php">高级搜索</a></li>
+                        <li><a href="index.php">高级搜索</a></li>
                         <li><a href="#about">关于本站</a></li>
                         <li><a href="#contact">联系我们</a></li>
                     </ul>

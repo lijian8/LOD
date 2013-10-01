@@ -1,0 +1,2293 @@
+<?xml version="1.0"?>
+
+
+<!DOCTYPE rdf:RDF [
+    <!ENTITY www "http://www.example.com/" >
+    <!ENTITY owl "http://www.w3.org/2002/07/owl#" >
+    <!ENTITY dc "http://purl.org/dc/elements/1.1/" >
+    <!ENTITY xsd "http://www.w3.org/2001/XMLSchema#" >
+    <!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#" >
+    <!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#" >
+]>
+
+
+<rdf:RDF xmlns="http://www.example.com/"
+     xml:base="http://www.example.com/"
+     xmlns:dc="http://purl.org/dc/elements/1.1/"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:www="http://www.example.com/"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+    <owl:Ontology rdf:about="http://www.example.com/">
+        <rdfs:comment xml:lang="en">An example of OWL ontology for Traditional Chinese Medicine domain.</rdfs:comment>
+        <rdfs:comment xml:lang="zh">中医药领域本体示例。</rdfs:comment>
+    </owl:Ontology>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Annotation properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    <owl:AnnotationProperty rdf:about="&rdfs;seeAlso"/>
+    <owl:AnnotationProperty rdf:about="&rdfs;isDefinedBy"/>
+    <owl:AnnotationProperty rdf:about="&rdfs;label"/>
+    <owl:AnnotationProperty rdf:about="&rdfs;comment"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Datatypes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral -->
+
+    <rdfs:Datatype rdf:about="&rdf;PlainLiteral"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Object Properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.example.com/adjacent_to -->
+
+    <owl:ObjectProperty rdf:about="&www;adjacent_to">
+        <rdfs:label xml:lang="en">adjacent to</rdfs:label>
+        <rdfs:label xml:lang="zh">与…相邻</rdfs:label>
+        <rdfs:comment xml:lang="en">Close to, near or abutting another physical unit with no other structure of the same kind intervening. This includes adjoins, abuts, is contiguous to, is juxtaposed, and is close to.</rdfs:comment>
+        <rdfs:comment xml:lang="zh">与另一个物理单位紧密地相连的，邻接的，没有其他的同样的结构介入其中。包括毗邻，邻接，邻近的，并列的，紧密联结的。</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="&www;spatially_related_to"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.example.com/affects -->
+
+    <owl:ObjectProperty rdf:about="&www;affects">
+        <rdfs:label xml:lang="en">affects</rdfs:label>
+        <rdfs:label xml:lang="zh">影响</rdfs:label>
+        <rdfs:comment xml:lang="en">Produces a direct effect on. Implied here is the altering or influencing of an existing condition, state, situation, or entity. This includes has a role in, alters, influences, predisposes, catalyzes, stimulates, regulates, depresses, impedes, enhances, contributes to, leads to, and modifies.</rdfs:comment>
+        <rdfs:comment xml:lang="zh">改变或影响现有的条件、状态、情形、实体产生一种直接的效果。包括起作用，改变，影响，预先安排，刺激、促进，管理、控制、调节，压下，阻止，提高、增强，起作用、有助于、促成，引导、致使，更改、修改等。</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="&www;functionally_related_to"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.example.com/analyzes -->
+
+    <owl:ObjectProperty rdf:about="&www;analyzes">
+        <rdfs:label xml:lang="en">analyzes</rdfs:label>
+        <rdfs:label xml:lang="zh">分析</rdfs:label>
+        <rdfs:comment xml:lang="en">Studies or examines using established quantitative or qualitative methods.</rdfs:comment>
+        <rdfs:comment xml:lang="zh">用确定的定量的或定型的方法研究或检查。</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="&www;conceptually_related_to"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.example.com/assesses_effect_of -->
+
+    <owl:ObjectProperty rdf:about="&www;assesses_effect_of">
+        <rdfs:label xml:lang="en">assesses effect of</rdfs:label>
+        <rdfs:label xml:lang="zh">分析评估…的影响</rdfs:label>
+        <rdfs:comment xml:lang="en">Analyzes the influence or consequences of the function or action of.</rdfs:comment>
+        <rdfs:comment xml:lang="zh">分析功能或行为的影响或结果。</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="&www;analyzes"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.example.com/associated_with -->
+
+    <owl:ObjectProperty rdf:about="&www;associated_with">
+        <rdf:type rdf:resource="&owl;SymmetricProperty"/>
+        <rdfs:label xml:lang="en">associated with</rdfs:label>
+        <rdfs:label xml:lang="zh">相关关系链</rdfs:label>
+        <rdfs:comment xml:lang="en">has a significant or salient relationship to</rdfs:comment>
+        <rdfs:comment xml:lang="zh">有重要的或显著的关系</rdfs:comment>
+        <rdfs:domain rdf:resource="&www;ClinicalFinding"/>
+        <rdfs:range rdf:resource="&www;ClinicalFinding"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.example.com/branch_of -->
+
+    <owl:ObjectProperty rdf:about="&www;branch_of">
+        <rdfs:label xml:lang="en">branch of</rdfs:label>
+        <rdfs:label xml:lang="zh">分支</rdfs:label>
+        <rdfs:comment xml:lang="en">Arises from the division of. For example, the arborization of arteries.</rdfs:comment>
+        <rdfs:comment xml:lang="zh">出现于分开的部分。例如，动脉的分支。</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="&www;physically_related_to"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.example.com/brings_about -->
+
+    <owl:ObjectProperty rdf:about="&www;brings_about">
+        <rdfs:label xml:lang="en">brings about</rdfs:label>
+        <rdfs:label xml:lang="zh">带来-造成</rdfs:label>
+        <rdfs:comment xml:lang="en">Acts on or influences an entity.</rdfs:comment>
+        <rdfs:comment xml:lang="zh">作用或影响一个实体</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="&www;functionally_related_to"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.example.com/broaderTransitive -->
+
+    <owl:ObjectProperty rdf:about="&www;broaderTransitive">
+        <rdfs:label xml:lang="en">broaderTransitive</rdfs:label>
+        <rdfs:label xml:lang="zh">传递性上位概念</rdfs:label>
+        <rdfs:subPropertyOf rdf:resource="&www;isa"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.example.com/carries_out -->
+
+    <owl:ObjectProperty rdf:about="&www;carries_out">
+        <rdfs:label xml:lang="en">carries out</rdfs:label>
+        <rdfs:label xml:lang="zh">实施</rdfs:label>
+        <rdfs:comment xml:lang="en">Executes a function or performs a procedure or activity. This includes transacts, operates on, handles, and executes.</rdfs:comment>
+        <rdfs:comment xml:lang="zh">执行一项功能或完成一项手续或活动。包括处理，操作、运转，操纵、运用，实行、执行等。</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="&www;performs"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.example.com/causes -->
+
+    <owl:ObjectProperty rdf:about="&www;causes">
+        <rdfs:label xml:lang="en">causes</rdfs:label>
+        <rdfs:label xml:lang="zh">引起</rdfs:label>
+        <rdfs:comment xml:lang="en">Brings about a condition or an effect. Implied here is that an agent, such as for example, a pharmacologic substance or an organism, has brought about the effect. This includes induces, effects, evokes, and etiology.</rdfs:comment>
+        <rdfs:comment xml:lang="zh">引起一种状态或结果。这里所指的是一种原因，例如，一种药物或有机体产生的结果。包括引起，导致，唤起，病变的原因。</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="&www;brings_about"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.example.com/co-occurs_with -->
+
+    <owl:ObjectProperty rdf:about="&www;co-occurs_with">
+        <rdfs:label xml:lang="en">co-occurs with</rdfs:label>
+        <rdfs:label xml:lang="zh">与…同时发生</rdfs:label>
+        <rdfs:comment xml:lang="en">Occurs at the same time as, together with, or jointly. This includes is co-incident with, is concurrent with, is contemporaneous with, accompanies, coexists with, and is concomitant with.</rdfs:comment>
+        <rdfs:comment xml:lang="zh">在同一时间一起或者共同地、连带地发生。包括同时发生的，并发的，同时期发生的，伴发的，共存的，伴随产生的等。</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="&www;temporally_related_to"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.example.com/complicates -->
+
+    <owl:ObjectProperty rdf:about="&www;complicates">
+        <rdfs:label xml:lang="en">complicates</rdfs:label>
+        <rdfs:label xml:lang="zh">并发</rdfs:label>
+        <rdfs:comment xml:lang="en">Causes to become more severe or complex or results in adverse effects.</rdfs:comment>
+        <rdfs:comment xml:lang="zh">引起变得更严重或更复杂或产生一种不利的结果。</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="&www;affects"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.example.com/conceptual_part_of -->
+
+    <owl:ObjectProperty rdf:about="&www;conceptual_part_of">
+        <rdfs:label xml:lang="en">conceptual part of</rdfs:label>
+        <rdfs:label xml:lang="zh">…的概念部分</rdfs:label>
+        <rdfs:comment xml:lang="en">Conceptually a portion, division, or component of some larger whole.</rdfs:comment>
+        <rdfs:comment xml:lang="zh">概念的一部分，或某个较大整体的组成成分。</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="&www;conceptually_related_to"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.example.com/conceptually_related_to -->
+
+    <owl:ObjectProperty rdf:about="&www;conceptually_related_to">
+        <rdfs:label xml:lang="en">conceptually related to</rdfs:label>
+        <rdfs:label xml:lang="zh">概念上相关</rdfs:label>
+        <rdfs:comment xml:lang="en">Related by some abstract concept, thought, or idea.</rdfs:comment>
+        <rdfs:comment xml:lang="zh">被某些理论性的概念、思想和想法相关。</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="&www;associated_with"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.example.com/connected_to -->
+
+    <owl:ObjectProperty rdf:about="&www;connected_to">
+        <rdfs:label xml:lang="en">connected to</rdfs:label>
+        <rdfs:label xml:lang="zh">与…相连</rdfs:label>
+        <rdfs:comment xml:lang="en">Directly attached to another physical unit as tendons are connected to muscles. This includes attached to and anchored to.</rdfs:comment>
+        <rdfs:comment xml:lang="zh">直接地附着在另一个物理单元上，比如肌腱与肌肉相连。包括附着在…上，固定在…上。</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="&www;physically_related_to"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.example.com/consists_of -->
+
+    <owl:ObjectProperty rdf:about="&www;consists_of">
+        <rdfs:label xml:lang="en">consists of</rdfs:label>
+        <rdfs:label xml:lang="zh">由…组成</rdfs:label>
+        <rdfs:comment xml:lang="en">Is structurally made up of in whole or in part of some material or matter. This includes composed of, made of, and formed of.</rdfs:comment>
+        <rdfs:comment xml:lang="zh">一个整体的结构上的组成部分或者某种材料或物质的构成部分。包括由…组成，由…构成，由…形成等。</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="&www;physically_related_to"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.example.com/contains -->
+
+    <owl:ObjectProperty rdf:about="&www;contains">
+        <rdfs:label xml:lang="en">contains</rdfs:label>
+        <rdfs:label xml:lang="zh">包含</rdfs:label>
+        <rdfs:comment xml:lang="en">Holds or is the receptacle for fluids or other substances. This includes is filled with, holds, and is occupied by.</rdfs:comment>
+        <rdfs:comment xml:lang="zh">包含</rdfs:comment>
+        <rdfs:comment xml:lang="zh">可容纳或者是一个贮藏液体或其他物质的容器。包括被…充满，可容纳，被…占用等。</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="&www;physically_related_to"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.example.com/contains_chemical -->
+
+    <owl:ObjectProperty rdf:about="&www;contains_chemical">
+        <rdfs:label xml:lang="en">contains chemical</rdfs:label>
+        <rdfs:label xml:lang="zh">包含化学物质</rdfs:label>
+        <rdfs:range rdf:resource="&www;Chemical"/>
+        <rdfs:domain rdf:resource="&www;ChineseMedicinal"/>
+        <rdfs:subPropertyOf rdf:resource="&www;contains"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.example.com/contains_herb -->
+
+    <owl:ObjectProperty rdf:about="&www;contains_herb">
+        <rdfs:label xml:lang="en">contains herb</rdfs:label>
+        <rdfs:label xml:lang="zh">包含中草药</rdfs:label>
+        <rdfs:range rdf:resource="&www;ChineseMedicinal"/>
+        <rdfs:domain rdf:resource="&www;Formula"/>
+        <rdfs:subPropertyOf rdf:resource="&www;contains"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.example.com/degree_of -->
+
+    <owl:ObjectProperty rdf:about="&www;degree_of">
+        <rdfs:label xml:lang="en">degree of</rdfs:label>
+        <rdfs:label xml:lang="zh">…的程度-等级</rdfs:label>
+        <rdfs:comment xml:lang="en">The relative intensity of a process or the relative intensity or amount of a quality or attribute.</rdfs:comment>
+        <rdfs:comment xml:lang="zh">一个过程相对的强度，一种属性或性质的相对强度或数量。</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="&www;conceptually_related_to"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.example.com/derivative_of -->
+
+    <owl:ObjectProperty rdf:about="&www;derivative_of">
+        <rdfs:label xml:lang="en">derivative of</rdfs:label>
+        <rdfs:label xml:lang="zh">衍生的</rdfs:label>
+        <rdfs:comment xml:lang="en">In chemistry, a substance structurally related to another or that can be made from the other substance. This is used only for structural relationships. This does not include functional relationships such as metabolite of, by product of, nor analog of.</rdfs:comment>
+        <rdfs:comment xml:lang="zh">化学上，一种物质与另一种物质在结构上相关，或者能够被其他的物质所产生。这仅仅指结构上的关联。不包括功能上的关联比如.…的代谢物，.…的产物，.…的类似物。</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="&www;conceptually_related_to"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.example.com/developmental_form_of -->
+
+    <owl:ObjectProperty rdf:about="&www;developmental_form_of">
+        <rdfs:label xml:lang="en">developmental form of</rdfs:label>
+        <rdfs:label xml:lang="zh">…的发育阶段</rdfs:label>
+        <rdfs:comment xml:lang="en">An earlier stage in the individual maturation of.</rdfs:comment>
+        <rdfs:comment xml:lang="zh">个体成熟过程中的早期阶段。</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="&www;conceptually_related_to"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.example.com/diagnoses -->
+
+    <owl:ObjectProperty rdf:about="&www;diagnoses">
+        <rdfs:label xml:lang="en">diagnoses</rdfs:label>
+        <rdfs:label xml:lang="zh">诊断</rdfs:label>
+        <rdfs:comment xml:lang="en">Distinguishes or identifies the nature or characteristics of.</rdfs:comment>
+        <rdfs:comment xml:lang="zh">区别或鉴别特性或特征。</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="&www;conceptually_related_to"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.example.com/disrupts -->
+
+    <owl:ObjectProperty rdf:about="&www;disrupts">
+        <rdfs:label xml:lang="en">disrupts</rdfs:label>
+        <rdfs:label xml:lang="zh">干扰</rdfs:label>
+        <rdfs:comment xml:lang="en">Alters or influences an already existing condition, state, or situation. Produces a negative effect on.</rdfs:comment>
+        <rdfs:comment xml:lang="zh">改变或影响一个已经存在的条件、状态或情形，产生一种消极的影响。</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="&www;affects"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.example.com/engenders -->
+
+    <owl:ObjectProperty rdf:about="&www;engenders">
+        <rdfs:label xml:lang="en">engenders</rdfs:label>
+        <rdfs:label xml:lang="zh">生</rdfs:label>
+        <rdfs:subPropertyOf rdf:resource="&www;affects"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.example.com/evaluation_of -->
+
+    <owl:ObjectProperty rdf:about="&www;evaluation_of">
+        <rdfs:label xml:lang="en">evaluation of</rdfs:label>
+        <rdfs:label xml:lang="zh">…的评价</rdfs:label>
+        <rdfs:comment xml:lang="en">Judgment of the value or degree of some attribute or process.</rdfs:comment>
+        <rdfs:comment xml:lang="zh">判断某种属性或过程的价值或程度。</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="&www;conceptually_related_to"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.example.com/exhibits -->
+
+    <owl:ObjectProperty rdf:about="&www;exhibits">
+        <rdfs:label xml:lang="en">exhibits</rdfs:label>
+        <rdfs:label xml:lang="zh">展示</rdfs:label>
+        <rdfs:comment xml:lang="en">Shows or demonstrates.</rdfs:comment>
+        <rdfs:comment xml:lang="zh">表示、出示、证明等。</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="&www;performs"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.example.com/functionally_related_to -->
+
+    <owl:ObjectProperty rdf:about="&www;functionally_related_to">
+        <rdfs:label xml:lang="en">functionally related to</rdfs:label>
+        <rdfs:label xml:lang="zh">功能上相关</rdfs:label>
+        <rdfs:comment xml:lang="en">Related by the carrying out of some function or activity.</rdfs:comment>
+        <rdfs:comment xml:lang="zh">由于某些功能或者活动而相关。</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="&www;associated_with"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.example.com/has -->
+
+    <owl:ObjectProperty rdf:about="&www;has">
+        <rdfs:label xml:lang="en">has</rdfs:label>
+        <rdfs:label xml:lang="zh">具有</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.example.com/has_herbal_taste -->
+
+    <owl:ObjectProperty rdf:about="&www;has_herbal_taste">
+        <rdfs:label xml:lang="en">has herbal taste</rdfs:label>
+        <rdfs:label xml:lang="zh">具有药味</rdfs:label>
+        <rdfs:domain rdf:resource="&www;ChineseMedicinal"/>
+        <rdfs:range rdf:resource="&www;FourQiAndFiveFlavors"/>
+        <rdfs:subPropertyOf rdf:resource="&www;has"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.example.com/has_king -->
+
+    <owl:ObjectProperty rdf:about="&www;has_king">
+        <rdfs:label xml:lang="en">has king</rdfs:label>
+        <rdfs:label xml:lang="zh">君药</rdfs:label>
+        <rdfs:subPropertyOf rdf:resource="&www;contains_herb"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.example.com/has_location -->
+
+    <owl:ObjectProperty rdf:about="&www;has_location">
+        <rdfs:label xml:lang="en">has location</rdfs:label>
+        <rdfs:label xml:lang="zh">具有病位</rdfs:label>
+        <rdfs:subPropertyOf rdf:resource="&www;has"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.example.com/has_messenger -->
+
+    <owl:ObjectProperty rdf:about="&www;has_messenger">
+        <rdfs:label xml:lang="en">has messenger</rdfs:label>
+        <rdfs:label xml:lang="zh">使药</rdfs:label>
+        <rdfs:subPropertyOf rdf:resource="&www;contains_herb"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.example.com/has_minister -->
+
+    <owl:ObjectProperty rdf:about="&www;has_minister">
+        <rdfs:label xml:lang="en">has minister</rdfs:label>
+        <rdfs:label xml:lang="zh">臣药</rdfs:label>
+        <rdfs:subPropertyOf rdf:resource="&www;contains_herb"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.example.com/has_subordinate -->
+
+    <owl:ObjectProperty rdf:about="&www;has_subordinate">
+        <rdfs:label xml:lang="en">has subordinate</rdfs:label>
+        <rdfs:label xml:lang="zh">佐药</rdfs:label>
+        <rdfs:subPropertyOf rdf:resource="&www;contains_herb"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.example.com/indicates -->
+
+    <owl:ObjectProperty rdf:about="&www;indicates">
+        <rdfs:label xml:lang="en">indicates</rdfs:label>
+        <rdfs:label xml:lang="zh">证实</rdfs:label>
+        <rdfs:comment xml:lang="en">Gives evidence for the presence at some time of an entity or process.</rdfs:comment>
+        <rdfs:comment xml:lang="zh">为一个实体或过程在某一时间的存在提供证据。</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="&www;functionally_related_to"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.example.com/ingredient_of -->
+
+    <owl:ObjectProperty rdf:about="&www;ingredient_of">
+        <rdfs:label xml:lang="en">ingredient of</rdfs:label>
+        <rdfs:label xml:lang="zh">…成份</rdfs:label>
+        <rdfs:comment xml:lang="en">Is a component of, as in a constituent of a preparation.</rdfs:comment>
+        <rdfs:comment xml:lang="zh">组成成分或构成成分。指一个部分的要素、成分。</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="&www;physically_related_to"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.example.com/inter_exterior_and_interior_with -->
+
+    <owl:ObjectProperty rdf:about="&www;inter_exterior_and_interior_with">
+        <rdfs:label xml:lang="en">inter exterior and interior with</rdfs:label>
+        <rdfs:label xml:lang="zh">与…相表里</rdfs:label>
+        <rdfs:comment xml:lang="en"></rdfs:comment>
+        <rdfs:comment xml:lang="zh">脏腑以及经络之间的阴阳表里关系，反映的是脏腑经络功能上的相互影响。</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="&www;affects"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.example.com/interacts_with -->
+
+    <owl:ObjectProperty rdf:about="&www;interacts_with">
+        <rdfs:label xml:lang="en">interacts with</rdfs:label>
+        <rdfs:label xml:lang="zh">与…相互作用</rdfs:label>
+        <rdfs:comment xml:lang="en">Acts, functions, or operates together with</rdfs:comment>
+        <rdfs:comment xml:lang="zh">与…一起产生效果，起作用</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="&www;affects"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.example.com/interconnects -->
+
+    <owl:ObjectProperty rdf:about="&www;interconnects">
+        <rdfs:label xml:lang="en">interconnects</rdfs:label>
+        <rdfs:label xml:lang="zh">使…相互联系</rdfs:label>
+        <rdfs:comment xml:lang="en">Serves to link or join together two or more other physical units. This includes joins, links, conjoins, articulates, separates, and bridges.</rdfs:comment>
+        <rdfs:comment xml:lang="zh">使两个或多个物理单元连接或结合在一起。包括结合，连接，连结，用关节连接，分离？桥梁连接等。</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="&www;physically_related_to"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.example.com/isa -->
+
+    <owl:ObjectProperty rdf:about="&www;isa">
+        <rdfs:label xml:lang="en">isa</rdfs:label>
+        <rdfs:label xml:lang="en">等级关系链</rdfs:label>
+        <rdfs:label xml:lang="zh">等级关系链</rdfs:label>
+        <rdfs:comment xml:lang="en"></rdfs:comment>
+        <rdfs:comment xml:lang="zh"></rdfs:comment>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.example.com/issue_in -->
+
+    <owl:ObjectProperty rdf:about="&www;issue_in">
+        <rdfs:label xml:lang="en">issue in</rdfs:label>
+        <rdfs:label xml:lang="zh">…之中的焦点问题</rdfs:label>
+        <rdfs:comment xml:lang="en">Is an issue in or a point of discussion, study, debate, or dispute.</rdfs:comment>
+        <rdfs:comment xml:lang="zh">讨论、研究、争论、辩论中的要点、关键。</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="&www;conceptually_related_to"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.example.com/location_of -->
+
+    <owl:ObjectProperty rdf:about="&www;location_of">
+        <rdfs:label xml:lang="en">location of</rdfs:label>
+        <rdfs:label xml:lang="zh">位于…</rdfs:label>
+        <rdfs:comment xml:lang="en">The position, site, or region of an entity or the site of a process.</rdfs:comment>
+        <rdfs:comment xml:lang="zh">位置、场所，一个实体的位置或一个过程的场所。</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="&www;spatially_related_to"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.example.com/manages -->
+
+    <owl:ObjectProperty rdf:about="&www;manages">
+        <rdfs:label xml:lang="en">manages</rdfs:label>
+        <rdfs:label xml:lang="zh">管理</rdfs:label>
+        <rdfs:comment xml:lang="en">Administers, or contributes to the care of an individual or group of individuals.</rdfs:comment>
+        <rdfs:comment xml:lang="zh">管理，有助于照顾个体或由个体组成的团体</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="&www;affects"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.example.com/manifestation_of -->
+
+    <owl:ObjectProperty rdf:about="&www;manifestation_of">
+        <rdfs:label xml:lang="en">manifestation of</rdfs:label>
+        <rdfs:label xml:lang="zh">现象表达</rdfs:label>
+        <rdfs:comment xml:lang="en">That part of a phenomenon which is directly observable or concretely or visibly expressed, or which gives evidence to the underlying process. This includes expression of, display of, and exhibition of.</rdfs:comment>
+        <rdfs:comment xml:lang="zh">能直接地可见的或者能具体地明显地被表示的现象的部分，能显示潜在的过程的现象部分。包括表达，表明，展示，显示等。</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="&www;functionally_related_to"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.example.com/measurement_of -->
+
+    <owl:ObjectProperty rdf:about="&www;measurement_of">
+        <rdfs:label xml:lang="en">measurement of</rdfs:label>
+        <rdfs:label xml:lang="zh">…的测量值</rdfs:label>
+        <rdfs:comment xml:lang="en">The dimension, quantity, or capacity determined by measuring.</rdfs:comment>
+        <rdfs:comment xml:lang="zh">被测量了的尺寸、数量、容量值</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="&www;conceptually_related_to"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.example.com/measures -->
+
+    <owl:ObjectProperty rdf:about="&www;measures">
+        <rdfs:label xml:lang="en">measures</rdfs:label>
+        <rdfs:label xml:lang="zh">测量</rdfs:label>
+        <rdfs:comment xml:lang="en">Ascertains or marks the dimensions, quantity, degree, or capacity of.</rdfs:comment>
+        <rdfs:comment xml:lang="zh">确定或标记尺寸、数量、程度、容量等。</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="&www;conceptually_related_to"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.example.com/meridian_tropism -->
+
+    <owl:ObjectProperty rdf:about="&www;meridian_tropism">
+        <rdfs:label xml:lang="en">meridian tropism</rdfs:label>
+        <rdfs:label xml:lang="zh">归…经</rdfs:label>
+        <rdfs:comment xml:lang="en"></rdfs:comment>
+        <rdfs:comment xml:lang="zh">是药物对机体某部分的选择性作用。归是作用的归属，经是脏腑经络的概称</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="&www;affects"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.example.com/method_of -->
+
+    <owl:ObjectProperty rdf:about="&www;method_of">
+        <rdfs:label xml:lang="en">method of</rdfs:label>
+        <rdfs:label xml:lang="zh">…的方法</rdfs:label>
+        <rdfs:comment xml:lang="en">The manner and sequence of events in performing an act or procedure</rdfs:comment>
+        <rdfs:comment xml:lang="zh">事件在执行或完成一个动作或过程中的方式或顺序。</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="&www;conceptually_related_to"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.example.com/narrowerTransitive -->
+
+    <owl:ObjectProperty rdf:about="&www;narrowerTransitive">
+        <rdfs:label xml:lang="en">narrowerTransitive</rdfs:label>
+        <rdfs:label xml:lang="zh">传递性下位概念</rdfs:label>
+        <rdfs:subPropertyOf rdf:resource="&www;isa"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.example.com/nourishes -->
+
+    <owl:ObjectProperty rdf:about="&www;nourishes">
+        <rdfs:label xml:lang="en">nourishes</rdfs:label>
+        <rdfs:label xml:lang="zh">滋养</rdfs:label>
+        <rdfs:subPropertyOf rdf:resource="&www;engenders"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.example.com/occurs_in -->
+
+    <owl:ObjectProperty rdf:about="&www;occurs_in">
+        <rdfs:label xml:lang="en">occurs in</rdfs:label>
+        <rdfs:label xml:lang="zh">发生于…情况下</rdfs:label>
+        <rdfs:comment xml:lang="en">Takes place in or happens under given conditions, circumstances, or time periods, or in a given location or population. This includes appears in, transpires, comes about, is present in, and exists in.</rdfs:comment>
+        <rdfs:comment xml:lang="zh">在给定的条件、环境、时期里或给定的位置、场所或人口下发生。包括出现于、发生、产生、出现、存在等</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="&www;functionally_related_to"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.example.com/part_of -->
+
+    <owl:ObjectProperty rdf:about="&www;part_of">
+        <rdfs:label xml:lang="en">part of</rdfs:label>
+        <rdfs:label xml:lang="zh">…的部分</rdfs:label>
+        <rdfs:comment xml:lang="en">Composes, with one or more other physical units, some larger whole. This includes component of, division of, portion of, fragment of, section of, and layer of.</rdfs:comment>
+        <rdfs:comment xml:lang="zh">有一个或更多个物理单位组成、构成某些较大的整体；包括…的成分，…的部分，…的片段，…的部件，…的层等。</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="&www;physically_related_to"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.example.com/performs -->
+
+    <owl:ObjectProperty rdf:about="&www;performs">
+        <rdfs:label xml:lang="en">performs</rdfs:label>
+        <rdfs:label xml:lang="zh">执行</rdfs:label>
+        <rdfs:comment xml:lang="en">Executes, accomplishes, or achieves an activity.</rdfs:comment>
+        <rdfs:comment xml:lang="zh">执行、实行；完成、实现：达到一种行为状态。</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="&www;functionally_related_to"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.example.com/physically_related_to -->
+
+    <owl:ObjectProperty rdf:about="&www;physically_related_to">
+        <rdfs:label xml:lang="en">physically related to</rdfs:label>
+        <rdfs:label xml:lang="zh">物理上相关</rdfs:label>
+        <rdfs:comment xml:lang="en">Related by virtue of some physical attribute or characteristic.</rdfs:comment>
+        <rdfs:comment xml:lang="zh">由于某些物理的属性或特征而相关</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="&www;associated_with"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.example.com/practices -->
+
+    <owl:ObjectProperty rdf:about="&www;practices">
+        <rdfs:label xml:lang="en">practices</rdfs:label>
+        <rdfs:label xml:lang="zh">练习</rdfs:label>
+        <rdfs:comment xml:lang="en">Performs habitually or customarily.</rdfs:comment>
+        <rdfs:comment xml:lang="zh">习惯地通常地进行、实行。</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="&www;performs"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.example.com/precedes -->
+
+    <owl:ObjectProperty rdf:about="&www;precedes">
+        <rdfs:label xml:lang="en">precedes</rdfs:label>
+        <rdfs:label xml:lang="zh">先于…发生</rdfs:label>
+        <rdfs:comment xml:lang="en">Occurs earlier in time. This includes antedates, comes before, is in advance of, predates, and is prior to.</rdfs:comment>
+        <rdfs:comment xml:lang="zh">提前发生。包括比实际提前的时间，在…之前发生，提前的，预先的，优先的</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="&www;temporally_related_to"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.example.com/prescribes -->
+
+    <owl:ObjectProperty rdf:about="&www;prescribes">
+        <rdfs:label xml:lang="en">prescribes</rdfs:label>
+        <rdfs:label xml:lang="zh">开处方</rdfs:label>
+        <rdfs:range rdf:resource="&www;MedicinalSubstance"/>
+        <rdfs:domain rdf:resource="&www;Therapy"/>
+        <rdfs:subPropertyOf rdf:resource="&www;associated_with"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.example.com/prevents -->
+
+    <owl:ObjectProperty rdf:about="&www;prevents">
+        <rdfs:label xml:lang="en">prevents</rdfs:label>
+        <rdfs:label xml:lang="zh">预防</rdfs:label>
+        <rdfs:comment xml:lang="en">Stops, hinders or eliminates an action or condition.</rdfs:comment>
+        <rdfs:comment xml:lang="zh">停止、阻碍或消除一种行为或状态。</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="&www;affects"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.example.com/process_of -->
+
+    <owl:ObjectProperty rdf:about="&www;process_of">
+        <rdfs:label xml:lang="en">process of</rdfs:label>
+        <rdfs:label xml:lang="zh">…的进程</rdfs:label>
+        <rdfs:comment xml:lang="en">Action, function, or state of.</rdfs:comment>
+        <rdfs:comment xml:lang="zh">行为，功能或状态？</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="&www;occurs_in"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.example.com/produces -->
+
+    <owl:ObjectProperty rdf:about="&www;produces">
+        <rdfs:label xml:lang="en">produces</rdfs:label>
+        <rdfs:label xml:lang="zh">产生</rdfs:label>
+        <rdfs:comment xml:lang="en">Brings forth, generates or creates. This includes yields, secretes, emits, biosynthesizes, generates, releases, discharges, and creates.</rdfs:comment>
+        <rdfs:comment xml:lang="zh">提出、带来、产生、创造。包括出产、生长、生产，分泌，放射、发出，用生物学的方法合成，产生，释放，放出，创造、引起、造成等。</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="&www;brings_about"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.example.com/property_of -->
+
+    <owl:ObjectProperty rdf:about="&www;property_of">
+        <rdfs:label xml:lang="en">property of</rdfs:label>
+        <rdfs:label xml:lang="zh">…的特性</rdfs:label>
+        <rdfs:comment xml:lang="en">Characteristic of, or quality of.</rdfs:comment>
+        <rdfs:comment xml:lang="zh">…的特征、特性，.…的品质、性质。</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="&www;conceptually_related_to"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.example.com/result_of -->
+
+    <owl:ObjectProperty rdf:about="&www;result_of">
+        <rdfs:label xml:lang="en">result of</rdfs:label>
+        <rdfs:label xml:lang="zh">…的结果-效果</rdfs:label>
+        <rdfs:comment xml:lang="en">The condition, product, or state occurring as a consequence, effect, or conclusion of an activity or process. This includes product of, effect of, sequel of, outcome of, culmination of, and completion of.</rdfs:comment>
+        <rdfs:comment xml:lang="zh">状态、情况、结果作为一个结果、效果或一个活动或过程的结论结局而发生。包括…的结果，…的效果，…的结局，…的成果，…的顶点，…的完成。</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="&www;functionally_related_to"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.example.com/similar_to -->
+
+    <owl:ObjectProperty rdf:about="&www;similar_to">
+        <rdfs:label xml:lang="en">similar concepts</rdfs:label>
+        <rdfs:label xml:lang="zh">与…类似概念</rdfs:label>
+        <rdfs:comment xml:lang="en"></rdfs:comment>
+        <rdfs:comment xml:lang="zh"></rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="&www;conceptually_related_to"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.example.com/spatially_related_to -->
+
+    <owl:ObjectProperty rdf:about="&www;spatially_related_to">
+        <rdfs:label xml:lang="en">spatially related to</rdfs:label>
+        <rdfs:label xml:lang="zh">空间上相关</rdfs:label>
+        <rdfs:comment xml:lang="en">Related by place or region.</rdfs:comment>
+        <rdfs:comment xml:lang="zh">空间区域上的相关。</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="&www;associated_with"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.example.com/surrounds -->
+
+    <owl:ObjectProperty rdf:about="&www;surrounds">
+        <rdfs:label xml:lang="en">surrounds</rdfs:label>
+        <rdfs:label xml:lang="zh">包围-周围</rdfs:label>
+        <rdfs:comment xml:lang="en">Establishes the boundaries for, or defines the limits of another physical structure. This includes limits, bounds, confines, encloses, and circumscribes.</rdfs:comment>
+        <rdfs:comment xml:lang="zh">确立分界线，定义另一个物理结构的界限。包括界限，范围，界线，围住、在…周围化线。</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="&www;spatially_related_to"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.example.com/temporally_related_to -->
+
+    <owl:ObjectProperty rdf:about="&www;temporally_related_to">
+        <rdfs:label xml:lang="en">temporally related to</rdfs:label>
+        <rdfs:label xml:lang="zh">时间上相关</rdfs:label>
+        <rdfs:comment xml:lang="en">Related in time by preceding, co-occuring with, or following.</rdfs:comment>
+        <rdfs:comment xml:lang="zh">时间上的提前、同时、随后相关</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="&www;associated_with"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.example.com/traverses -->
+
+    <owl:ObjectProperty rdf:about="&www;traverses">
+        <rdfs:label xml:lang="en">traverses</rdfs:label>
+        <rdfs:label xml:lang="zh">穿过</rdfs:label>
+        <rdfs:comment xml:lang="en">Crosses or extends across another physical structure or area. This includes crosses over and crosses through.</rdfs:comment>
+        <rdfs:comment xml:lang="zh">穿过或者延伸越过另一个物理结构或区域。包括从其上跨过和从其中穿过。</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="&www;spatially_related_to"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.example.com/treats -->
+
+    <owl:ObjectProperty rdf:about="&www;treats">
+        <rdfs:label xml:lang="en">treats</rdfs:label>
+        <rdfs:label xml:lang="zh">治疗</rdfs:label>
+        <rdfs:comment xml:lang="en">Applies a remedy with the object of effecting a cure or managing a condition.</rdfs:comment>
+        <rdfs:comment xml:lang="zh">提供一种治愈或改善症状的疗法</rdfs:comment>
+        <rdfs:range rdf:resource="&www;ClinicalFinding"/>
+        <rdfs:subPropertyOf rdf:resource="&www;affects"/>
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="&www;MedicinalSubstance"/>
+                    <rdf:Description rdf:about="&www;Therapy"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.example.com/tributary_of -->
+
+    <owl:ObjectProperty rdf:about="&www;tributary_of">
+        <rdfs:label xml:lang="en">tributary of</rdfs:label>
+        <rdfs:label xml:lang="zh">由…汇合</rdfs:label>
+        <rdfs:comment xml:lang="en">Merges with. For example, the confluence of veins.</rdfs:comment>
+        <rdfs:comment xml:lang="zh">合并、并入。例如，血管的汇合。</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="&www;physically_related_to"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.example.com/uses -->
+
+    <owl:ObjectProperty rdf:about="&www;uses">
+        <rdfs:label xml:lang="en">uses</rdfs:label>
+        <rdfs:label xml:lang="zh">使用</rdfs:label>
+        <rdfs:comment xml:lang="en">Employs in the carrying out of some activity. This includes applies, utilizes, employs, and avails.</rdfs:comment>
+        <rdfs:comment xml:lang="zh">在某些正在进行的活动中使用。包括应用、适用、利用、使用等。</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="&www;functionally_related_to"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.w3.org/2002/07/owl#topObjectProperty -->
+
+    <owl:ObjectProperty rdf:about="&owl;topObjectProperty">
+        <rdfs:label xml:lang="en">Top object property </rdfs:label>
+        <rdfs:label xml:lang="zh">顶级对象属性</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.example.com/Activity -->
+
+    <owl:Class rdf:about="&www;Activity">
+        <rdfs:label xml:lang="en">Activity</rdfs:label>
+        <rdfs:label xml:lang="en">An operation or series of operations that an organism or machine carries out or participates in.</rdfs:label>
+        <rdfs:label xml:lang="zh">活动</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&www;Event"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.example.com/AcupuncturePoint -->
+
+    <owl:Class rdf:about="&www;AcupuncturePoint">
+        <rdfs:label xml:lang="en">Acupuncture point</rdfs:label>
+        <rdfs:label xml:lang="zh">腧穴</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&www;FunctionalBodySystem"/>
+        <rdfs:comment xml:lang="en">The point where a needle is inserted and manipulated in acupuncture therapy.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.example.com/AcupunctureTherapy -->
+
+    <owl:Class rdf:about="&www;AcupunctureTherapy">
+        <rdfs:label xml:lang="en">Acupuncture therapy</rdfs:label>
+        <rdfs:label xml:lang="zh">针灸疗法</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&www;Therapy"/>
+        <rdfs:comment xml:lang="en">Treatment of disease by inserting needles along specific pathways or meridians. The placement varies with the disease being treated. It is sometimes used in conjunction with heat, moxibustion, acupressure, or electric stimulation.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.example.com/Animal -->
+
+    <owl:Class rdf:about="&www;Animal">
+        <rdfs:label xml:lang="en">Animal</rdfs:label>
+        <rdfs:label xml:lang="zh">动物</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&www;Organism"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.example.com/BasicMaterialInTheHumanBodyInChineseMedicine -->
+
+    <owl:Class rdf:about="&www;BasicMaterialInTheHumanBodyInChineseMedicine">
+        <rdfs:label xml:lang="en">Basic material in the human body in Chinese medicine</rdfs:label>
+        <rdfs:label xml:lang="zh">中医人体基础</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&www;PhysicalObject"/>
+        <rdfs:comment xml:lang="en">In Chinese medicine, the basic elements, constituents, or substances of which the human body is composed or can be made according to TCM theory.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.example.com/BasicSubstanceInTheHumanBody -->
+
+    <owl:Class rdf:about="&www;BasicSubstanceInTheHumanBody">
+        <rdfs:label xml:lang="en">Basic substance in the human body</rdfs:label>
+        <rdfs:label xml:lang="zh">人体基本物质</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&www;BasicMaterialInTheHumanBodyInChineseMedicine"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.example.com/Blood -->
+
+    <owl:Class rdf:about="&www;Blood">
+        <rdfs:label xml:lang="en">Blood</rdfs:label>
+        <rdfs:label xml:lang="zh">血</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&www;BasicSubstanceInTheHumanBody"/>
+        <rdfs:comment xml:lang="en">The red fluid circulating through the blood vessels, and nourishing and moistening the whole body.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.example.com/BodyConstituentAndOrificeOfSenseOrgan -->
+
+    <owl:Class rdf:about="&www;BodyConstituentAndOrificeOfSenseOrgan">
+        <rdfs:label xml:lang="en">Body constituent and orifice of sense organ</rdfs:label>
+        <rdfs:label xml:lang="zh">形体关窍</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&www;BasicMaterialInTheHumanBodyInChineseMedicine"/>
+        <rdfs:comment xml:lang="en">A collective term for skin, vessels, flesh, sinews, bones and the external opening of sense organs.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.example.com/Bowel -->
+
+    <owl:Class rdf:about="&www;Bowel">
+        <rdfs:label xml:lang="en">bowel</rdfs:label>
+        <rdfs:label xml:lang="zh">腑</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&www;VisceraBowel"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.example.com/Chemical -->
+
+    <owl:Class rdf:about="&www;Chemical">
+        <rdfs:label xml:lang="en">Chemical</rdfs:label>
+        <rdfs:label xml:lang="zh">化学物质</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&www;Substance"/>
+        <rdfs:comment xml:lang="en">A substance with a distinct molecular composition that is produced by or used in a chemical process.</rdfs:comment>
+        <rdfs:comment xml:lang="zh">具有特定的分子组成，并作为化学过程的参与者或产物的物质.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.example.com/ChemicalConstituentOfChineseMedicine -->
+
+    <owl:Class rdf:about="&www;ChemicalConstituentOfChineseMedicine">
+        <rdfs:label xml:lang="en">Chemical constituent of Chinese medicine</rdfs:label>
+        <rdfs:label xml:lang="zh">中药化学成分</rdfs:label>
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="&www;Chemical"/>
+                    <rdf:Description rdf:about="&www;MedicinalSubstance"/>
+                </owl:intersectionOf>
+            </owl:Class>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="&www;MedicinalSubstance"/>
+        <rdfs:comment xml:lang="zh">Molecular components that are extracted from Chinese medicinal after extraction, separation, identification, structure determination.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.example.com/ChineseMedicinal -->
+
+    <owl:Class rdf:about="&www;ChineseMedicinal">
+        <rdfs:label xml:lang="en">Chinese medicinal</rdfs:label>
+        <rdfs:label xml:lang="zh">中药</rdfs:label>
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="&www;MedicinalSubstance"/>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="&www;treats"/>
+                        <owl:someValuesFrom rdf:resource="&www;EtiologyPathogenesisAndDisease"/>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="&www;MedicinalSubstance"/>
+        <rdfs:comment xml:lang="en">Usually referring to those medicinal substances recorded in Chinese materia medica.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.example.com/ChineseMedicinalCombination -->
+
+    <owl:Class rdf:about="&www;ChineseMedicinalCombination">
+        <rdfs:label xml:lang="en">Chinese medicinal combination</rdfs:label>
+        <rdfs:label xml:lang="zh">配伍</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&www;TheFunctionOfChineseMedicinal"/>
+        <rdfs:comment xml:lang="en">Use various medicinals jointly in a formula or prescription for producing the desired therapeutic effect and reducing toxic or side effects.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.example.com/ChineseMedicinalTherapy -->
+
+    <owl:Class rdf:about="&www;ChineseMedicinalTherapy">
+        <rdfs:label xml:lang="en">Chinese medicinal therapy</rdfs:label>
+        <rdfs:label xml:lang="zh">中药疗法</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&www;Therapy"/>
+        <rdfs:comment xml:lang="en">Under the guidance of the basic TCM theory, prescribe Chinese medicinal to treat the disease.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.example.com/ClinicalFinding -->
+
+    <owl:Class rdf:about="&www;ClinicalFinding">
+        <rdfs:label xml:lang="en">clinical finding</rdfs:label>
+        <rdfs:label xml:lang="zh">临床发现</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&www;EtiologyPathogenesisAndDisease"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.example.com/ConceptualEntity -->
+
+    <owl:Class rdf:about="&www;ConceptualEntity">
+        <rdfs:label xml:lang="en">Conceptual entity</rdfs:label>
+        <rdfs:label xml:lang="zh">概念实体</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&www;Entity"/>
+        <rdfs:comment xml:lang="en">A broad type for grouping abstract entities or concepts.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.example.com/Constitution -->
+
+    <owl:Class rdf:about="&www;Constitution">
+        <rdfs:label xml:lang="en">Constitution</rdfs:label>
+        <rdfs:label xml:lang="zh">体质</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&www;BasicMaterialInTheHumanBodyInChineseMedicine"/>
+        <rdfs:comment xml:lang="en">The characteristics of an individual, including structural and functional characteristics, temperament, adaptability to environmental changes and susceptibility to disease. It is relatively stable, being in part, genetically determined and in part, acquired.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.example.com/DiagnosticMethod -->
+
+    <owl:Class rdf:about="&www;DiagnosticMethod">
+        <rdfs:label xml:lang="en">Diagnostic method</rdfs:label>
+        <rdfs:label xml:lang="zh">诊法</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&www;TraditionalChineseDiagnostics"/>
+        <rdfs:comment xml:lang="en">The basic method of collecting data to determine the disease condition.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.example.com/DietTherapy -->
+
+    <owl:Class rdf:about="&www;DietTherapy">
+        <rdfs:label xml:lang="en">Diet therapy</rdfs:label>
+        <rdfs:label xml:lang="zh">饮食疗法</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&www;Therapy"/>
+        <rdfs:comment xml:lang="en">Also known as the food therapy. It is a way that will regulate the body and treat disease according to the different nature of food flavors and acting on different organs. Use nutritious food or medicinal food products to reinforce the healthy qi and strong physique.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.example.com/Disease -->
+
+    <owl:Class rdf:about="&www;Disease">
+        <rdfs:label xml:lang="en">Disease</rdfs:label>
+        <rdfs:label xml:lang="zh">疾病</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&www;EtiologyPathogenesisAndDisease"/>
+        <rdfs:comment xml:lang="en">Study of disease process through basic theory of TCM.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.example.com/Entity -->
+
+    <owl:Class rdf:about="&www;Entity">
+        <rdfs:label xml:lang="en">Entity</rdfs:label>
+        <rdfs:label xml:lang="zh">实体</rdfs:label>
+        <rdfs:comment xml:lang="zh">A broad type for grouping physical and conceptual entities.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.example.com/Essence -->
+
+    <owl:Class rdf:about="&www;Essence">
+        <rdfs:label xml:lang="en">Essence</rdfs:label>
+        <rdfs:label xml:lang="zh">精</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&www;BasicSubstanceInTheHumanBody"/>
+        <rdfs:comment xml:lang="en">Essence means two things: (1) the fundamental substance that builds up the physical structure and maintains body function; (2) reproductive essence stored in the kidney.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.example.com/EtiologyAndPathogenesis -->
+
+    <owl:Class rdf:about="&www;EtiologyAndPathogenesis">
+        <rdfs:label xml:lang="en">Etiology and pathogenesis</rdfs:label>
+        <rdfs:label xml:lang="zh">病因病机</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&www;EtiologyPathogenesisAndDisease"/>
+        <rdfs:comment xml:lang="en">Study of the cause, development, and mechanism of disease according to the basic theory of TCM.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.example.com/EtiologyPathogenesisAndDisease -->
+
+    <owl:Class rdf:about="&www;EtiologyPathogenesisAndDisease">
+        <rdfs:label xml:lang="en">Etiology, pathogenesis and disease</rdfs:label>
+        <rdfs:label xml:lang="zh">病因病机疾病</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&www;PhenomenonAndProcess"/>
+        <rdfs:comment xml:lang="en">Study of the etiology, development and mechanism of disease according to TCM theory.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.example.com/Event -->
+
+    <owl:Class rdf:about="&www;Event">
+        <rdfs:label xml:lang="en">Event</rdfs:label>
+        <rdfs:label xml:lang="zh">事件</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&owl;Thing"/>
+        <rdfs:comment xml:lang="en">A broad type for grouping activities, processes and states.(UMLS)</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.example.com/FiveHerbalTaste -->
+
+    <owl:Class rdf:about="&www;FiveHerbalTaste">
+        <rdfs:label xml:lang="en">five herbal taste</rdfs:label>
+        <rdfs:label xml:lang="zh">五味</rdfs:label>
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:oneOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="&www;pungent"/>
+                    <rdf:Description rdf:about="&www;sour"/>
+                    <rdf:Description rdf:about="&www;salty"/>
+                    <rdf:Description rdf:about="&www;sweet"/>
+                    <rdf:Description rdf:about="&www;bitter"/>
+                </owl:oneOf>
+            </owl:Class>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="&www;FourQiAndFiveFlavors"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.example.com/FivePhaseTheory -->
+
+    <owl:Class rdf:about="&www;FivePhaseTheory">
+        <rdfs:label xml:lang="en">Five phase theory</rdfs:label>
+        <rdfs:label xml:lang="zh">五行理论</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&www;TraditionalChineseMedicineTheory"/>
+        <rdfs:comment xml:lang="en">One of the philosophical theories of medical practice in ancient China, concerning the composition and evolution of the physical universe, epitomized by the nature and the inhibition-generation relationships of the five phases, wood, fire, earth, metal and water, serving as the guiding ideology and methodology of physiology, pathology, clinical diagnosis and treatment, also known as five elements theory.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.example.com/FivePhases -->
+
+    <owl:Class rdf:about="&www;FivePhases">
+        <rdfs:label xml:lang="en">five phases</rdfs:label>
+        <rdfs:label xml:lang="zh">五行</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&www;FivePhaseTheory"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.example.com/FiveViscera -->
+
+    <owl:Class rdf:about="&www;FiveViscera">
+        <rdfs:label xml:lang="en">five viscera</rdfs:label>
+        <rdfs:label xml:lang="zh">五脏</rdfs:label>
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:oneOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="&www;lung"/>
+                    <rdf:Description rdf:about="&www;kidney"/>
+                    <rdf:Description rdf:about="&www;liver"/>
+                    <rdf:Description rdf:about="&www;spleen"/>
+                    <rdf:Description rdf:about="&www;heart"/>
+                </owl:oneOf>
+            </owl:Class>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="&www;Viscus"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.example.com/Formula -->
+
+    <owl:Class rdf:about="&www;Formula">
+        <rdfs:label xml:lang="en">Formula</rdfs:label>
+        <rdfs:label xml:lang="zh">方剂</rdfs:label>
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="&www;MedicinalSubstance"/>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="&www;contains"/>
+                        <owl:someValuesFrom rdf:resource="&www;MedicinalSubstance"/>
+                    </owl:Restriction>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="&www;treats"/>
+                        <owl:someValuesFrom rdf:resource="&www;Syndrome"/>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="&www;MedicinalSubstance"/>
+        <rdfs:comment xml:lang="en">Formula refers to herbal formula in TCM domain, which is prescriptions as mixtures of multiple herbs.</rdfs:comment>
+        <rdfs:comment xml:lang="zh">方剂指由若干中草药混合而成的处方.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.example.com/FourExamination -->
+
+    <owl:Class rdf:about="&www;FourExamination">
+        <rdfs:label xml:lang="en">four examinations</rdfs:label>
+        <rdfs:label xml:lang="zh">四诊</rdfs:label>
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="&www;Inquiry"/>
+                    <rdf:Description rdf:about="&www;Inspection"/>
+                    <rdf:Description rdf:about="&www;ListeningAndSmellingExamination"/>
+                    <rdf:Description rdf:about="&www;Palpation"/>
+                </owl:unionOf>
+            </owl:Class>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="&www;DiagnosticMethod"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.example.com/FourQiAndFiveFlavors -->
+
+    <owl:Class rdf:about="&www;FourQiAndFiveFlavors">
+        <rdfs:label xml:lang="en">Four qi and five flavors</rdfs:label>
+        <rdfs:label xml:lang="zh">四气五味</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&www;NatureOfChineseMedicinals"/>
+        <rdfs:comment xml:lang="en">A collective term of four qi and five flavors. The four basic properties of medicinals, cold, hot, warmth, and coolness. The five tastes of medicinals, pungency, sweetness, sourness, bitterness, and saltiness, representing the basic actions of the medicinals.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.example.com/FunctionalBodySystem -->
+
+    <owl:Class rdf:about="&www;FunctionalBodySystem">
+        <rdfs:label xml:lang="en">Functional body system</rdfs:label>
+        <rdfs:label xml:lang="zh">功能性人体系统</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&www;BasicMaterialInTheHumanBodyInChineseMedicine"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.example.com/Herb -->
+
+    <owl:Class rdf:about="&www;Herb">
+        <rdfs:label xml:lang="en">Herb</rdfs:label>
+        <rdfs:label xml:lang="zh">草药</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&www;MedicinalSubstance"/>
+        <rdfs:comment xml:lang="en">Herbal medicines include herbs, herbal materials, herbal preparations and finished herbal products, that contain as active ingredients parts of plants, or other plant materials, or combinations thereof.</rdfs:comment>
+        <rdfs:comment xml:lang="zh">草药包括含有植物、植物原料或其组合等活性成分的药草、药草原料、药草制剂及药草成本.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.example.com/Inquiry -->
+
+    <owl:Class rdf:about="&www;Inquiry">
+        <rdfs:label xml:lang="en">Inquiry</rdfs:label>
+        <rdfs:label xml:lang="zh">问诊</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&www;DiagnosticMethod"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.example.com/Inspection -->
+
+    <owl:Class rdf:about="&www;Inspection">
+        <rdfs:label xml:lang="en">Inspection</rdfs:label>
+        <rdfs:label xml:lang="zh">望诊</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&www;DiagnosticMethod"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.example.com/LiquidAndHumor -->
+
+    <owl:Class rdf:about="&www;LiquidAndHumor">
+        <rdfs:label xml:lang="en">Liquid and humor</rdfs:label>
+        <rdfs:label xml:lang="zh">津液</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&www;BasicSubstanceInTheHumanBody"/>
+        <rdfs:comment xml:lang="en">A general term for all kinds of normal liquid in the body, except the blood, also known as body liquids.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.example.com/ListeningAndSmellingExamination -->
+
+    <owl:Class rdf:about="&www;ListeningAndSmellingExamination">
+        <rdfs:label xml:lang="en">listening and smelling examination</rdfs:label>
+        <rdfs:label xml:lang="zh">闻诊</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&www;DiagnosticMethod"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.example.com/ListeningExamination -->
+
+    <owl:Class rdf:about="&www;ListeningExamination">
+        <rdfs:label xml:lang="en">listening examination</rdfs:label>
+        <rdfs:label xml:lang="zh">听声音</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&www;ListeningAndSmellingExamination"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.example.com/ListeningSoundsOfBreathing -->
+
+    <owl:Class rdf:about="&www;ListeningSoundsOfBreathing">
+        <rdfs:label xml:lang="en">Listening Sounds of Breathing</rdfs:label>
+        <rdfs:label xml:lang="zh">听气息</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&www;ListeningAndSmellingExamination"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.example.com/Massage -->
+
+    <owl:Class rdf:about="&www;Massage">
+        <rdfs:label xml:lang="en">Massage</rdfs:label>
+        <rdfs:label xml:lang="en">Rubbing, kneading, or percussion of the soft tissues and joints of the body with the hands, usually performed by one person on another, esp. to relieve tension or pain.</rdfs:label>
+        <rdfs:label xml:lang="zh">按摩</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&www;Therapy"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.example.com/MedicalSpecialist -->
+
+    <owl:Class rdf:about="&www;MedicalSpecialist">
+        <rdfs:label xml:lang="en">Medical specialist</rdfs:label>
+        <rdfs:label xml:lang="en">The people who dedicated their lives to the development of (traditional Chinese) medicine from ancient times , particularly the ancestors who are symbolized as Huangdi and Shennong.</rdfs:label>
+        <rdfs:label xml:lang="zh">医家</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&www;TheoriesOfSchoolsOfTraditionalChineseMedicine"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.example.com/MedicinalAnimal -->
+
+    <owl:Class rdf:about="&www;MedicinalAnimal">
+        <rdfs:label xml:lang="en">Medicinal animal</rdfs:label>
+        <rdfs:label xml:lang="zh">药用动物</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&www;MedicinalAnimalPlantAndMineral"/>
+        <rdfs:comment xml:lang="zh">Generally refers to those animals that have health function or can be used to prevent and treat the disease.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.example.com/MedicinalAnimalPlantAndMineral -->
+
+    <owl:Class rdf:about="&www;MedicinalAnimalPlantAndMineral">
+        <rdfs:label xml:lang="en">Medicinal animal plant and mineral</rdfs:label>
+        <rdfs:label xml:lang="zh">药用动物、植物和矿物质</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&www;PhysicalObject"/>
+        <rdfs:comment xml:lang="en">Generally refers to all animals, plants and minerals that can be used as drugs.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.example.com/MedicinalMineral -->
+
+    <owl:Class rdf:about="&www;MedicinalMineral">
+        <rdfs:label xml:lang="en">Medicinal mineral</rdfs:label>
+        <rdfs:label xml:lang="zh">药用矿物</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&www;MedicinalAnimalPlantAndMineral"/>
+        <rdfs:comment xml:lang="en">A naturally occurring, homogeneous inorganic solid substance having a definite chemical composition, and have health function or can be used to prevent and treat the disease.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.example.com/MedicinalPlant -->
+
+    <owl:Class rdf:about="&www;MedicinalPlant">
+        <rdfs:label xml:lang="en">Medicinal plant</rdfs:label>
+        <rdfs:label xml:lang="zh">药用植物</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&www;MedicinalAnimalPlantAndMineral"/>
+        <rdfs:comment xml:lang="en">Generally refers to those plants that have health function or can be used to prevent and treat the disease.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.example.com/MedicinalSubstance -->
+
+    <owl:Class rdf:about="&www;MedicinalSubstance">
+        <rdfs:label xml:lang="en">Medicinal substance</rdfs:label>
+        <rdfs:label xml:lang="zh">药用物质</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&www;PhysicalObject"/>
+        <rdfs:comment xml:lang="en">A substance intended for use in the diagnosis, cure, mitigation, treatment, or prevention of disease. This includes substances that occur naturally in the body and are administered therapeutically.</rdfs:comment>
+        <rdfs:comment xml:lang="zh">用于诊断, 治愈, 移除, 治疗, 或预防疾病的物质.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.example.com/MeridianAndCollateral -->
+
+    <owl:Class rdf:about="&www;MeridianAndCollateral">
+        <rdfs:label xml:lang="en">Meridian and collateral</rdfs:label>
+        <rdfs:label xml:lang="zh">经络</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&www;FunctionalBodySystem"/>
+        <rdfs:comment xml:lang="en">A system of conduits through which qi and blood circulate, connecting the bowels, viscera, extremities, superficial organs and tissues, making the body an organic whole, the same as channels and networks; meridians or channels, in short.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.example.com/MeridianEntry -->
+
+    <owl:Class rdf:about="&www;MeridianEntry">
+        <rdfs:label xml:lang="en">Meridian entry</rdfs:label>
+        <rdfs:label xml:lang="zh">归经</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&www;NatureOfChineseMedicinals"/>
+        <rdfs:comment xml:lang="en">Orientation of the medicinal action according to the meridian/channel on which the therapeutic action is manifested, also called meridian tropism.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.example.com/Mind -->
+
+    <owl:Class rdf:about="&www;Mind">
+        <rdfs:label xml:lang="en">Mental activities, referring to mind, consciousness, thinking and feeling.</rdfs:label>
+        <rdfs:label xml:lang="en">Mind</rdfs:label>
+        <rdfs:label xml:lang="zh">神</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&www;TraditionalChineseMedicinePsychology"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.example.com/NatureOfChineseMedicinals -->
+
+    <owl:Class rdf:about="&www;NatureOfChineseMedicinals">
+        <rdfs:label xml:lang="en">Nature of Chinese medicinals</rdfs:label>
+        <rdfs:label xml:lang="zh">药性</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&www;PhysiologyPhenomenonOrProcess"/>
+        <rdfs:comment xml:lang="en">The basic properties of a medicinal mainly includes four qi, five flavors, meridian entry, upbearing, downbearing, floating, sinking, toxin, etc.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.example.com/Organism -->
+
+    <owl:Class rdf:about="&www;Organism">
+        <rdfs:label xml:lang="en">Organism</rdfs:label>
+        <rdfs:label xml:lang="zh">有机体</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&www;PhysicalObject"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.example.com/Organization -->
+
+    <owl:Class rdf:about="&www;Organization">
+        <rdfs:label xml:lang="en">Organization</rdfs:label>
+        <rdfs:label xml:lang="zh">团体</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&www;ConceptualEntity"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.example.com/Palpation -->
+
+    <owl:Class rdf:about="&www;Palpation">
+        <rdfs:label xml:lang="en">palpation</rdfs:label>
+        <rdfs:label xml:lang="zh">切诊</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&www;DiagnosticMethod"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.example.com/PhenomenonAndProcess -->
+
+    <owl:Class rdf:about="&www;PhenomenonAndProcess">
+        <rdfs:label xml:lang="en">A process or state which occurs naturally or as a result of an activity. (UMLS)</rdfs:label>
+        <rdfs:label xml:lang="en">Phenomenon and process</rdfs:label>
+        <rdfs:label xml:lang="zh">现象与过程</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&www;Event"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.example.com/PhysicalObject -->
+
+    <owl:Class rdf:about="&www;PhysicalObject">
+        <rdfs:label xml:lang="en">Physical object</rdfs:label>
+        <rdfs:label xml:lang="zh">物理对象</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&www;Entity"/>
+        <rdfs:comment xml:lang="zh">An object perceptible to the sense of vision or touch. (UMLS)</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.example.com/PhysiologyPhenomenonOrProcess -->
+
+    <owl:Class rdf:about="&www;PhysiologyPhenomenonOrProcess">
+        <rdfs:label xml:lang="en">Phenomena or process that organism itself have or due to some activity.</rdfs:label>
+        <rdfs:label xml:lang="en">Physiology phenomenon or process</rdfs:label>
+        <rdfs:label xml:lang="zh">生理现象与过程</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&www;PhenomenonAndProcess"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.example.com/Plant -->
+
+    <owl:Class rdf:about="&www;Plant">
+        <rdfs:label xml:lang="en">Plant</rdfs:label>
+        <rdfs:label xml:lang="zh">植物</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&www;Organism"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.example.com/PropertyAndFunctionOfChineseMedicinal -->
+
+    <owl:Class rdf:about="&www;PropertyAndFunctionOfChineseMedicinal">
+        <rdfs:label xml:lang="en">Property and function of Chinese medicinal</rdfs:label>
+        <rdfs:label xml:lang="zh">中药属性和功能</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&www;PhenomenonAndProcess"/>
+        <rdfs:comment xml:lang="en">Refer to the property, flavor, meridian entry, upbearing, downbearing, floating and sinking, toxin, and function of traditional Chinese drugs.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.example.com/Qi -->
+
+    <owl:Class rdf:about="&www;Qi">
+        <rdfs:label xml:lang="en">Qi</rdfs:label>
+        <rdfs:label xml:lang="zh">气</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&www;BasicSubstanceInTheHumanBody"/>
+        <rdfs:comment xml:lang="en">The basic element that constitutes the cosmos and, through its movements, changes and transformations, produces everything in the world, including the human body and life activities. In the field of medicine, qi refers both to the refined nutritive substance that flows within the human body as well as to its functional activities.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.example.com/QiGongTherapy -->
+
+    <owl:Class rdf:about="&www;QiGongTherapy">
+        <rdfs:label xml:lang="en">Qigong therapy</rdfs:label>
+        <rdfs:label xml:lang="zh">气功疗法</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&www;Therapy"/>
+        <rdfs:comment xml:lang="en">Qigong is a therapeutic method used to prevent and cure disease by means of bringing the subjective initiative of the patient into full play.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.example.com/RelatedNaturePhysicsSubjectsOfTraditionalChineseMedicine -->
+
+    <owl:Class rdf:about="&www;RelatedNaturePhysicsSubjectsOfTraditionalChineseMedicine">
+        <rdfs:label xml:lang="en">Related nature physics subjects of traditional Chinese medicine</rdfs:label>
+        <rdfs:label xml:lang="zh">中医相关自然物理学科</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&www;RelatedSubjectsOfTraditionalChineseMedicine"/>
+        <rdfs:comment xml:lang="en">A subject that involves the study of natural phenomena or physical phenomena related TCM.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.example.com/RelatedSubjectsOfTraditionalChineseMedicine -->
+
+    <owl:Class rdf:about="&www;RelatedSubjectsOfTraditionalChineseMedicine">
+        <rdfs:label xml:lang="en">Related subjects of traditional Chinese medicine</rdfs:label>
+        <rdfs:label xml:lang="zh">中医相关学科</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&www;ConceptualEntity"/>
+        <rdfs:comment xml:lang="en">Referring to a subject that is connected to Traditional Chinese Medicine.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.example.com/SevenEmotions -->
+
+    <owl:Class rdf:about="&www;SevenEmotions">
+        <rdfs:label xml:lang="en">A collective term for joy, anger, thought, anxiety, sorrow, fear and fright, taken as endogenous factors causing diseases if in excess.</rdfs:label>
+        <rdfs:label xml:lang="en">Seven emotions</rdfs:label>
+        <rdfs:label xml:lang="zh">七情</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&www;TraditionalChineseMedicinePsychology"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.example.com/SixBowels -->
+
+    <owl:Class rdf:about="&www;SixBowels">
+        <rdfs:label xml:lang="en">Six bowels</rdfs:label>
+        <rdfs:label xml:lang="zh">六腑</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&www;Bowel"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.example.com/SmellingExamination -->
+
+    <owl:Class rdf:about="&www;SmellingExamination">
+        <rdfs:label xml:lang="en">smelling examination</rdfs:label>
+        <rdfs:label xml:lang="zh">闻气味</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&www;ListeningAndSmellingExamination"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.example.com/Substance -->
+
+    <owl:Class rdf:about="&www;Substance">
+        <rdfs:label xml:lang="en">Substance</rdfs:label>
+        <rdfs:label xml:lang="zh">物质</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&www;PhysicalObject"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.example.com/SymptomAndSign -->
+
+    <owl:Class rdf:about="&www;SymptomAndSign">
+        <rdfs:label xml:lang="en">Symptom &amp; sign</rdfs:label>
+        <rdfs:label xml:lang="zh">症状体征</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&www;EtiologyPathogenesisAndDisease"/>
+        <rdfs:comment xml:lang="en">A (bodily or mental) phenomenon, circumstance, or change of condition arising from and accompanying a disease or other pathological condition, and constituting an indication or evidence of it; a characteristic sign of a particular disease. Especially, in modern use, a subjective indication, perceptible to the patient.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.example.com/Syndrome -->
+
+    <owl:Class rdf:about="&www;Syndrome">
+        <rdfs:label xml:lang="en">Syndrome</rdfs:label>
+        <rdfs:label xml:lang="en">pattern</rdfs:label>
+        <rdfs:label xml:lang="zh">证候</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&www;EtiologyPathogenesisAndDisease"/>
+        <rdfs:comment xml:lang="en">Summarization of the cause, nature and location of the pathological change at a certain stages of disease.</rdfs:comment>
+        <rdfs:comment xml:lang="zh">证候是中医对人体病变的分类体系.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.example.com/SyndromeDifferentiation -->
+
+    <owl:Class rdf:about="&www;SyndromeDifferentiation">
+        <rdfs:label xml:lang="en">Syndrome differentiation</rdfs:label>
+        <rdfs:label xml:lang="zh">辨证</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&www;TraditionalChineseDiagnostics"/>
+        <rdfs:comment xml:lang="en">The process of overall analysis of clinical data to determine the location, cause and nature of a patient’s disease and achieving a diagnosis of a pattern/syndrome, also called pattern differentiation.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.example.com/TheFunctionOfChineseMedicinal -->
+
+    <owl:Class rdf:about="&www;TheFunctionOfChineseMedicinal">
+        <rdfs:label xml:lang="en">The function of Chinese medicinal</rdfs:label>
+        <rdfs:label xml:lang="zh">功效</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&www;PropertyAndFunctionOfChineseMedicinal"/>
+        <rdfs:comment xml:lang="en">Refers to the effect that Chinese medicinal produced on the body.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.example.com/TheoriesOfSchoolsOfTraditionalChineseMedicine -->
+
+    <owl:Class rdf:about="&www;TheoriesOfSchoolsOfTraditionalChineseMedicine">
+        <rdfs:label xml:lang="en">Theories of schools of traditional Chinese medicine</rdfs:label>
+        <rdfs:label xml:lang="zh">各家学说</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&www;TraditionalChineseMedicineTheory"/>
+        <rdfs:comment xml:lang="en">Refers to a TCM theory that is from various factions.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.example.com/TherapeuticPrinciple -->
+
+    <owl:Class rdf:about="&www;TherapeuticPrinciple">
+        <rdfs:label xml:lang="en">Therapeutic principle</rdfs:label>
+        <rdfs:label xml:lang="zh">治则</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&www;TraditionalChineseMedicineTreatment"/>
+        <rdfs:comment xml:lang="en">A general rule that should be followed in treating disease.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.example.com/Therapy -->
+
+    <owl:Class rdf:about="&www;Therapy">
+        <rdfs:label xml:lang="en">therapy</rdfs:label>
+        <rdfs:label xml:lang="zh">治法</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&www;TraditionalChineseMedicineTreatment"/>
+        <rdfs:comment xml:lang="en">Therapy, or treatment, is the attempted remediation of a health problem. Any specific intervention derived from a principle of treatment, e.g. diaphoresis, emesis, purgation, mediation, warming, clearing, tonification and resolution.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.example.com/Toxin -->
+
+    <owl:Class rdf:about="&www;Toxin">
+        <rdfs:label xml:lang="en">Toxin</rdfs:label>
+        <rdfs:label xml:lang="zh">毒性</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&www;NatureOfChineseMedicinals"/>
+        <rdfs:comment xml:lang="en">Any virulent pathogen that causes a fulminating disease.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.example.com/TraditionalChineseDiagnostics -->
+
+    <owl:Class rdf:about="&www;TraditionalChineseDiagnostics">
+        <rdfs:label xml:lang="en">Traditional Chinese diagnostics</rdfs:label>
+        <rdfs:label xml:lang="zh">中医诊断</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&www;Activity"/>
+        <rdfs:comment xml:lang="en">Determination of the nature of a diseased condition; identification of a disease by careful investigation of its symptoms and history; also, the opinion (formally stated) resulting from such investigation.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.example.com/TraditionalChineseMedicineLiterature -->
+
+    <owl:Class rdf:about="&www;TraditionalChineseMedicineLiterature">
+        <rdfs:label xml:lang="en">Traditional Chinese medicine literature</rdfs:label>
+        <rdfs:label xml:lang="zh">中医文献</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&www;ConceptualEntity"/>
+        <rdfs:comment xml:lang="en">The body of written works (e.g., books, magazines) on the subject of traditional Chinese medicine.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.example.com/TraditionalChineseMedicineOrganization -->
+
+    <owl:Class rdf:about="&www;TraditionalChineseMedicineOrganization">
+        <rdfs:label xml:lang="en">Traditional Chinese medicine organization</rdfs:label>
+        <rdfs:label xml:lang="zh">中医团体</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&www;Organization"/>
+        <rdfs:comment xml:lang="en">A social group organized for some end or tasks related to health care, education, and scientific research in traditional Chinese medicine.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.example.com/TraditionalChineseMedicinePhysiologicalFunction -->
+
+    <owl:Class rdf:about="&www;TraditionalChineseMedicinePhysiologicalFunction">
+        <rdfs:label xml:lang="en">Traditional Chinese medicine physiological function</rdfs:label>
+        <rdfs:label xml:lang="zh">中医生理功能</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&www;PhysiologyPhenomenonOrProcess"/>
+        <rdfs:comment xml:lang="en">Study of human physiological state according to TCM Theory.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.example.com/TraditionalChineseMedicinePsychology -->
+
+    <owl:Class rdf:about="&www;TraditionalChineseMedicinePsychology">
+        <rdfs:label xml:lang="en">Traditional Chinese medicine psychology</rdfs:label>
+        <rdfs:label xml:lang="zh">中医心理</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&www;PhysiologyPhenomenonOrProcess"/>
+        <rdfs:comment xml:lang="en">Study of human psychological state according to TCM Theory.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.example.com/TraditionalChineseMedicineSchools -->
+
+    <owl:Class rdf:about="&www;TraditionalChineseMedicineSchools">
+        <rdfs:label xml:lang="en">Traditional Chinese Medicine Schools</rdfs:label>
+        <rdfs:label xml:lang="zh">中医各家</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&www;TheoriesOfSchoolsOfTraditionalChineseMedicine"/>
+        <rdfs:comment xml:lang="en">The prolonged history of traditional Chinese medicine has witnessed a plurality of famous figures, who not only inherited theories and experiences from their antecessors, but also formed their own opinions and doctrines.
+The inheritance of academic tradition, achieved through apprenticeship training, in addition to the creativity of famous figures recognized for their outstanding works, gave rise to the different schools of traditional Chinese medicine.
+</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.example.com/TraditionalChineseMedicineSubject -->
+
+    <owl:Class rdf:about="&www;TraditionalChineseMedicineSubject">
+        <rdfs:label xml:lang="en">Traditional Chinese medicine subject</rdfs:label>
+        <rdfs:label xml:lang="zh">中医学科</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&www;ConceptualEntity"/>
+        <rdfs:comment xml:lang="en">A subject that originated in China evolved a unique theoretical system, which is based on the Chinese people’s long-term medical practice.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.example.com/TraditionalChineseMedicineTheory -->
+
+    <owl:Class rdf:about="&www;TraditionalChineseMedicineTheory">
+        <rdfs:label xml:lang="en">Traditional Chinese medicine theory</rdfs:label>
+        <rdfs:label xml:lang="zh">中医理论</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&www;ConceptualEntity"/>
+        <rdfs:comment xml:lang="en">In Chinese medicine, a system of ideas formed from Chinese medical philosophy in combination with practical experiences on medicine, such as yin-yang theory, visceral manifestation theory, meridian and collateral theory, essential qi theory, and five-phase theory.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.example.com/TraditionalChineseMedicineTreatment -->
+
+    <owl:Class rdf:about="&www;TraditionalChineseMedicineTreatment">
+        <rdfs:label xml:lang="en">Traditional Chinese medicine treatment</rdfs:label>
+        <rdfs:label xml:lang="zh">中医治疗</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&www;Activity"/>
+        <rdfs:comment xml:lang="en">Treat the disease with the idea and method of syndrome differentiation and treatment.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.example.com/TraditionalChinesePhilosophy -->
+
+    <owl:Class rdf:about="&www;TraditionalChinesePhilosophy">
+        <rdfs:label xml:lang="en">Traditional Chinese philosophy</rdfs:label>
+        <rdfs:label xml:lang="zh">中华传统哲学</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&www;RelatedSubjectsOfTraditionalChineseMedicine"/>
+        <rdfs:comment xml:lang="en">Philosophical thought that was developed by ancient Chinese, through the generalization and summarization of their natural and social knowledge.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.example.com/VisceraBowel -->
+
+    <owl:Class rdf:about="&www;VisceraBowel">
+        <rdfs:label xml:lang="en">Viscera &amp; Bowel</rdfs:label>
+        <rdfs:label xml:lang="zh">脏腑</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&www;FunctionalBodySystem"/>
+        <rdfs:comment xml:lang="en">A collective term for internal organs, also called zang-organs and fu-organs.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.example.com/Viscus -->
+
+    <owl:Class rdf:about="&www;Viscus">
+        <rdfs:label xml:lang="en">Viscus</rdfs:label>
+        <rdfs:label xml:lang="zh">脏</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&www;VisceraBowel"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.example.com/YinYangTheory -->
+
+    <owl:Class rdf:about="&www;YinYangTheory">
+        <rdfs:label xml:lang="en">Yin-yang theory</rdfs:label>
+        <rdfs:label xml:lang="zh">阴阳理论</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&www;TraditionalChineseMedicineTheory"/>
+        <rdfs:comment xml:lang="en">An ancient Chinese philosophical concept, dealing with two opposite aspects of matters in nature which are interrelated with each other. Its principle is widely applied to traditional Chinese medicine.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.w3.org/2002/07/owl#Thing -->
+
+    <owl:Class rdf:about="&owl;Thing">
+        <rdfs:label xml:lang="en">Thing</rdfs:label>
+        <rdfs:label xml:lang="zh">事物</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Individuals
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.example.com/Atractylodes -->
+
+    <owl:NamedIndividual rdf:about="&www;Atractylodes">
+        <rdf:type rdf:resource="&www;ChineseMedicinal"/>
+        <rdfs:label xml:lang="en">Atractylodes</rdfs:label>
+        <rdfs:label xml:lang="zh">白术</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.example.com/alzheimers_disease -->
+
+    <owl:NamedIndividual rdf:about="&www;alzheimers_disease">
+        <rdf:type rdf:resource="&www;Disease"/>
+        <rdfs:label xml:lang="en">Alzheimer&#39;s Disease</rdfs:label>
+        <rdfs:label xml:lang="zh">阿尔茨海默症</rdfs:label>
+        <rdfs:comment xml:lang="en">A human degenerative disorder characterized by progressive dementia.</rdfs:comment>
+        <rdfs:comment xml:lang="zh">以渐进性痴呆为特征的人类退化性紊乱.</rdfs:comment>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.example.com/bitter -->
+
+    <owl:NamedIndividual rdf:about="&www;bitter">
+        <rdf:type rdf:resource="&www;FourQiAndFiveFlavors"/>
+        <rdfs:label xml:lang="en">Bitter</rdfs:label>
+        <rdfs:label xml:lang="zh">苦</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.example.com/deficiency -->
+
+    <owl:NamedIndividual rdf:about="&www;deficiency">
+        <rdf:type rdf:resource="&www;Syndrome"/>
+        <rdfs:label xml:lang="en">Deficiency</rdfs:label>
+        <rdfs:label xml:lang="zh">虚证</rdfs:label>
+        <narrowerTransitive rdf:resource="&www;kideny_deficiency"/>
+        <narrowerTransitive rdf:resource="&www;kidney_yang_syndrome"/>
+        <narrowerTransitive rdf:resource="&www;yang_syndrome"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.example.com/four_gentlemen_decoction -->
+
+    <owl:NamedIndividual rdf:about="&www;four_gentlemen_decoction">
+        <rdf:type rdf:resource="&www;Formula"/>
+        <rdf:type rdf:resource="&www;MedicinalSubstance"/>
+        <rdfs:label xml:lang="en">Four gentlemen decoction</rdfs:label>
+        <rdfs:label xml:lang="en">four gentlemen decoction</rdfs:label>
+        <rdfs:label xml:lang="zh">四君子汤</rdfs:label>
+        <has_minister rdf:resource="&www;Atractylodes"/>
+        <has_subordinate rdf:resource="&www;fu_ling"/>
+        <has_king rdf:resource="&www;ginseng"/>
+        <contains rdf:resource="&www;ginseng"/>
+        <has_messenger rdf:resource="&www;glycyrrhizae"/>
+        <treats rdf:resource="&www;kideny_deficiency"/>
+        <treats rdf:resource="&www;kidney_yang_syndrome"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.example.com/fu_ling -->
+
+    <owl:NamedIndividual rdf:about="&www;fu_ling">
+        <rdf:type rdf:resource="&www;ChineseMedicinal"/>
+        <rdfs:label xml:lang="en">Fu Ling</rdfs:label>
+        <rdfs:label xml:lang="zh">茯苓</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.example.com/ginseng -->
+
+    <owl:NamedIndividual rdf:about="&www;ginseng">
+        <rdf:type rdf:resource="&www;ChineseMedicinal"/>
+        <rdfs:label xml:lang="en">Ginseng</rdfs:label>
+        <rdfs:label xml:lang="zh">人参</rdfs:label>
+        <has_herbal_taste rdf:resource="&www;bitter"/>
+        <treats rdf:resource="&www;deficiency"/>
+        <has_herbal_taste rdf:resource="&www;sweet"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.example.com/glycyrrhizae -->
+
+    <owl:NamedIndividual rdf:about="&www;glycyrrhizae">
+        <rdf:type rdf:resource="&www;ChineseMedicinal"/>
+        <rdfs:label xml:lang="en">Glycyrrhizae</rdfs:label>
+        <rdfs:label xml:lang="zh">甘草</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.example.com/heart -->
+
+    <owl:NamedIndividual rdf:about="&www;heart">
+        <rdf:type rdf:resource="&www;Viscus"/>
+        <rdfs:label xml:lang="en">Heart</rdfs:label>
+        <rdfs:label xml:lang="zh">心</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.example.com/huperzia_serrata -->
+
+    <owl:NamedIndividual rdf:about="&www;huperzia_serrata">
+        <rdf:type rdf:resource="&www;ChineseMedicinal"/>
+        <rdfs:label xml:lang="en">Huperzia serrata</rdfs:label>
+        <rdfs:label xml:lang="zh">千层塔</rdfs:label>
+        <contains_chemical rdf:resource="&www;huperzine_a"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.example.com/huperzine_a -->
+
+    <owl:NamedIndividual rdf:about="&www;huperzine_a">
+        <rdf:type rdf:resource="&www;Chemical"/>
+        <rdf:type rdf:resource="&www;MedicinalSubstance"/>
+        <rdfs:label xml:lang="en">Huperzine A</rdfs:label>
+        <rdfs:label xml:lang="zh">石杉碱甲</rdfs:label>
+        <rdfs:comment xml:lang="en">Huperzine A is a naturally occurring sesquiterpene alkaloid found in the extracts of the firmoss Huperzia serrata.</rdfs:comment>
+        <rdfs:seeAlso rdf:resource="Http://www.catcm.ac.cn/doc/64010"/>
+        <rdfs:isDefinedBy rdf:resource="Http://www.catcm.ac.cn/doc/64010"/>
+        <treats rdf:resource="&www;alzheimers_disease"/>
+        <treats rdf:resource="&www;kidney_yang_syndrome"/>
+        <treats rdf:resource="&www;memory_loss"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.example.com/kideny_deficiency -->
+
+    <owl:NamedIndividual rdf:about="&www;kideny_deficiency">
+        <rdf:type rdf:resource="&www;Syndrome"/>
+        <rdfs:label xml:lang="en">Kideny Deficiency</rdfs:label>
+        <rdfs:label xml:lang="en">kidney deficiency syndrome</rdfs:label>
+        <rdfs:label xml:lang="zh">肾虚证</rdfs:label>
+        <has_location rdf:resource="&www;kidney"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.example.com/kideny_yang_deficiency -->
+
+    <owl:NamedIndividual rdf:about="&www;kideny_yang_deficiency">
+        <rdf:type rdf:resource="&www;Syndrome"/>
+        <rdfs:label xml:lang="en">Kideny Yang Deficiency</rdfs:label>
+        <rdfs:label xml:lang="zh">肾阳虚证</rdfs:label>
+        <associated_with rdf:resource="&www;alzheimers_disease"/>
+        <broaderTransitive rdf:resource="&www;deficiency"/>
+        <broaderTransitive rdf:resource="&www;kideny_deficiency"/>
+        <associated_with rdf:resource="&www;memory_loss"/>
+        <associated_with rdf:resource="&www;pregnancy"/>
+        <broaderTransitive rdf:resource="&www;yang_syndrome"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.example.com/kidney -->
+
+    <owl:NamedIndividual rdf:about="&www;kidney">
+        <rdf:type rdf:resource="&www;Viscus"/>
+        <rdfs:label xml:lang="en">Kidney</rdfs:label>
+        <rdfs:label xml:lang="zh">肾</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.example.com/kidney_yang_syndrome -->
+
+    <owl:NamedIndividual rdf:about="&www;kidney_yang_syndrome">
+        <rdf:type rdf:resource="&www;Syndrome"/>
+        <rdfs:label xml:lang="en">kidney yang syndrome</rdfs:label>
+        <rdfs:label xml:lang="zh">肾阳证</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.example.com/liver -->
+
+    <owl:NamedIndividual rdf:about="&www;liver">
+        <rdf:type rdf:resource="&www;Viscus"/>
+        <rdfs:label xml:lang="en">Liver</rdfs:label>
+        <rdfs:label xml:lang="zh">肝</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.example.com/lung -->
+
+    <owl:NamedIndividual rdf:about="&www;lung">
+        <rdf:type rdf:resource="&www;Viscus"/>
+        <rdfs:label xml:lang="en">Lung</rdfs:label>
+        <rdfs:label xml:lang="zh">肺</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.example.com/memory_loss -->
+
+    <owl:NamedIndividual rdf:about="&www;memory_loss">
+        <rdf:type rdf:resource="&www;SymptomAndSign"/>
+        <rdfs:label xml:lang="en">Memory Loss</rdfs:label>
+        <rdfs:label xml:lang="zh">记忆减退</rdfs:label>
+        <associated_with rdf:resource="&www;kidney_yang_syndrome"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.example.com/pregnancy -->
+
+    <owl:NamedIndividual rdf:about="&www;pregnancy">
+        <rdf:type rdf:resource="&www;ClinicalFinding"/>
+        <rdfs:label xml:lang="en">pregnancy</rdfs:label>
+        <rdfs:label xml:lang="zh">怀孕</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.example.com/pungent -->
+
+    <owl:NamedIndividual rdf:about="&www;pungent">
+        <rdf:type rdf:resource="&www;FourQiAndFiveFlavors"/>
+        <rdfs:label xml:lang="en">Pungent</rdfs:label>
+        <rdfs:label xml:lang="zh">辛</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.example.com/salty -->
+
+    <owl:NamedIndividual rdf:about="&www;salty">
+        <rdf:type rdf:resource="&www;FourQiAndFiveFlavors"/>
+        <rdfs:label xml:lang="en">Salty</rdfs:label>
+        <rdfs:label xml:lang="zh">咸</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.example.com/sour -->
+
+    <owl:NamedIndividual rdf:about="&www;sour">
+        <rdf:type rdf:resource="&www;FourQiAndFiveFlavors"/>
+        <rdfs:label xml:lang="en">Sour</rdfs:label>
+        <rdfs:label xml:lang="zh">酸</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.example.com/spleen -->
+
+    <owl:NamedIndividual rdf:about="&www;spleen">
+        <rdf:type rdf:resource="&www;Viscus"/>
+        <rdfs:label xml:lang="en">Spleen</rdfs:label>
+        <rdfs:label xml:lang="zh">脾</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.example.com/sweet -->
+
+    <owl:NamedIndividual rdf:about="&www;sweet">
+        <rdf:type rdf:resource="&www;FourQiAndFiveFlavors"/>
+        <rdfs:label xml:lang="en">Sweet</rdfs:label>
+        <rdfs:label xml:lang="zh">甜</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.example.com/water -->
+
+    <owl:NamedIndividual rdf:about="&www;water">
+        <rdf:type rdf:resource="&www;FivePhases"/>
+        <rdfs:label xml:lang="en">Water</rdfs:label>
+        <rdfs:label xml:lang="zh">水</rdfs:label>
+        <rdfs:comment xml:lang="zh">水</rdfs:comment>
+        <nourishes rdf:resource="&www;wood"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.example.com/wood -->
+
+    <owl:NamedIndividual rdf:about="&www;wood">
+        <rdf:type rdf:resource="&www;FivePhases"/>
+        <rdfs:label xml:lang="en">Wood</rdfs:label>
+        <rdfs:label xml:lang="zh">木</rdfs:label>
+        <rdfs:comment xml:lang="zh">木</rdfs:comment>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.example.com/yang_deficiency -->
+
+    <owl:NamedIndividual rdf:about="&www;yang_deficiency">
+        <rdf:type rdf:resource="&www;Syndrome"/>
+        <rdfs:label xml:lang="en">Yang Deficiency</rdfs:label>
+        <rdfs:label xml:lang="zh">阳虚证</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.example.com/yang_syndrome -->
+
+    <owl:NamedIndividual rdf:about="&www;yang_syndrome">
+        <rdf:type rdf:resource="&www;Syndrome"/>
+        <rdfs:label xml:lang="en">yang syndrome</rdfs:label>
+        <rdfs:label xml:lang="zh">阳证</rdfs:label>
+    </owl:NamedIndividual>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 3.2.3.1824) http://owlapi.sourceforge.net -->
+
