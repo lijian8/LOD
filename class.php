@@ -4,34 +4,8 @@ include_once ("./header.php");
 require 'vendor/autoload.php';
 require_once "html_tag_helpers.php";
 
-function get_label($p) {
-    $label = $p->label('zh');
-    if (!$label)
-        $label = $p->label();
+include_once ("./rdf_helper.php");
 
-    if (!$label)
-        $label = $p->shorten();
-
-    if (!$label)
-        $label = $p->getUri();
-
-    return $label;
-}
-
-function list_instances($graph, $type) {
-    foreach ($graph->allOfType($type) as $p) {
-        $label = $p->label('zh');
-
-        if (!$label)
-            $label = $p->getUri();
-
-        if ($p->isBnode()) {
-            //echo "&nbsp;$label&nbsp;";
-        } else {
-            echo "&nbsp;" . link_to_self($label, 'uri=' . urlencode($p)) . "&nbsp;|";
-        }
-    }
-}
 
 function render_property($graph, $me, $p) {
 
@@ -55,20 +29,6 @@ function render_property($graph, $me, $p) {
     }
 
     echo "</p>";
-}
-
-function render_literals($graph, $me, $p) {
-    $property = $graph->resource($p);
-    //echo "<p>属性名称: " . $property;
-//$graph->allResources($me, $property);
-
-    foreach ($me->allLiterals($property, 'zh') as $lit) {
-        echo '<p>' . $lit . '</p>';
-    }
-
-    foreach ($me->allLiterals($property, 'en') as $lit) {
-        echo '<p>' . $lit . '</p>';
-    }
 }
 
 function num_of_instances($graph, $type) {

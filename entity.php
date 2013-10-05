@@ -169,6 +169,8 @@ if (isset($name) && $name != '') {
         if (isset($name)) {
             render_graph($dbc, $name, $ontology);
         }
+        
+        include_once ("./individual.php");
         ?>
 
         <div class="panel panel-default">
