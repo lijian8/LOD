@@ -45,11 +45,29 @@ function num_of_instances($graph, $type) {
     return count($instances);
 }
 
-$localname = isset($_GET['localname']) ? $_GET['localname'] : 'kideny_yang_deficiency';
-
+if (isset($_GET['localname'])) {
+    $localname = $_GET['localname'];
+}
 
 $graph = new EasyRdf_Graph("http://localhost/lod/tcmdemoen.rdf");
 $graph->load();
+
+if (isset($_GET['label'])) {
+    $first = true;
+    foreach ($graph->resourcesMatching("rdfs:label", $_GET['label']) as $r) {
+        if ($first) {
+            $localname = $r->localname();
+        } else {
+            echo "<p>" . $r . "</p>";
+        }
+    }
+}
+
+
+if (!isset($localname)) {
+    render_warning("对不起！本系统没有相关实体的信息！下面显示的是'kideny_yang_deficiency(肾阳虚)'这一示例实体。");
+    $localname = 'kideny_yang_deficiency';
+}
 ?>
 <div class="container">
 
@@ -109,7 +127,7 @@ $graph->load();
         echo '<div class="panel-body">';
         //list_instances($graph, 'http://www.example.com/' . $localname);
         foreach ($graph->allOfType('http://www.example.com/' . $localname) as $p) {
-           render_thing($p); 
+            render_thing($p);
         }
 
 

@@ -7,22 +7,20 @@ $dbc = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME) or die('Error conn
 session_name('tzLogin');
 // Starting the session
 session_start();
-/*
-  if (isset($_GET['logoff'])) {
-  $_SESSION = array();
-  session_destroy();
 
-  header("Location: demo.php");
-  exit;
-  }
+if (isset($_GET['logoff'])) {
+    $_SESSION = array();
+    session_destroy();
+
+    header("Location: demo.php");
+    exit;
+}
 
 
-  if (!isset($_SESSION['real_name']) || !isset($_SESSION['usr']) || !isset($_SESSION['id'])) {
-  header("Location: demo.php");
-  exit;
-  }
- * 
- */
+if (!isset($_SESSION['real_name']) || !isset($_SESSION['usr']) || !isset($_SESSION['id'])) {
+    header("Location: demo.php");
+    exit;
+}
 ?>
 <!--
 To change this template, choose Tools | Templates
@@ -39,7 +37,6 @@ and open the template in the editor.
         <meta name="author" content="">
         <link rel="shortcut icon" href="ico/favicon.png">
 
-        <title>Jumbotron Template for Bootstrap</title>
 
         <!-- Bootstrap core CSS -->
         <link href="css/bootstrap.css" rel="stylesheet">
@@ -92,19 +89,29 @@ and open the template in the editor.
                     <ul class="nav navbar-nav">
                         <li class="active"><a href="index.php">首页</a></li>
                         <li><a href="index.php">高级搜索</a></li>
-                        <li><a href="#about">关于本站</a></li>
+                        <li><a href="index.php">高级搜索</a></li>
+                        <li><a href="ontology.php">顶层本体</a></li>
                         <li><a href="#contact">联系我们</a></li>
                     </ul>
-             
-                    <form class="navbar-form navbar-right">
-                        <div class="form-group">
-                            <input type="text" placeholder="用户名" class="form-control">
-                        </div>
-                        <div class="form-group">
-                            <input type="password" placeholder="密码" class="form-control">
-                        </div>
-                        <button type="submit" class="btn btn-success">登录</button>
-                    </form>
+
+                    <?php
+                    if ($_SESSION['real_name']) {
+                        echo "<p class=\"navbar-text pull-right\">您好," . $_SESSION['real_name'] . "&nbsp;|&nbsp;" . "<a href=\"?logoff\" class=\"navbar-link\">退出</a></p>";
+                    } else {
+                        ?>
+
+                        <form class="navbar-form navbar-right">
+                            <div class="form-group">
+                                <input type="text" placeholder="用户名" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <input type="password" placeholder="密码" class="form-control">
+                            </div>
+                            <button type="submit" class="btn btn-success">登录</button>
+                        </form>
+                        <?php
+                    }
+                    ?>
                 </div><!--/.navbar-collapse -->
             </div>
         </div>

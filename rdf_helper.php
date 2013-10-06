@@ -1,5 +1,17 @@
 <?php
 
+function get_graph() {
+    if (!isset($GLOBALS['rdf_graph'])) {
+        echo "RDF图初始化...";
+        $GLOBALS['rdf_graph'] = new EasyRdf_Graph("http://localhost/lod/tcmdemoen.rdf");
+        $GLOBALS['rdf_graph']->load();
+    }else{
+        echo "直接使用已初始化的RDF图...";
+    }
+    
+    return $GLOBALS['rdf_graph'];
+}
+
 function render_property_as_row($graph, $me, $p) {
     $property = $graph->resource($p);
     echo "<p>" . get_label($property) . ":&nbsp;";

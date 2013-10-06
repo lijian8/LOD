@@ -26,7 +26,7 @@ function render_info_by_property($dbc, $name, $property) {
 
         $value = $row[value];
         $id = $row[id];
-        echo "<p><strong>$property</strong>:&nbsp;$value";
+        echo "<p>$value";
         echo '<a href="' . $_SERVER['PHP_SELF'] . '?name=' . $name . '&delete_triple_id=' . $id . '"><span class="glyphicon glyphicon-remove-circle"></span></a>';
         echo "</p>";
     }
@@ -38,7 +38,7 @@ function render_graph_by_property($dbc, $name, $property) {
     $result = mysqli_query($dbc, $query) or die('Error querying database2.');
 
     if (mysqli_num_rows($result) != 0) {
-        echo '<div class="panel panel-success">';
+        echo '<div class="panel panel-info">';
         echo '<div class="panel-heading">';
         echo '<h3 class="panel-title">' . $property . '</h3>';
         echo '</div>';
@@ -140,7 +140,7 @@ if (isset($name) && $name != '') {
             $def = $name;
         }
 
-        $width = 200;
+        $width = 300;
 
 
         echo '<div class="media">';
@@ -156,24 +156,35 @@ if (isset($name) && $name != '') {
 
         echo '<div class="media-body"  align ="left">';
         echo '<h2>' . $name . '</h2>';
-        echo '<h4>' . $def . '</h4>';
+        echo "<p>&nbsp;<a class=\"btn btn-xs btn-primary\" href=\"individual.php\">查看本体信息</a>";
+        echo "&nbsp;<a class=\"btn btn-xs btn-primary\" href=\"individual.php\">添加实体信息</a>";
+        echo "&nbsp;<a class=\"btn btn-xs btn-success\" href=\"individual.php\">返回主页</a></p>";
 
-        echo '<strong>类型</strong>:&nbsp;' . implode(',', get_types($dbc, $name));
+        echo "<table class=\"table\"><tbody>";
+        echo "<tr><td width='10%'>类型:</td><td>" . implode(',', get_types($dbc, $name)) . "</td></tr>";
 
+        echo "<tr><td>定义:</td><td>" . $def;
         render_info_by_property($dbc, $name, '定义');
         render_info_by_property($dbc, $name, '注释');
+        echo "</td></tr>";
+
+        echo "</tbody></table>";
+
+
+
+
+
         echo '</div></div></div>';
 
-        echo '<p></p>';
+
         echo '<div class ="container">';
         if (isset($name)) {
             render_graph($dbc, $name, $ontology);
         }
-        
-        include_once ("./individual.php");
         ?>
 
-        <div class="panel panel-default">
+
+        <div class="panel panel-info">
             <div class="panel-heading">
                 <h3 class="panel-title">请添加实体信息:</h3>
             </div>
