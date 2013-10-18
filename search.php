@@ -1,5 +1,7 @@
 <?php
 include_once ("./header.php");
+include_once ("./appvars.php");
+include_once ("./entity_helper.php");
 
 function render_content($row) {
     $name = $row[name];
@@ -27,9 +29,31 @@ function render_entity($dbc, $keywords) {
     $query = "SELECT * FROM def where name = '$keywords'";
     $result = mysqli_query($dbc, $query) or die('Error querying database.');
     if ($row = mysqli_fetch_array($result)) {
-
         render_content($row);
     }
+}
+
+function render_related($dbc, $keywords) {
+
+    $query = "SELECT * FROM def where name = '$keywords'";
+    $result = mysqli_query($dbc, $query) or die('Error querying database.');
+    if ($row = mysqli_fetch_array($result)) {
+        $id = $row[id];
+        $name = TCMLS_OBJECT . $id;
+        $query = "select * from graph where subject ='$name'  limit 20";
+
+        $result = mysqli_query($dbc, $query) or die('Error querying database2.');
+
+        if (mysqli_num_rows($result) != 0) {
+            echo '<p><font color="red">' . $keywords . '</font>的相关搜索:</p>';
+            while ($row = mysqli_fetch_array($result)) {
+                $value = $row[value];
+                render_entity_link($dbc, $value);
+            }
+        }
+    }
+
+  
 }
 
 if (isset($_POST['submit'])) {
@@ -79,7 +103,7 @@ if (isset($_GET['keywords'])) {
                     <span class="input-group-btn">
                         <button name ="submit" type="submit" class="btn btn-primary  btn-lg"><span class="glyphicon glyphicon-search"></span></button>
                     </span> 
-                   
+
                 </div> 
                 <p></p>
 
@@ -130,17 +154,7 @@ if (isset($_GET['keywords'])) {
                     </div>
                     <div class="col-md-2">
                         <?php
-                        echo '<p><font color="red">' . $keywords . '</font>的相关搜索:</p>';
-                        echo '<p><a  href=\"#\">四君子汤</a></p>';
-                        echo '<p><a  href=\"#\">人参</a></p>';
-                        echo '<p><a  href=\"#\">补阳</a></p>';
-                        echo '<p><a  href=\"#\">石杉碱甲</a></p>';
-                        echo '<p><a  href=\"#\">大黄</a></p>';
-                        echo '<p><a  href=\"#\">肾</a></p>';
-                        echo '<p><a  href=\"#\">李时珍</a></p>';
-                        echo '<p><a  href=\"#\">孙思邈</a></p>';
-                        echo '<p><a  href=\"#\">汤剂</a></p>';
-                        echo '<p><a  href=\"#\">牛黄</a></p>';
+                        render_related($dbc, $keywords);
                         ?>
                     </div>
 

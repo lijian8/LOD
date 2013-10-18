@@ -2,6 +2,7 @@
 include_once ("./header.php");
 include_once ("./onto_array.php");
 include_once ("./appvars.php");
+include_once ("./entity_helper.php");
 /*
   function render_graph($dbc, $name) {
   $query = "select * from graph where subject ='$name'  limit 100";
