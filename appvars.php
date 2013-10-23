@@ -8,5 +8,5 @@ define('IMG_UPLOADPATH', 'img/');
 define('FIGURE', '图表');
 define('BIBLIO', '文献');
 define('CONCEPT', '概念');
-define('TCMLS_OBJECT', 'tcmls:o');
+define('TCMLS_OBJECT', 'spleen:o');
 ?>

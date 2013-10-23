@@ -2,6 +2,7 @@
 include_once ("./header.php");
 include_once ("./appvars.php");
 include_once ("./entity_helper.php");
+include_once ("./db_array.php");
 
 function render_content($row) {
     $name = $row[name];
@@ -63,6 +64,38 @@ if (isset($_POST['submit'])) {
 if (isset($_GET['keywords'])) {
     $keywords = $_GET['keywords'];
 }
+$db_name = 'tcmls';
+if (isset($_POST['db_name'])) {
+    $db_name = trim($_POST['db_name']);
+  
+    //echo $db_name;
+    //echo $db_name == 'spleen'? "yes":"no";
+    
+    //print_r($dbs[$db_name]);
+    //$db_name = 'spleen';
+    // echo $db_name;
+   // print_r($dbs[$db_name]);
+  //  echo 'test';
+    
+}elseif (isset($_GET['db_name'])) {
+    $db_name = trim($_GET['db_name']);
+  
+}
+
+//$db_name='spleen';
+//$spleen = array("localhost", "root", "yutong", "test");
+//$dbs = array("tcmls" => $spleen);
+//$d = 'tcmls';
+//print_r($dbs['tcmls']);
+//print_r($dbs[$d]);
+//print_r($dbs);
+//print_r($dbs["$db_name"]);
+//print_r($dbs['spleen']);
+$db = $dbs["$db_name"];
+//print_r($db);
+//echo $db[0] . $db[1] . $db[2] . $db[3];
+$dbc = mysqli_connect($db[0], $db[1], $db[2], $db[3]) or die('Error connecting to MySQL server.');
+
 ?>
 <div class="row">
     <div class="col-md-2"></div>
