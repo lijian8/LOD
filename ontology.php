@@ -33,7 +33,7 @@ function render_property_values($graph, $me, $property) {
     }
 }
 
-$graph = new EasyRdf_Graph("http://localhost/lod/tcmdemoen.rdf");
+$graph = new EasyRdf_Graph("http://localhost/lod/tcmls-sn.rdf");
 $graph->load();
 ?>
 <div class="container">

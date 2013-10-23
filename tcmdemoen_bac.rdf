@@ -6,6 +6,7 @@
     <!ENTITY owl "http://www.w3.org/2002/07/owl#" >
     <!ENTITY dc "http://purl.org/dc/elements/1.1/" >
     <!ENTITY xsd "http://www.w3.org/2001/XMLSchema#" >
+    <!ENTITY xml "http://www.w3.org/XML/1998/namespace" >
     <!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#" >
     <!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#" >
 ]>
@@ -18,7 +19,8 @@
      xmlns:owl="http://www.w3.org/2002/07/owl#"
      xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
      xmlns:www="http://www.example.com/"
-     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace">
     <owl:Ontology rdf:about="http://www.example.com/">
         <rdfs:comment xml:lang="en">An example of OWL ontology for Traditional Chinese Medicine domain.</rdfs:comment>
         <rdfs:comment xml:lang="zh">中医药领域本体示例。</rdfs:comment>
@@ -445,42 +447,6 @@
     
 
 
-    <!-- http://www.example.com/has_medicinal_function -->
-
-    <owl:ObjectProperty rdf:about="&www;has_medicinal_function">
-        <rdfs:label xml:lang="en">has Medicinal Function</rdfs:label>
-        <rdfs:label xml:lang="zh">具有功效</rdfs:label>
-        <rdfs:domain rdf:resource="&www;MedicinalSubstance"/>
-        <rdfs:range rdf:resource="&www;TheFunctionOfChineseMedicinal"/>
-        <rdfs:subPropertyOf rdf:resource="&www;has"/>
-    </owl:ObjectProperty>
-    
-
-
-    <!-- http://www.example.com/has_medicinal_nature -->
-
-    <owl:ObjectProperty rdf:about="&www;has_medicinal_nature">
-        <rdfs:label xml:lang="en">has medicinal function</rdfs:label>
-        <rdfs:label xml:lang="zh">具有药性</rdfs:label>
-        <rdfs:domain rdf:resource="&www;MedicinalSubstance"/>
-        <rdfs:range rdf:resource="&www;NatureOfChineseMedicinals"/>
-        <rdfs:subPropertyOf rdf:resource="&www;has"/>
-    </owl:ObjectProperty>
-    
-
-
-    <!-- http://www.example.com/has_meridian_entry -->
-
-    <owl:ObjectProperty rdf:about="&www;has_meridian_entry">
-        <rdfs:label xml:lang="en">has meridian entry</rdfs:label>
-        <rdfs:label xml:lang="zh">具有归经</rdfs:label>
-        <rdfs:domain rdf:resource="&www;MedicinalSubstance"/>
-        <rdfs:range rdf:resource="&www;MeridianEntry"/>
-        <rdfs:subPropertyOf rdf:resource="&www;has"/>
-    </owl:ObjectProperty>
-    
-
-
     <!-- http://www.example.com/has_messenger -->
 
     <owl:ObjectProperty rdf:about="&www;has_messenger">
@@ -497,16 +463,6 @@
         <rdfs:label xml:lang="en">has minister</rdfs:label>
         <rdfs:label xml:lang="zh">臣药</rdfs:label>
         <rdfs:subPropertyOf rdf:resource="&www;contains_herb"/>
-    </owl:ObjectProperty>
-    
-
-
-    <!-- http://www.example.com/has_pharmacological_effects -->
-
-    <owl:ObjectProperty rdf:about="&www;has_pharmacological_effects">
-        <rdfs:label xml:lang="en">has pharmacological effects</rdfs:label>
-        <rdfs:label xml:lang="zh">具有药理作用</rdfs:label>
-        <rdfs:subPropertyOf rdf:resource="&www;has"/>
     </owl:ObjectProperty>
     
 
@@ -958,6 +914,26 @@
     
 
 
+    <!-- http://www.example.com/具有功效 -->
+
+    <owl:ObjectProperty rdf:about="&www;具有功效">
+        <rdfs:domain rdf:resource="&www;MedicinalSubstance"/>
+        <rdfs:range rdf:resource="&www;TheFunctionOfChineseMedicinal"/>
+        <rdfs:subPropertyOf rdf:resource="&www;has"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.example.com/具有归经 -->
+
+    <owl:ObjectProperty rdf:about="&www;具有归经">
+        <rdfs:domain rdf:resource="&www;MedicinalSubstance"/>
+        <rdfs:range rdf:resource="&www;MeridianEntry"/>
+        <rdfs:subPropertyOf rdf:resource="&www;has"/>
+    </owl:ObjectProperty>
+    
+
+
     <!-- http://www.w3.org/2002/07/owl#topObjectProperty -->
 
     <owl:ObjectProperty rdf:about="&owl;topObjectProperty">
@@ -1017,16 +993,6 @@
         <rdfs:label xml:lang="en">Animal</rdfs:label>
         <rdfs:label xml:lang="zh">动物</rdfs:label>
         <rdfs:subClassOf rdf:resource="&www;Organism"/>
-    </owl:Class>
-    
-
-
-    <!-- http://www.example.com/Araliaceae -->
-
-    <owl:Class rdf:about="&www;Araliaceae">
-        <rdfs:label xml:lang="en">Araliaceae</rdfs:label>
-        <rdfs:label xml:lang="zh">五加科</rdfs:label>
-        <rdfs:subClassOf rdf:resource="&www;Dicotyledoneae"/>
     </owl:Class>
     
 
@@ -1109,19 +1075,8 @@
                 </owl:intersectionOf>
             </owl:Class>
         </owl:equivalentClass>
-        <rdfs:subClassOf rdf:resource="&www;Chemical"/>
         <rdfs:subClassOf rdf:resource="&www;MedicinalSubstance"/>
         <rdfs:comment xml:lang="zh">Molecular components that are extracted from Chinese medicinal after extraction, separation, identification, structure determination.</rdfs:comment>
-    </owl:Class>
-    
-
-
-    <!-- http://www.example.com/ChemistryExperiment -->
-
-    <owl:Class rdf:about="&www;ChemistryExperiment">
-        <rdfs:label xml:lang="en">Chemistry Experiment</rdfs:label>
-        <rdfs:label xml:lang="zh">化学实验</rdfs:label>
-        <rdfs:subClassOf rdf:resource="&www;Experiment"/>
     </owl:Class>
     
 
@@ -1213,16 +1168,6 @@
     
 
 
-    <!-- http://www.example.com/Dicotyledoneae -->
-
-    <owl:Class rdf:about="&www;Dicotyledoneae">
-        <rdfs:label xml:lang="en">Dicotyledoneae</rdfs:label>
-        <rdfs:label xml:lang="zh">双子叶植物纲</rdfs:label>
-        <rdfs:subClassOf rdf:resource="&www;Plant"/>
-    </owl:Class>
-    
-
-
     <!-- http://www.example.com/DietTherapy -->
 
     <owl:Class rdf:about="&www;DietTherapy">
@@ -1295,16 +1240,6 @@
         <rdfs:label xml:lang="zh">事件</rdfs:label>
         <rdfs:subClassOf rdf:resource="&owl;Thing"/>
         <rdfs:comment xml:lang="en">A broad type for grouping activities, processes and states.(UMLS)</rdfs:comment>
-    </owl:Class>
-    
-
-
-    <!-- http://www.example.com/Experiment -->
-
-    <owl:Class rdf:about="&www;Experiment">
-        <rdfs:label xml:lang="en">Experiment</rdfs:label>
-        <rdfs:label xml:lang="zh">实验</rdfs:label>
-        <rdfs:subClassOf rdf:resource="&www;Activity"/>
     </owl:Class>
     
 
@@ -1436,16 +1371,6 @@
         <rdfs:label xml:lang="en">Functional body system</rdfs:label>
         <rdfs:label xml:lang="zh">功能性人体系统</rdfs:label>
         <rdfs:subClassOf rdf:resource="&www;BasicMaterialInTheHumanBodyInChineseMedicine"/>
-    </owl:Class>
-    
-
-
-    <!-- http://www.example.com/GeographicArea -->
-
-    <owl:Class rdf:about="&www;GeographicArea">
-        <rdfs:label xml:lang="en">Geographic area</rdfs:label>
-        <rdfs:label xml:lang="en">地理区域</rdfs:label>
-        <rdfs:subClassOf rdf:resource="&www;ConceptualEntity"/>
     </owl:Class>
     
 
@@ -1671,16 +1596,6 @@
         <rdfs:label xml:lang="en">palpation</rdfs:label>
         <rdfs:label xml:lang="zh">切诊</rdfs:label>
         <rdfs:subClassOf rdf:resource="&www;DiagnosticMethod"/>
-    </owl:Class>
-    
-
-
-    <!-- http://www.example.com/PharmacologicalEffects -->
-
-    <owl:Class rdf:about="&www;PharmacologicalEffects">
-        <rdfs:label xml:lang="en">Pharmacological effects</rdfs:label>
-        <rdfs:label xml:lang="zh">药理作用</rdfs:label>
-        <rdfs:subClassOf rdf:resource="&www;PropertyAndFunctionOfChineseMedicinal"/>
     </owl:Class>
     
 
@@ -2123,20 +2038,11 @@ The inheritance of academic tradition, achieved through apprenticeship training,
     
 
 
-    <!-- http://www.example.com/dilation_of_blood_vessels -->
-
-    <owl:NamedIndividual rdf:about="&www;dilation_of_blood_vessels">
-        <rdf:type rdf:resource="&www;PharmacologicalEffects"/>
-        <rdfs:label xml:lang="en">Dilation of blood vessels</rdfs:label>
-        <rdfs:label xml:lang="zh">扩张血管</rdfs:label>
-    </owl:NamedIndividual>
-    
-
-
     <!-- http://www.example.com/four_gentlemen_decoction -->
 
     <owl:NamedIndividual rdf:about="&www;four_gentlemen_decoction">
         <rdf:type rdf:resource="&www;Formula"/>
+        <rdf:type rdf:resource="&www;MedicinalSubstance"/>
         <rdfs:label xml:lang="en">Four gentlemen decoction</rdfs:label>
         <rdfs:label xml:lang="en">four gentlemen decoction</rdfs:label>
         <rdfs:label xml:lang="zh">四君子汤</rdfs:label>
@@ -2164,43 +2070,15 @@ The inheritance of academic tradition, achieved through apprenticeship training,
     <!-- http://www.example.com/ginseng -->
 
     <owl:NamedIndividual rdf:about="&www;ginseng">
-        <rdf:type rdf:resource="&www;Araliaceae"/>
         <rdf:type rdf:resource="&www;ChineseMedicinal"/>
         <rdfs:label xml:lang="en">Ginseng</rdfs:label>
         <rdfs:label xml:lang="zh">人参</rdfs:label>
         <has_herbal_taste rdf:resource="&www;bitter"/>
         <treats rdf:resource="&www;deficiency"/>
-        <has_pharmacological_effects rdf:resource="&www;dilation_of_blood_vessels"/>
-        <contains_chemical rdf:resource="&www;ginsenosides_rb1"/>
-        <contains_chemical rdf:resource="&www;ginsenosides_rg1"/>
-        <has_medicinal_function rdf:resource="&www;invigorating_primodial_qi"/>
-        <location_of rdf:resource="&www;northeast_china"/>
-        <has_medicinal_nature rdf:resource="&www;peace"/>
-        <has_meridian_entry rdf:resource="&www;spleen_channel"/>
         <has_herbal_taste rdf:resource="&www;sweet"/>
-        <has_medicinal_nature rdf:resource="&www;warm"/>
-        <has_meridian_entry rdf:resource="&www;肺经"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.example.com/ginsenosides_rb1 -->
-
-    <owl:NamedIndividual rdf:about="&www;ginsenosides_rb1">
-        <rdf:type rdf:resource="&www;ChemicalConstituentOfChineseMedicine"/>
-        <rdfs:label xml:lang="en">Ginsenosides Rb1</rdfs:label>
-        <rdfs:label xml:lang="zh">人参皂苷Rb1</rdfs:label>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.example.com/ginsenosides_rg1 -->
-
-    <owl:NamedIndividual rdf:about="&www;ginsenosides_rg1">
-        <rdf:type rdf:resource="&www;ChemicalConstituentOfChineseMedicine"/>
-        <rdfs:label xml:lang="en">Ginsenosides Rg1</rdfs:label>
-        <rdfs:label xml:lang="zh">人参皂苷Rg1</rdfs:label>
-        <has_pharmacological_effects rdf:resource="&www;dilation_of_blood_vessels"/>
+        <具有功效 rdf:resource="&www;大补元气"/>
+        <具有归经 rdf:resource="&www;肺经"/>
+        <具有归经 rdf:resource="&www;脾经"/>
     </owl:NamedIndividual>
     
 
@@ -2239,7 +2117,8 @@ The inheritance of academic tradition, achieved through apprenticeship training,
     <!-- http://www.example.com/huperzine_a -->
 
     <owl:NamedIndividual rdf:about="&www;huperzine_a">
-        <rdf:type rdf:resource="&www;ChemicalConstituentOfChineseMedicine"/>
+        <rdf:type rdf:resource="&www;Chemical"/>
+        <rdf:type rdf:resource="&www;MedicinalSubstance"/>
         <rdfs:label xml:lang="en">Huperzine A</rdfs:label>
         <rdfs:label xml:lang="zh">石杉碱甲</rdfs:label>
         <rdfs:comment xml:lang="en">Huperzine A is a naturally occurring sesquiterpene alkaloid found in the extracts of the firmoss Huperzia serrata.</rdfs:comment>
@@ -2248,16 +2127,6 @@ The inheritance of academic tradition, achieved through apprenticeship training,
         <treats rdf:resource="&www;alzheimers_disease"/>
         <treats rdf:resource="&www;kidney_yang_syndrome"/>
         <treats rdf:resource="&www;memory_loss"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.example.com/invigorating_primodial_qi -->
-
-    <owl:NamedIndividual rdf:about="&www;invigorating_primodial_qi">
-        <rdf:type rdf:resource="&www;TheFunctionOfChineseMedicinal"/>
-        <rdfs:label xml:lang="en">invigorating primodial qi</rdfs:label>
-        <rdfs:label xml:lang="zh">大补元气</rdfs:label>
     </owl:NamedIndividual>
     
 
@@ -2341,26 +2210,6 @@ The inheritance of academic tradition, achieved through apprenticeship training,
     
 
 
-    <!-- http://www.example.com/northeast_china -->
-
-    <owl:NamedIndividual rdf:about="&www;northeast_china">
-        <rdf:type rdf:resource="&www;GeographicArea"/>
-        <rdfs:label xml:lang="en">Northeast China</rdfs:label>
-        <rdfs:label xml:lang="zh">中国东北</rdfs:label>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.example.com/peace -->
-
-    <owl:NamedIndividual rdf:about="&www;peace">
-        <rdf:type rdf:resource="&www;NatureOfChineseMedicinals"/>
-        <rdfs:label xml:lang="en">peace</rdfs:label>
-        <rdfs:label xml:lang="zh">平</rdfs:label>
-    </owl:NamedIndividual>
-    
-
-
     <!-- http://www.example.com/pregnancy -->
 
     <owl:NamedIndividual rdf:about="&www;pregnancy">
@@ -2411,32 +2260,12 @@ The inheritance of academic tradition, achieved through apprenticeship training,
     
 
 
-    <!-- http://www.example.com/spleen_channel -->
-
-    <owl:NamedIndividual rdf:about="&www;spleen_channel">
-        <rdf:type rdf:resource="&www;MeridianEntry"/>
-        <rdfs:label xml:lang="en">spleen channel</rdfs:label>
-        <rdfs:label xml:lang="zh">脾经</rdfs:label>
-    </owl:NamedIndividual>
-    
-
-
     <!-- http://www.example.com/sweet -->
 
     <owl:NamedIndividual rdf:about="&www;sweet">
         <rdf:type rdf:resource="&www;FourQiAndFiveFlavors"/>
         <rdfs:label xml:lang="en">Sweet</rdfs:label>
         <rdfs:label xml:lang="zh">甜</rdfs:label>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.example.com/warm -->
-
-    <owl:NamedIndividual rdf:about="&www;warm">
-        <rdf:type rdf:resource="&www;NatureOfChineseMedicinals"/>
-        <rdfs:label xml:lang="en">warm</rdfs:label>
-        <rdfs:label xml:lang="zh">温</rdfs:label>
     </owl:NamedIndividual>
     
 
@@ -2484,12 +2313,26 @@ The inheritance of academic tradition, achieved through apprenticeship training,
     
 
 
+    <!-- http://www.example.com/大补元气 -->
+
+    <owl:NamedIndividual rdf:about="&www;大补元气">
+        <rdf:type rdf:resource="&www;TheFunctionOfChineseMedicinal"/>
+    </owl:NamedIndividual>
+    
+
+
     <!-- http://www.example.com/肺经 -->
 
     <owl:NamedIndividual rdf:about="&www;肺经">
         <rdf:type rdf:resource="&www;MeridianEntry"/>
-        <rdfs:label xml:lang="en">lung channel</rdfs:label>
-        <rdfs:label xml:lang="zh">肺经</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.example.com/脾经 -->
+
+    <owl:NamedIndividual rdf:about="&www;脾经">
+        <rdf:type rdf:resource="&www;MeridianEntry"/>
     </owl:NamedIndividual>
 </rdf:RDF>
 
