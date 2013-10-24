@@ -1,8 +1,8 @@
 <?php
 
 function render_entity_link($dbc, $name) {
-    if (strpos($name, TCMLS_OBJECT) === 0) {
-        $id = str_replace(TCMLS_OBJECT, "", $name);
+    if (strpos($name, PREFIX) === 0) {
+        $id = str_replace(PREFIX, "", $name);
         $query = "select * from def where id ='$id'";
         $result = mysqli_query($dbc, $query) or die('Error querying database1.');
         if ($row = mysqli_fetch_array($result)) {

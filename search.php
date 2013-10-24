@@ -2,13 +2,13 @@
 include_once ("./header.php");
 include_once ("./appvars.php");
 include_once ("./entity_helper.php");
-include_once ("./db_array.php");
+include_once ("./db_helper.php");
 
-function render_content($row) {
+function render_content($row, $db_name) {
     $name = $row[name];
     $id = $row[id];
     $def = $row[def];
-    echo "<p><a href=\"entity.php?id=$id\">$name</a></p>";
+    echo "<p><a href=\"entity.php?id=$id&db_name=$db_name\">$name</a></p>";
 
     echo $def;
     echo '<br>';
@@ -26,11 +26,11 @@ function render_content($row) {
     echo "<hr>";
 }
 
-function render_entity($dbc, $keywords) {
+function render_entity($dbc, $keywords, $db_name) {
     $query = "SELECT * FROM def where name = '$keywords'";
     $result = mysqli_query($dbc, $query) or die('Error querying database.');
     if ($row = mysqli_fetch_array($result)) {
-        render_content($row);
+        render_content($row, $db_name);
     }
 }
 
@@ -40,7 +40,8 @@ function render_related($dbc, $keywords) {
     $result = mysqli_query($dbc, $query) or die('Error querying database.');
     if ($row = mysqli_fetch_array($result)) {
         $id = $row[id];
-        $name = TCMLS_OBJECT . $id;
+        $name = PREFIX . $id;
+       
         $query = "select * from graph where subject ='$name'  limit 20";
 
         $result = mysqli_query($dbc, $query) or die('Error querying database2.');
@@ -53,8 +54,6 @@ function render_related($dbc, $keywords) {
             }
         }
     }
-
-  
 }
 
 if (isset($_POST['submit'])) {
@@ -64,38 +63,6 @@ if (isset($_POST['submit'])) {
 if (isset($_GET['keywords'])) {
     $keywords = $_GET['keywords'];
 }
-$db_name = 'tcmls';
-if (isset($_POST['db_name'])) {
-    $db_name = trim($_POST['db_name']);
-  
-    //echo $db_name;
-    //echo $db_name == 'spleen'? "yes":"no";
-    
-    //print_r($dbs[$db_name]);
-    //$db_name = 'spleen';
-    // echo $db_name;
-   // print_r($dbs[$db_name]);
-  //  echo 'test';
-    
-}elseif (isset($_GET['db_name'])) {
-    $db_name = trim($_GET['db_name']);
-  
-}
-
-//$db_name='spleen';
-//$spleen = array("localhost", "root", "yutong", "test");
-//$dbs = array("tcmls" => $spleen);
-//$d = 'tcmls';
-//print_r($dbs['tcmls']);
-//print_r($dbs[$d]);
-//print_r($dbs);
-//print_r($dbs["$db_name"]);
-//print_r($dbs['spleen']);
-$db = $dbs["$db_name"];
-//print_r($db);
-//echo $db[0] . $db[1] . $db[2] . $db[3];
-$dbc = mysqli_connect($db[0], $db[1], $db[2], $db[3]) or die('Error connecting to MySQL server.');
-
 ?>
 <div class="row">
     <div class="col-md-2"></div>
@@ -110,6 +77,17 @@ $dbc = mysqli_connect($db[0], $db[1], $db[2], $db[3]) or die('Error connecting t
                     </div>   
                     <div class="col-md-9">
                         <br>
+                        <ul class="nav nav-pills" align="center">
+                            <?php                          
+                            foreach ($db_labels as $db => $db_label) {
+                                echo '<li ' . (($db == $db_name) ? 'class="disabled"' : '') . '><a href="' . $_SERVER['PHP_SELF'] . "?db_name=" . $db . '">' . $db_label . '</a></li>';
+                            }
+                            ?>  
+                            <li><a href="#">更多>></a></li>
+                        </ul>
+
+
+                        <!--
                         <label class="checkbox-inline">
                             <input type="checkbox" id="inlineCheckbox1" value="option1"> 单味药
                         </label>
@@ -128,6 +106,7 @@ $dbc = mysqli_connect($db[0], $db[1], $db[2], $db[3]) or die('Error connecting t
                         <label class="checkbox-inline">
                             <input type="checkbox" id="inlineCheckbox3" value="option3"> 学者 
                         </label>
+                        !-->
                     </div>
                 </div>
                 <p></p>
@@ -149,7 +128,7 @@ $dbc = mysqli_connect($db[0], $db[1], $db[2], $db[3]) or die('Error connecting t
 
                         <?php
 //$keywords = '四君子汤';
-                        render_entity($dbc, $keywords);
+                        render_entity($dbc, $keywords, $db_name);
 
 
 
@@ -159,7 +138,7 @@ $dbc = mysqli_connect($db[0], $db[1], $db[2], $db[3]) or die('Error connecting t
 
                         $result = mysqli_query($dbc, $query) or die('Error querying database.');
                         while ($row = mysqli_fetch_array($result)) {
-                            render_content($row);
+                            render_content($row, $db);
                         }
                         ?>
 

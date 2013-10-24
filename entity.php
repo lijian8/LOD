@@ -3,6 +3,7 @@ include_once ("./header.php");
 include_once ("./onto_array.php");
 include_once ("./appvars.php");
 include_once ("./entity_helper.php");
+include_once ("./db_helper.php");
 /*
   function render_graph($dbc, $name) {
   $query = "select * from graph where subject ='$name'  limit 100";
@@ -91,8 +92,8 @@ function render_details($dbc, $name) {
 }
 
 function render_value($dbc, $name) {
-    if (strpos($name, TCMLS_OBJECT) === 0) {
-        $id = str_replace(TCMLS_OBJECT, "", $name);
+    if (strpos($name, PREFIX) === 0) {
+        $id = str_replace(PREFIX, "", $name);
         $query = "select * from def where id ='$id'";
         $result = mysqli_query($dbc, $query) or die('Error querying database1.');
         if ($row = mysqli_fetch_array($result)) {
@@ -117,6 +118,8 @@ function get_types($dbc, $name) {
     }
     return $types;
 }
+
+
 
 if (isset($_GET['delete_triple_id'])) {
     $query = "DELETE FROM graph WHERE id = '" . $_GET['delete_triple_id'] . "'";
@@ -205,7 +208,7 @@ if (isset($name) && $name != '' && isset($id) && $id != '') {
         echo '<div class="panel-body">';
 
         echo "<table class=\"table\"><tbody>";
-        render_details($dbc, TCMLS_OBJECT . $id);
+        render_details($dbc, PREFIX . $id);
         render_details($dbc, $name);
         echo "</tbody></table></div></div>";
         ?>
