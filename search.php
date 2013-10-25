@@ -35,13 +35,16 @@ function render_entity($dbc, $keywords, $db_name) {
 }
 
 function render_related($dbc, $keywords) {
-
+    echo PREFIX;
+    echo $keywords;
+   
     $query = "SELECT * FROM def where name = '$keywords'";
     $result = mysqli_query($dbc, $query) or die('Error querying database.');
     if ($row = mysqli_fetch_array($result)) {
+         echo "has results";
         $id = $row[id];
         $name = PREFIX . $id;
-       
+
         $query = "select * from graph where subject ='$name'  limit 20";
 
         $result = mysqli_query($dbc, $query) or die('Error querying database2.');
@@ -55,7 +58,7 @@ function render_related($dbc, $keywords) {
         }
     }
 }
-
+ 
 if (isset($_POST['submit'])) {
     $keywords = $_POST['keywords'];
 }
@@ -63,13 +66,15 @@ if (isset($_POST['submit'])) {
 if (isset($_GET['keywords'])) {
     $keywords = $_GET['keywords'];
 }
+
+
 ?>
 <div class="row">
     <div class="col-md-2"></div>
     <div class="col-md-8">
-        <form class="form-search" action="search.php" method="post" class="form-horizontal"
+        <form class="form-search" action="search.php" method="get" class="form-horizontal"
               enctype="multipart/form-data">
-
+            <input type="hidden" id ="db_name" name ="db_name" value ="<?php if (isset($db_name)) echo $db_name; ?>">
             <div class="container" >
                 <div class="row">
                     <div class="col-md-3">
@@ -78,9 +83,9 @@ if (isset($_GET['keywords'])) {
                     <div class="col-md-9">
                         <br>
                         <ul class="nav nav-pills" align="center">
-                            <?php                          
+                            <?php
                             foreach ($db_labels as $db => $db_label) {
-                                echo '<li ' . (($db == $db_name) ? 'class="disabled"' : '') . '><a href="' . $_SERVER['PHP_SELF'] . "?db_name=" . $db . '">' . $db_label . '</a></li>';
+                                echo '<li ' . (($db == $db_name) ? 'class="disabled"' : '') . '><a href="' . $_SERVER['PHP_SELF'] . "?keywords=$keywords&db_name=" . $db . '">' . $db_label . '</a></li>';
                             }
                             ?>  
                             <li><a href="#">更多>></a></li>
@@ -115,7 +120,6 @@ if (isset($_GET['keywords'])) {
                     <span class="input-group-btn">
                         <button name ="submit" type="submit" class="btn btn-primary  btn-lg"><span class="glyphicon glyphicon-search"></span></button>
                     </span> 
-
                 </div> 
                 <p></p>
 

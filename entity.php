@@ -38,7 +38,7 @@ function render_info_by_property($dbc, $name, $property) {
 
 function render_graph_by_property($dbc, $name, $property) {
     $query = "select * from graph where subject ='$name' and property='$property' limit 100";
-
+   
     $result = mysqli_query($dbc, $query) or die('Error querying database2.');
 
     if (mysqli_num_rows($result) != 0) {
@@ -64,8 +64,9 @@ function render_graph_by_property($dbc, $name, $property) {
 
 function render_graph($dbc, $name, $ontology) {
     $types = get_types($dbc, $name);
+
     foreach ($types as $type) {
-        $properties = $ontology[$type];
+        $properties = $ontology[$type];     
         foreach ($properties as $property) {
             render_graph_by_property($dbc, $name, $property);
         }
@@ -99,7 +100,7 @@ function render_value($dbc, $name) {
         if ($row = mysqli_fetch_array($result)) {
             $name = $row[name];
             $def = $row[def];
-            echo '<a href="'.$_SERVER['PHP_SELF'].'?id='.$id.'">'. $name .'</a>&nbsp;<em><small>('. $def .')'.'</small></em>';
+            echo '<a href="' . $_SERVER['PHP_SELF'] . '?id=' . $id . '">' . $name . '</a>&nbsp;<em><small>(' . $def . ')' . '</small></em>';
         } else {
             echo $name;
         }
@@ -108,18 +109,11 @@ function render_value($dbc, $name) {
     }
 }
 
-function get_types($dbc, $name) {
-    $query = "select * from graph where subject = '$name' and property = 'a'";
-    $types = array();
-    $result = mysqli_query($dbc, $query) or die('Error querying database2.');
-    while ($row = mysqli_fetch_array($result)) {
-        $value = $row[value];
-        array_push($types, $value);
-    }
-    return $types;
+function get_types($dbc, $name, $id) {
+
+    $types = get_values($dbc, $name, '类型');
+    return array_merge($types, get_values($dbc, PREFIX . $id, '类型'));
 }
-
-
 
 if (isset($_GET['delete_triple_id'])) {
     $query = "DELETE FROM graph WHERE id = '" . $_GET['delete_triple_id'] . "'";
@@ -155,35 +149,68 @@ if (isset($name) && $name != '' && isset($id) && $id != '') {
 
 
     <div class="container">
+        <ul class="nav nav-pills pull-right">    
+            <li ><a  href="editor.php?name=<?php echo $name; ?>"><span class="glyphicon glyphicon-plus"></span>&nbsp;添加信息</a></li>
+            <li ><a  href="editor.php?name=<?php echo $name; ?>"><span class="glyphicon glyphicon-home"></span>&nbsp;返回首页</a></li>
+
+        </ul>
+
 
         <?php
         $width = 300;
+        echo '<ul class="nav nav-pills">';
+        echo '<li ><a  href="editor.php?name=<?php echo $name; ?>">领域本体</a></li>';
+
+        foreach ($db_labels as $db => $db_label) {
+            echo '<li ' . (($db == $db_name) ? 'class="disabled"' : '') . '><a href="' . $_SERVER['PHP_SELF'] . "?name=$name&db_name=" . $db . '">' . $db_label . '</a></li>';
+        }
+        echo '<li><a href="#">更多>></a></li>';
+        echo '</ul>';
+        ?>
+
+        <?php
+        echo '<h1>' . $name . '(' . implode(',', get_types($dbc, $name, $id)) . ')</h1>';
+
         echo '<div class="media">';
 
         $image_file = 'img/' . $name . '.jpg';
         if (is_file(iconv('utf-8', 'gb2312', $image_file))) {
             //$image_file = 'img/NA.jpg';
-            echo '<a class="pull-left" href="search.php?keywords=' . $name . '">';
+            echo '<a class="pull-right" href="search.php?keywords=' . $name . '">';
             echo '<img width="' . $width . '" class="media-object" src="' . $image_file . '" data-src="holder.js/64x64">';
             echo '</a>';
         }
 
 
         echo '<div class="media-body"  align ="left">';
-        echo '<h2>' . $name . '</h2>';
-        echo "<p>&nbsp;<a class=\"btn btn-xs btn-primary\" href=\"individual.php\">查看本体信息</a>";
-        echo "&nbsp;<a class=\"btn btn-xs btn-primary\" href=\"editor.php?name=" . $name . "\">添加实体信息</a>";
-        echo "&nbsp;<a class=\"btn btn-xs btn-success\" href=\"individual.php\">返回主页</a></p>";
-
-        echo "<table class=\"table\"><tbody>";
-        echo "<tr><td width='10%'>代码:</td><td>" . $id . "</td></tr>";
-
-        echo "<tr><td width='10%'>类型:</td><td>" . implode(',', get_types($dbc, $name)) . "</td></tr>";
-
-        echo "<tr><td>定义/注释:</td><td>" . $def;
+        echo $def;
         render_info_by_property($dbc, $name, '定义');
         render_info_by_property($dbc, $name, '注释');
+        echo "<table class=\"table\"><tbody>";
+        //echo "<tr><td width='10%'>代码:</td><td>" . $id . "</td></tr>";
+
+
+        echo "<tr><td width='10%'>英文名:</td><td>";
+
+        render_info_by_property($dbc, PREFIX . $id, '英文正名');
+        render_info_by_property($dbc, $name, '英文正名');
+        render_info_by_property($dbc, PREFIX . $id, '英文异名');
+        render_info_by_property($dbc, $name, '英文异名');
         echo "</td></tr>";
+
+        echo "<tr><td width='10%'>异名:</td><td>";
+
+        render_info_by_property($dbc, PREFIX . $id, '中文异名');
+        render_info_by_property($dbc, $name, '中文异名');
+        render_info_by_property($dbc, PREFIX . $id, '英文异名');
+        render_info_by_property($dbc, $name, '英文异名');
+        render_info_by_property($dbc, PREFIX . $id, '异名');
+        render_info_by_property($dbc, $name, '异名');
+        echo "</td></tr>";
+
+        // echo "<tr><td width='10%'>类型:</td><td>" . implode(',', get_types($dbc, $name, $id)) . "</td></tr>";
+
+
 
 
 
@@ -196,10 +223,16 @@ if (isset($name) && $name != '' && isset($id) && $id != '') {
 
 
         echo '</div></div></div>';
+        echo "<p/>";
 
 
         echo '<div class ="container">';
-        render_graph($dbc, $name, $ontology);
+        if (isset($id) && $id != '') {
+            render_graph($dbc, PREFIX . $id, $ontology);
+        } else {
+            render_graph($dbc, $name, $ontology);
+        }
+
 
         echo '<div class="panel panel-info">';
         echo '<div class="panel-heading">';
