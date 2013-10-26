@@ -4,25 +4,29 @@ include_once ("./appvars.php");
 include_once ("./entity_helper.php");
 include_once ("./db_helper.php");
 
-function render_content($row, $db_name) {
-    $name = $row[name];
+function render_content($dbc, $row, $db_name) {
     $id = $row[id];
+    $name = $row[name];
     $def = $row[def];
+  
     echo "<p><a href=\"entity.php?id=$id&db_name=$db_name\">$name</a></p>";
-
-    echo $def;
+    if ($def != '') {
+        echo $def;
+    } else {
+        render_summary($dbc, PREFIX . $id);
+    }
     echo '<br>';
-
-    echo '<a class="btn btn-link" href="#" role="button">功效&nbsp; &raquo;</a>';
-    echo '&nbsp;';
-    echo '<a class="btn btn-link" href="#" role="button">化学成分&nbsp; &raquo;</a>';
-    echo '&nbsp;';
-    echo '<a class="btn btn-link" href="#" role="button">药理作用&nbsp; &raquo;</a>';
-    echo '&nbsp;';
-    echo '<a class="btn btn-link" href="#" role="button">化学实验&nbsp; &raquo;</a>';
-    echo '&nbsp;';
-    echo '<a class="btn btn-link" href="#" role="button">来源处方&nbsp; &raquo;</a>';
-
+    /*
+      echo '<a class="btn btn-link" href="#" role="button">功效&nbsp; &raquo;</a>';
+      echo '&nbsp;';
+      echo '<a class="btn btn-link" href="#" role="button">化学成分&nbsp; &raquo;</a>';
+      echo '&nbsp;';
+      echo '<a class="btn btn-link" href="#" role="button">药理作用&nbsp; &raquo;</a>';
+      echo '&nbsp;';
+      echo '<a class="btn btn-link" href="#" role="button">化学实验&nbsp; &raquo;</a>';
+      echo '&nbsp;';
+      echo '<a class="btn btn-link" href="#" role="button">来源处方&nbsp; &raquo;</a>';
+     */
     echo "<hr>";
 }
 
@@ -30,18 +34,17 @@ function render_entity($dbc, $keywords, $db_name) {
     $query = "SELECT * FROM def where name = '$keywords'";
     $result = mysqli_query($dbc, $query) or die('Error querying database.');
     if ($row = mysqli_fetch_array($result)) {
-        render_content($row, $db_name);
+        render_content($dbc, $row, $db_name);
     }
 }
 
 function render_related($dbc, $keywords) {
-    echo PREFIX;
-    echo $keywords;
-   
+
+
     $query = "SELECT * FROM def where name = '$keywords'";
     $result = mysqli_query($dbc, $query) or die('Error querying database.');
     if ($row = mysqli_fetch_array($result)) {
-         echo "has results";
+
         $id = $row[id];
         $name = PREFIX . $id;
 
@@ -58,7 +61,7 @@ function render_related($dbc, $keywords) {
         }
     }
 }
- 
+
 if (isset($_POST['submit'])) {
     $keywords = $_POST['keywords'];
 }
@@ -66,8 +69,6 @@ if (isset($_POST['submit'])) {
 if (isset($_GET['keywords'])) {
     $keywords = $_GET['keywords'];
 }
-
-
 ?>
 <div class="row">
     <div class="col-md-2"></div>
@@ -142,7 +143,7 @@ if (isset($_GET['keywords'])) {
 
                         $result = mysqli_query($dbc, $query) or die('Error querying database.');
                         while ($row = mysqli_fetch_array($result)) {
-                            render_content($row, $db);
+                            render_content($dbc, $row, $db);
                         }
                         ?>
 

@@ -38,7 +38,7 @@ function render_info_by_property($dbc, $name, $property) {
 
 function render_graph_by_property($dbc, $name, $property) {
     $query = "select * from graph where subject ='$name' and property='$property' limit 100";
-    echo $query;
+    
     $result = mysqli_query($dbc, $query) or die('Error querying database2.');
 
     if (mysqli_num_rows($result) != 0) {
@@ -63,8 +63,8 @@ function render_graph_by_property($dbc, $name, $property) {
 }
 
 function render_graph($dbc, $name, $ontology) {
-    $types = get_types($dbc, $name);
-
+    //$types = get_types($dbc, $name);
+    $types = array('方剂');
     foreach ($types as $type) {
         $properties = $ontology[$type];
         foreach ($properties as $property) {
@@ -97,9 +97,6 @@ function get_types($dbc, $name, $id) {
     $types = get_values($dbc, $name, '类型');
     return array_merge($types, get_values($dbc, PREFIX . $id, '类型'));
 }
-
-$names = array('英文正名', '英文异名', '中文异名', '中文正名', '异名','汉语拼音','英文名','别名');
-$type_labels = array('类型');
 
 if (isset($_GET['delete_triple_id'])) {
     $query = "DELETE FROM graph WHERE id = '" . $_GET['delete_triple_id'] . "'";
@@ -154,83 +151,21 @@ if (isset($name) && $name != '' && isset($id) && $id != '') {
 
 
         <h1>  
-            <font face="微软雅黑"><strong>
-                <?php echo $name . '(' . implode(',', get_types($dbc, $name, $id)) . ')'; ?>       
-            </strong>
-            </font>
+            <?php echo $name . '(' . implode(',', get_types($dbc, $name, $id)) . ')'; ?>       
         </h1>
 
-       
         <hr>
-
-
-        <div class="row">
-            <div class="col-md-8">
-                <?php
-                echo $def; 
-                echo '<hr>';
-                //render_summary($dbc, $name);
-                //echo "<table class=\"table\"><tbody>";
-                $filter = array_merge($type_labels, $names);
-
-                render_literals($dbc, PREFIX . $id, $filter, $ratio = '10%');
-                render_literals($dbc, $name, $filter, $ratio = '10%');
-
-                //echo "</tbody></table>";
-                ?>
-            </div>
-            <div class="col-md-4">
-                <div class="panel panel-info">
-                    <div class="panel-heading">
-                        <h3 class="panel-title"><?php echo $name; ?></h3>
-                    </div>
-                    <div class="panel-body" align="center">
-                        <?php
-                        $image_file = 'img/' . $name . '.jpg';
-                        if (is_file(iconv('utf-8', 'gb2312', $image_file))) {
-                            echo '<a class="thumbnail" href="search.php?keywords=' . $name . '">';
-                            echo '<img width="' . $width . '" class="img-thumbnail" src="' . $image_file . '" alt="' . $name . '" data-src="holder.js/64x64">';
-                            echo $name;
-                            echo '</a>';
-                        }
-                        ?>   
-                    </div>
-
-                    <table class="table">
-                        <tbody>
-
-                            <?php
-                            // echo "<tr><td width='10%'>代码:</td><td>" . $id . "</td></tr>";
-                            //  echo "<tr><td width='10%'>类型:</td><td>" . implode(',', get_types($dbc, $name, $id)) . "</td></tr>";
-
-                            echo "<tr><td width='30%'>相关术语:</td><td>";
-
-                            foreach ($names as $name_property) {
-                                render_info_by_property($dbc, PREFIX . $id, $name_property);
-                                render_info_by_property($dbc, $name, $name_property);
-                            }
-
-                            echo "</td></tr>";
-                            /*
-                              echo "<tr><td>异名:</td><td>";
-
-                              render_info_by_property($dbc, PREFIX . $id, '中文异名');
-                              render_info_by_property($dbc, $name, '中文异名');
-                              render_info_by_property($dbc, PREFIX . $id, '英文异名');
-                              render_info_by_property($dbc, $name, '英文异名');
-                              render_info_by_property($dbc, PREFIX . $id, '异名');
-                              render_info_by_property($dbc, $name, '异名');
-                              echo "</td></tr>";
-                             */
-                            render_links($dbc, PREFIX . $id, '30%');
-                            ?>
-                        </tbody>
-                    </table>
-
-                </div>
-            </div>
-        </div>
+    
         <p/>
+        <div class ="container">
+            <?php
+            
+          
+            render_graph($dbc, $name, $ontology);
+          
+            ?>
+           
+        </div>
 
 
 

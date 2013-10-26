@@ -74,7 +74,7 @@ function render_graph($dbc, $name, $ontology) {
 }
 
 function render_details($dbc, $name) {
-    $query = "select * from graph where subject ='$name'  limit 100";
+    $query = "select * from graph where subject ='$name'";
 
     $result = mysqli_query($dbc, $query) or die('Error querying database2.');
 
@@ -98,7 +98,7 @@ function get_types($dbc, $name, $id) {
     return array_merge($types, get_values($dbc, PREFIX . $id, '类型'));
 }
 
-$names = array('英文正名', '英文异名', '中文异名', '中文正名', '异名','汉语拼音','英文名','别名');
+$names = array('英文正名', '英文异名', '中文异名', '中文正名', '异名');
 $type_labels = array('类型');
 
 if (isset($_GET['delete_triple_id'])) {
@@ -154,86 +154,41 @@ if (isset($name) && $name != '' && isset($id) && $id != '') {
 
 
         <h1>  
-            <font face="微软雅黑"><strong>
-                <?php echo $name . '(' . implode(',', get_types($dbc, $name, $id)) . ')'; ?>       
-            </strong>
-            </font>
+            <?php echo $name . '(' . implode(',', get_types($dbc, $name, $id)) . ')'; ?>       
         </h1>
 
-       
+        <em><?php echo $def; ?></em>
         <hr>
-
-
-        <div class="row">
-            <div class="col-md-8">
-                <?php
-                echo $def; 
-                echo '<hr>';
-                //render_summary($dbc, $name);
-                //echo "<table class=\"table\"><tbody>";
-                $filter = array_merge($type_labels, $names);
-
-                render_literals($dbc, PREFIX . $id, $filter, $ratio = '10%');
-                render_literals($dbc, $name, $filter, $ratio = '10%');
-
-                //echo "</tbody></table>";
-                ?>
-            </div>
-            <div class="col-md-4">
-                <div class="panel panel-info">
-                    <div class="panel-heading">
-                        <h3 class="panel-title"><?php echo $name; ?></h3>
-                    </div>
-                    <div class="panel-body" align="center">
-                        <?php
-                        $image_file = 'img/' . $name . '.jpg';
-                        if (is_file(iconv('utf-8', 'gb2312', $image_file))) {
-                            echo '<a class="thumbnail" href="search.php?keywords=' . $name . '">';
-                            echo '<img width="' . $width . '" class="img-thumbnail" src="' . $image_file . '" alt="' . $name . '" data-src="holder.js/64x64">';
-                            echo $name;
-                            echo '</a>';
-                        }
-                        ?>   
-                    </div>
-
-                    <table class="table">
-                        <tbody>
-
-                            <?php
-                            // echo "<tr><td width='10%'>代码:</td><td>" . $id . "</td></tr>";
-                            //  echo "<tr><td width='10%'>类型:</td><td>" . implode(',', get_types($dbc, $name, $id)) . "</td></tr>";
-
-                            echo "<tr><td width='30%'>相关术语:</td><td>";
-
-                            foreach ($names as $name_property) {
-                                render_info_by_property($dbc, PREFIX . $id, $name_property);
-                                render_info_by_property($dbc, $name, $name_property);
-                            }
-
-                            echo "</td></tr>";
-                            /*
-                              echo "<tr><td>异名:</td><td>";
-
-                              render_info_by_property($dbc, PREFIX . $id, '中文异名');
-                              render_info_by_property($dbc, $name, '中文异名');
-                              render_info_by_property($dbc, PREFIX . $id, '英文异名');
-                              render_info_by_property($dbc, $name, '英文异名');
-                              render_info_by_property($dbc, PREFIX . $id, '异名');
-                              render_info_by_property($dbc, $name, '异名');
-                              echo "</td></tr>";
-                             */
-                            render_links($dbc, PREFIX . $id, '30%');
-                            ?>
-                        </tbody>
-                    </table>
-
+  
+        <?php
+        $values = get_property_values($dbc, PREFIX . $id);
+        $values = get_property_values($dbc, $name, $values);
+        ?>
+        <div class ="container">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><?php echo $db_name; ?></h3>
                 </div>
+
+                <table class="table">
+                    <tbody>
+                        <?php
+                        foreach ($values as $property => $value) {
+
+                            echo "<tr><td width='10%'>" . $property . ":</td><td>";
+                            foreach ($value as $v) {
+                                //echo '<li class="list-group-item">' . $v . '</li>';
+                                echo '<p>' . $v;
+                                echo '<a href="' . $_SERVER['PHP_SELF'] . '?name=' . $name . '&delete_triple_id=' . $id . '"><span class="glyphicon glyphicon-remove-circle"></span></a>';
+                                echo '</p>';
+                            }
+                            echo "</td></tr>";
+                        }
+                        ?>
+                    </tbody>
+                </table>
             </div>
         </div>
-        <p/>
-
-
-
         <?php
     }
     include_once ("./foot.php");
