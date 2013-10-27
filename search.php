@@ -4,16 +4,17 @@ include_once ("./appvars.php");
 include_once ("./entity_helper.php");
 include_once ("./db_helper.php");
 
-function render_content($dbc, $row, $db_name) {
+function render_item($dbc, $row, $db_name) {
     $id = $row[id];
     $name = $row[name];
     $def = $row[def];
-  
-    echo "<p><a href=\"entity.php?id=$id&db_name=$db_name\">$name</a></p>";
+
+    echo '<p>'. get_entity_link($id, $name, $db_name) . '</p>';
+
     if ($def != '') {
         echo $def;
     } else {
-        render_summary($dbc, PREFIX . $id);
+        echo get_summary($dbc, $db_name, PREFIX . $id);
     }
     echo '<br>';
     /*
@@ -30,33 +31,22 @@ function render_content($dbc, $row, $db_name) {
     echo "<hr>";
 }
 
-function render_entity($dbc, $keywords, $db_name) {
-    $query = "SELECT * FROM def where name = '$keywords'";
-    $result = mysqli_query($dbc, $query) or die('Error querying database.');
-    if ($row = mysqli_fetch_array($result)) {
-        render_content($dbc, $row, $db_name);
-    }
-}
-
-function render_related($dbc, $keywords) {
-
-
+function render_related($dbc, $db_name, $keywords) {
+    
     $query = "SELECT * FROM def where name = '$keywords'";
     $result = mysqli_query($dbc, $query) or die('Error querying database.');
     if ($row = mysqli_fetch_array($result)) {
 
         $id = $row[id];
         $name = PREFIX . $id;
-
-        $query = "select * from graph where subject ='$name'  limit 20";
-
+        $query = "select * from graph where subject ='$name' and value like '" . PREFIX . "%' limit 20";
         $result = mysqli_query($dbc, $query) or die('Error querying database2.');
 
         if (mysqli_num_rows($result) != 0) {
             echo '<p><font color="red">' . $keywords . '</font>的相关搜索:</p>';
             while ($row = mysqli_fetch_array($result)) {
                 $value = $row[value];
-                render_entity_link($dbc, $value);
+                echo '<p>' . render_value($dbc, $db_name, $value, false) . '</p>';
             }
         }
     }
@@ -132,18 +122,19 @@ if (isset($_GET['keywords'])) {
 
 
                         <?php
-//$keywords = '四君子汤';
-                        render_entity($dbc, $keywords, $db_name);
 
-
-
+                        $query = "SELECT * FROM def where name = '$keywords'";
+                        $result = mysqli_query($dbc, $query) or die('Error querying database.');
+                        if ($row = mysqli_fetch_array($result)) {
+                            render_item($dbc, $row, $db_name);
+                        }
 
                         $query = "SELECT * FROM def where name like '%$keywords%' or def like '%$keywords%' ORDER BY name ASC LIMIT 0,10";
 
 
                         $result = mysqli_query($dbc, $query) or die('Error querying database.');
                         while ($row = mysqli_fetch_array($result)) {
-                            render_content($dbc, $row, $db);
+                            render_item($dbc, $row, $db_name);
                         }
                         ?>
 
@@ -171,7 +162,7 @@ if (isset($_GET['keywords'])) {
                     </div>
                     <div class="col-md-2">
                         <?php
-                        render_related($dbc, $keywords);
+                        render_related($dbc, $db_name, $keywords);
                         ?>
                     </div>
 
