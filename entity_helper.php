@@ -87,7 +87,18 @@ function get_summary($dbc, $db_name, $name) {
     return $s;
 }
 
-
+function get_reverse_property_values_from_row($dbc, $db_name, $result, $values, $with_def = true) {
+    while ($row = mysqli_fetch_array($result)) {
+        $property = $row[property] . '之逆属性';
+        $value = $row[subject];
+        if (array_key_exists($property, $values)) {
+            array_push($values[$property], render_value($dbc, $db_name, $value, $with_def));
+        } else {
+            $values[$property] = array(render_value($dbc, $db_name, $value, $with_def));
+        }
+    }
+    return $values;
+}
 
 function get_property_values_from_row($dbc, $db_name, $result, $values, $with_def = true) {
     while ($row = mysqli_fetch_array($result)) {
@@ -108,6 +119,16 @@ function get_property_values($dbc,  $db_name, $name, $values = array()) {
     $result = mysqli_query($dbc, $query) or die('Error querying database2.');
     if (mysqli_num_rows($result) != 0) {
         $values = get_property_values_from_row($dbc,  $db_name, $result, $values);
+    }
+    return $values;
+}
+
+function get_reverse_property_values($dbc,  $db_name, $name, $values = array()) {
+
+    $query = "select * from graph where value ='$name'";
+    $result = mysqli_query($dbc, $query) or die('Error querying database2.');
+    if (mysqli_num_rows($result) != 0) {
+        $values = get_reverse_property_values_from_row($dbc,  $db_name, $result, $values);
     }
     return $values;
 }
