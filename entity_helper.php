@@ -2,7 +2,7 @@
 
 function render_graph_by_property($dbc, $name, $property) {
     $query = "select * from graph where subject ='$name' and property='$property'";
-    
+
     $result = mysqli_query($dbc, $query) or die('Error querying database2.');
 
     if (mysqli_num_rows($result) != 0) {
@@ -33,11 +33,10 @@ function render_graph($dbc, $id, $ontology) {
     foreach ($types as $type) {
         $properties = $ontology[$type];
         foreach ($properties as $property) {
-            render_graph_by_property($dbc, PREFIX. $id, $property);
+            render_graph_by_property($dbc, PREFIX . $id, $property);
         }
     }
 }
-
 
 function render_info_by_property($dbc, $db_name, $name, $property, $with_def = true) {
     $query = "select * from graph where subject ='$name' and property = '$property'";
@@ -47,7 +46,7 @@ function render_info_by_property($dbc, $db_name, $name, $property, $with_def = t
     while ($row = mysqli_fetch_array($result)) {
         $value = $row[value];
         $id = $row[id];
-       
+
         $s .= "<p>$value";
         $s .= render_value($dbc, $db_name, $value, $with_def);
         $s .= '<a href="entity.php?name=' . $name . '&delete_triple_id=' . $id . '"><span class="glyphicon glyphicon-remove-circle"></span></a>';
@@ -68,7 +67,7 @@ function get_summary($dbc, $db_name, $name) {
             $s .= "&nbsp;";
         }
     }
-    
+
     /*
       $query = "select * from graph where subject ='$name'  limit 10";
       $result = mysqli_query($dbc, $query) or die('Error querying database2.');
@@ -113,29 +112,29 @@ function get_property_values_from_row($dbc, $db_name, $result, $values, $with_de
     return $values;
 }
 
-function get_property_values($dbc,  $db_name, $name, $values = array()) {
+function get_property_values($dbc, $db_name, $name, $values = array()) {
 
     $query = "select * from graph where subject ='$name'";
     $result = mysqli_query($dbc, $query) or die('Error querying database2.');
     if (mysqli_num_rows($result) != 0) {
-        $values = get_property_values_from_row($dbc,  $db_name, $result, $values);
+        $values = get_property_values_from_row($dbc, $db_name, $result, $values);
     }
     return $values;
 }
 
-function get_reverse_property_values($dbc,  $db_name, $name, $values = array()) {
+function get_reverse_property_values($dbc, $db_name, $name, $values = array()) {
 
     $query = "select * from graph where value ='$name'";
     $result = mysqli_query($dbc, $query) or die('Error querying database2.');
     if (mysqli_num_rows($result) != 0) {
-        $values = get_reverse_property_values_from_row($dbc,  $db_name, $result, $values);
+        $values = get_reverse_property_values_from_row($dbc, $db_name, $result, $values);
     }
     return $values;
 }
 
 function get_literals($dbc, $db_name, $name, $filter, $ratio = '10%') {
     $query = "select * from graph where subject ='$name' and not(value like '" . PREFIX . "%')  limit 100";
-    
+
     $result = mysqli_query($dbc, $query) or die('Error querying database2.');
 
     $values = array();
@@ -144,26 +143,22 @@ function get_literals($dbc, $db_name, $name, $filter, $ratio = '10%') {
         while ($row = mysqli_fetch_array($result)) {
             $property = $row[property];
             $value = $row[value];
-            
+
 
             if (!in_array($property, $filter)) {
-               
+
                 if (array_key_exists($property, $values)) {
                     $values[$property] = $values[$property] . ',&nbsp;' . render_value($dbc, $db_name, $value, false);
                 } else {
                     $values[$property] = render_value($dbc, $db_name, $value, false);
                 }
             }
-           
+
             //echo "<p><strong>$property</strong>:&nbsp;$value";
         }
     }
     return $values;
-
-  
 }
-
-
 
 function render_links($dbc, $db_name, $name, $ratio = '10%') {
     $query = "select * from graph where subject ='$name' and value like '" . PREFIX . "%'  limit 100";
@@ -192,27 +187,58 @@ function render_links($dbc, $db_name, $name, $ratio = '10%') {
     }
 }
 
-function get_types($dbc, $id) {   
+function get_types($dbc, $id) {
     return get_values($dbc, PREFIX . $id, '类型');
 }
 
+function render_panel($dbc, $db_name, $property, $values) {
+    echo '<div class="panel panel-info">';
+    echo '<div class="panel-heading">';
+    echo '<h3 class="panel-title">' . $property . '</h3>';
+    echo '</div>';
+    echo '<div class="panel-body">';
+    foreach ($values as $value) {
+
+        //echo "<p><strong>$property</strong>:&nbsp;$value";
+        echo "<p>";
+        echo render_value($dbc, $db_name, $value, true);
+        echo "</p>";
+    }
+    echo '</div></div>';
+}
+
+function get_subjects($dbc, $object, $property) {
+    $query = "select * from graph where value = '$object' and property = '$property'";
+    echo $query;
+    $result = mysqli_query($dbc, $query) or die('Error querying database2.');
+    $types = array();
+    while ($row = mysqli_fetch_array($result)) {
+        $value = $row[subject];
+        array_push($types, $value);
+    }
+    print_r($types);
+    return $types;
+}
+
 function get_values($dbc, $subject, $property) {
-    $query = "select * from graph where subject = '$subject' and property = '$property'";
+    $query = "select * from graph where subject='$subject' and property = '$property'";
+    echo $query;
     $result = mysqli_query($dbc, $query) or die('Error querying database2.');
     $types = array();
     while ($row = mysqli_fetch_array($result)) {
         $value = $row[value];
         array_push($types, $value);
     }
+    print_r($types);
     return $types;
 }
 
-function get_entity_link($id, $name, $db_name){
+function get_entity_link($id, $name, $db_name) {
     return "<a href=\"entity.php?id=$id&db_name=$db_name\">$name</a>";
 }
 
 function render_value($dbc, $db_name, $name, $with_def = true) {
-   
+
     if (strpos($name, PREFIX) === 0) {
         $id = str_replace(PREFIX, "", $name);
         $query = "select * from def where id ='$id'";
@@ -234,7 +260,7 @@ function render_value($dbc, $db_name, $name, $with_def = true) {
     } else {
         $result = $name;
     }
-    
+
     return $result;
 }
 
