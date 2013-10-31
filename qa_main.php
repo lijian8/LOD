@@ -20,23 +20,23 @@ include_once ("./header.php");
             <br>
 
             <label>
-                <input type="radio" name="question_type" id="question_type" value="symptom" checked>&nbsp;症状
+                <input type="radio" name="question_type" id="question_type" value="症状" checked>&nbsp;症状
             </label>
             &nbsp;&nbsp;
 
 
             <label>
-                <input type="radio" name="question_type" id="question_type" value="syndrome">&nbsp;证候
+                <input type="radio" name="question_type" id="question_type" value="证候">&nbsp;证候
             </label>
             &nbsp;&nbsp;
 
             <label>
-                <input type="radio" name="question_type" id="question_type" value="disease">&nbsp;疾病
+                <input type="radio" name="question_type" id="question_type" value="疾病">&nbsp;疾病
             </label>
             &nbsp;&nbsp;
 
             <label>
-                <input type="radio" name="question_type" id="question_type" value="syndrome_plus">&nbsp;证候加减
+                <input type="radio" name="question_type" id="question_type" value="证候加减">&nbsp;证候加减
             </label>
 
             <br><br>

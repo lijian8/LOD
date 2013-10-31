@@ -1,5 +1,31 @@
 <?php
 
+function get_entity_of_type($dbc, $name, $type) {
+    $query = "select id, def from def where name ='$name'";
+    
+    $result = mysqli_query($dbc, $query) or die('Error querying database1.');
+    
+    while ($row = mysqli_fetch_array($result)) {
+        $id = $row[id];
+       
+        if (instance_of($dbc, $id, $type)) return $id;
+    }
+    return '';
+}
+
+function instance_of($dbc, $id, $type) {
+    $subject = PREFIX . $id;
+    $query = "select * from graph where subject='$subject' and property = '". ENTITY_TYPE . "' and value = '$type'";
+   
+    $result = mysqli_query($dbc, $query) or die('Error querying database2.');
+    $types = array();
+    if ($row = mysqli_fetch_array($result)) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
 function render_graph_by_property($dbc, $name, $property) {
     $query = "select * from graph where subject ='$name' and property='$property'";
 
@@ -191,50 +217,82 @@ function get_types($dbc, $id) {
     return get_values($dbc, PREFIX . $id, '类型');
 }
 
+function render_list($dbc, $db_name, $property, $values) {
+   
+    //echo '<ul class="list-group">';
+    echo '<ol >';
+    foreach ($values as $value) {
+        
+        //echo '<li class="list-group-item">';   
+        echo '<li>';   
+        echo render_value($dbc, $db_name, $value, true);
+        echo '</li>';
+        
+    }
+    echo '</ol>';
+   
+}
+
 function render_panel($dbc, $db_name, $property, $values) {
     echo '<div class="panel panel-info">';
     echo '<div class="panel-heading">';
     echo '<h3 class="panel-title">' . $property . '</h3>';
     echo '</div>';
-    echo '<div class="panel-body">';
+    echo '<ul class="list-group">';
     foreach ($values as $value) {
-
-        //echo "<p><strong>$property</strong>:&nbsp;$value";
-        echo "<p>";
+        
+        echo '<li class="list-group-item">';      
         echo render_value($dbc, $db_name, $value, true);
-        echo "</p>";
+        echo '</li>';
+        
     }
-    echo '</div></div>';
+    echo '</ul>';
+    echo '</div>';
 }
 
 function get_subjects($dbc, $object, $property) {
     $query = "select * from graph where value = '$object' and property = '$property'";
-    echo $query;
+    
     $result = mysqli_query($dbc, $query) or die('Error querying database2.');
     $types = array();
     while ($row = mysqli_fetch_array($result)) {
         $value = $row[subject];
         array_push($types, $value);
     }
-    print_r($types);
+
     return $types;
 }
 
 function get_values($dbc, $subject, $property) {
     $query = "select * from graph where subject='$subject' and property = '$property'";
-    echo $query;
+    
     $result = mysqli_query($dbc, $query) or die('Error querying database2.');
     $types = array();
     while ($row = mysqli_fetch_array($result)) {
         $value = $row[value];
         array_push($types, $value);
     }
-    print_r($types);
+    
     return $types;
 }
 
 function get_entity_link($id, $name, $db_name) {
     return "<a href=\"entity.php?id=$id&db_name=$db_name\">$name</a>";
+}
+
+function get_entity_name($dbc, $name){
+     if (strpos($name, PREFIX) === 0) {
+        $id = str_replace(PREFIX, "", $name);
+        $query = "select * from def where id ='$id'";
+        $result = mysqli_query($dbc, $query) or die('Error querying database1.');
+        if ($row = mysqli_fetch_array($result)) {
+            return $row[name];          
+        } else {
+            return $name;
+        }
+    } 
+
+    return $name;
 }
 
 function render_value($dbc, $db_name, $name, $with_def = true) {

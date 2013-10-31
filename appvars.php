@@ -9,5 +9,6 @@ define('FIGURE', '图表');
 define('BIBLIO', '文献');
 define('CONCEPT', '概念');
 define('TCMLS_OBJECT', 'spleen:o');
+define('ENTITY_TYPE', '类型');
 
 ?>
