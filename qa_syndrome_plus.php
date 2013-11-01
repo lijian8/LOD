@@ -1,9 +1,9 @@
 <?php
 
-function render_syndrome_plus($dbc, $db_name, $id) {
-    echo '<p>该证候有如下的调整/加减：</p>';
+function render_syndrome($dbc, $db_name, $id) {
+    echo '<p>证候：';
     $diseases = array();
-    $values = array_merge(get_subjects($dbc, PREFIX . $id, "证候（调整）"));
+    $values = array_merge(get_values($dbc, PREFIX . $id, "证候（调整）"));
     foreach ($values as $value) {
         if (array_key_exists($value, $diseases)) {
             $diseases[$value] = $diseases[$value] + 1;
@@ -16,22 +16,22 @@ function render_syndrome_plus($dbc, $db_name, $id) {
 
     $diseases = array_slice(array_keys($diseases), 0, 5);
 
-    echo '<ol>';
+    
     foreach ($diseases as $value) {
 
         //echo '<li class="list-group-item">';   
-        echo '<li>';
+      
         echo render_value($dbc, $db_name, $value, true);
-        echo '&nbsp;<a class="btn btn-xs btn-primary" href="qa.php?db_name=' . $db_name . '&keywords=' . get_entity_name($dbc, $value) . '&question_type=证候加减" ><span class="glyphicon glyphicon-search"></span></a>';
-        echo '<p/></li>';
+        echo '&nbsp;<a class="btn btn-xs btn-primary" href="qa.php?db_name=' . $db_name . '&keywords=' . get_entity_name($dbc, $value) . '&question_type=证候" ><span class="glyphicon glyphicon-search"></span></a>';
+        echo '&nbsp;';
     }
-    echo '</ol>';
+   echo '</p>';
 }
 
-function render_syndromes($dbc, $db_name, $id) {
-    echo '<p>系统为您推荐如下的疾病：</p>';
+function render_symptom($dbc, $db_name, $id) {
+    echo '<p>症状：</p>';
     $diseases = array();
-    $values = array_merge(get_values($dbc, PREFIX . $id, "现象表达"));
+    $values = array_merge(get_values($dbc, PREFIX . $id, "症状加（调整）"));
     foreach ($values as $value) {
         if (array_key_exists($value, $diseases)) {
             $diseases[$value] = $diseases[$value] + 1;
@@ -50,7 +50,7 @@ function render_syndromes($dbc, $db_name, $id) {
         //echo '<li class="list-group-item">';   
         echo '<li>';
         echo render_value($dbc, $db_name, $value, true);
-        echo '&nbsp;<a class="btn btn-xs btn-primary" href="qa.php?db_name=' . $db_name . '&keywords=' . get_entity_name($dbc, $value) . '&question_type=疾病" ><span class="glyphicon glyphicon-search"></span></a>';
+        echo '&nbsp;<a class="btn btn-xs btn-primary" href="qa.php?db_name=' . $db_name . '&keywords=' . get_entity_name($dbc, $value) . '&question_type=症状" ><span class="glyphicon glyphicon-search"></span></a>';
         echo '<p/></li>';
     }
     echo '</ol>';
@@ -60,7 +60,7 @@ function render_treatment($dbc, $db_name, $id) {
     echo '<p>系统为您推荐如下的方剂：</p>';
     $formulas = array();
 
-    $values = array_merge(get_subjects($dbc, PREFIX . $id, "治疗"), get_values($dbc, PREFIX . $id, "被...治疗"));
+    $values = array_merge(get_values($dbc, PREFIX . $id, "方剂加（调整）"), get_values($dbc, PREFIX . $id, "方剂（调整）"));
     foreach ($values as $value) {
         if (array_key_exists($value, $formulas)) {
             $formulas[$value] = $formulas[$value] + 1;
@@ -84,20 +84,27 @@ function render_treatment($dbc, $db_name, $id) {
     echo '</ol>';
 }
 
-$names = get_names($keywords);
-
 $ids = array();
-foreach ($names as $name) {
-    $id = get_entity_of_type($dbc, $name, $question_type);
-    if ($id != '') {
-        array_push($ids, $id);
+$id = get_entity_of_type($dbc, $keywords, $question_type);
+if ($id != '') {
+    array_push($ids, $id);
+} else {
+    $names = get_names($keywords);
+    foreach ($names as $name) {
+        $id = get_entity_of_type($dbc, $name, $question_type);
+        if ($id != '') {
+            array_push($ids, $id);
+        }
     }
 }
 
 
 
+
+
+
 if (!empty($ids)) {
-    echo '<p>您输入的证候为：';
+    echo '<p>您输入的证候加减为：';
     foreach ($ids as $id) {
         echo '&nbsp;' . render_value($dbc, $db_name, PREFIX . $id, false);
     }
@@ -110,11 +117,14 @@ if (!empty($ids)) {
                 <strong><?php echo get_entity_name($dbc, PREFIX . $id); ?></strong>
             </div>
             <div class="panel-body">
+                <?php render_syndrome($dbc, $db_name, $id); ?>
+                <hr/> 
+                <?php render_symptom($dbc, $db_name, $id); ?>
+                <hr/> 
                 <?php render_treatment($dbc, $db_name, $id); ?>
-                <hr/>
-                <?php render_syndromes($dbc, $db_name, $id); ?>
-                <hr/>
-                <?php render_syndrome_plus($dbc, $db_name, $id); ?>
+                
+
+                
             </div>
 
         </div>

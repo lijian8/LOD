@@ -1,37 +1,9 @@
 <?php
 
-function render_syndrome_plus($dbc, $db_name, $id) {
-    echo '<p>该证候有如下的调整/加减：</p>';
-    $diseases = array();
-    $values = array_merge(get_subjects($dbc, PREFIX . $id, "证候（调整）"));
-    foreach ($values as $value) {
-        if (array_key_exists($value, $diseases)) {
-            $diseases[$value] = $diseases[$value] + 1;
-        } else {
-            $diseases[$value] = 1;
-        }
-    }
-
-    arsort($diseases);
-
-    $diseases = array_slice(array_keys($diseases), 0, 5);
-
-    echo '<ol>';
-    foreach ($diseases as $value) {
-
-        //echo '<li class="list-group-item">';   
-        echo '<li>';
-        echo render_value($dbc, $db_name, $value, true);
-        echo '&nbsp;<a class="btn btn-xs btn-primary" href="qa.php?db_name=' . $db_name . '&keywords=' . get_entity_name($dbc, $value) . '&question_type=证候加减" ><span class="glyphicon glyphicon-search"></span></a>';
-        echo '<p/></li>';
-    }
-    echo '</ol>';
-}
-
 function render_syndromes($dbc, $db_name, $id) {
-    echo '<p>系统为您推荐如下的疾病：</p>';
+    echo '<p>系统为您推荐如下的证候：</p>';
     $diseases = array();
-    $values = array_merge(get_values($dbc, PREFIX . $id, "现象表达"));
+    $values = array_merge(get_subjects($dbc, PREFIX . $id, "现象表达"));
     foreach ($values as $value) {
         if (array_key_exists($value, $diseases)) {
             $diseases[$value] = $diseases[$value] + 1;
@@ -97,7 +69,7 @@ foreach ($names as $name) {
 
 
 if (!empty($ids)) {
-    echo '<p>您输入的证候为：';
+    echo '<p>您输入的疾病为：';
     foreach ($ids as $id) {
         echo '&nbsp;' . render_value($dbc, $db_name, PREFIX . $id, false);
     }
@@ -113,8 +85,6 @@ if (!empty($ids)) {
                 <?php render_treatment($dbc, $db_name, $id); ?>
                 <hr/>
                 <?php render_syndromes($dbc, $db_name, $id); ?>
-                <hr/>
-                <?php render_syndrome_plus($dbc, $db_name, $id); ?>
             </div>
 
         </div>

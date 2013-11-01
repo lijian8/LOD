@@ -1,22 +1,68 @@
 <?php
 
+
+function get_classes($dbc) {
+    $query = "select distinct value from graph where property='类型'";
+    $result = mysqli_query($dbc, $query) or die('Error querying database1.');
+    $classes = array();
+    while ($row = mysqli_fetch_array($result)) {
+        array_push($classes, $row[value]);
+    }
+    return $classes;
+}
+
+function get_properties($dbc) {
+    $query = "select distinct property from graph";
+
+    $result = mysqli_query($dbc, $query) or die('Error querying database1.');
+    $classes = array();
+    while ($row = mysqli_fetch_array($result)) {
+        array_push($classes, $row[0]);
+    }
+    
+    return $classes;
+}
+
+function get_num_of_facts($dbc) {
+    $query = "select count(id) as c from graph";
+    $result = mysqli_query($dbc, $query) or die('Error querying database1.');
+
+    if ($row = mysqli_fetch_array($result)) {
+        return $row[c];
+    } else {
+        return 0;
+    }
+}
+
+function get_num_of_entities($dbc) {
+    $query = "select count(id) as c from def";
+    $result = mysqli_query($dbc, $query) or die('Error querying database1.');
+
+    if ($row = mysqli_fetch_array($result)) {
+        return $row[c];
+    } else {
+        return 0;
+    }
+}
+
 function get_entity_of_type($dbc, $name, $type) {
     $query = "select id, def from def where name ='$name'";
-    
+
     $result = mysqli_query($dbc, $query) or die('Error querying database1.');
-    
+
     while ($row = mysqli_fetch_array($result)) {
         $id = $row[id];
-       
-        if (instance_of($dbc, $id, $type)) return $id;
+
+        if (instance_of($dbc, $id, $type))
+            return $id;
     }
     return '';
 }
 
 function instance_of($dbc, $id, $type) {
     $subject = PREFIX . $id;
-    $query = "select * from graph where subject='$subject' and property = '". ENTITY_TYPE . "' and value = '$type'";
-   
+    $query = "select * from graph where subject='$subject' and property = '" . ENTITY_TYPE . "' and value = '$type'";
+
     $result = mysqli_query($dbc, $query) or die('Error querying database2.');
     $types = array();
     if ($row = mysqli_fetch_array($result)) {
@@ -218,19 +264,17 @@ function get_types($dbc, $id) {
 }
 
 function render_list($dbc, $db_name, $property, $values) {
-   
+
     //echo '<ul class="list-group">';
     echo '<ol >';
     foreach ($values as $value) {
-        
+
         //echo '<li class="list-group-item">';   
-        echo '<li>';   
+        echo '<li>';
         echo render_value($dbc, $db_name, $value, true);
         echo '</li>';
-        
     }
     echo '</ol>';
-   
 }
 
 function render_panel($dbc, $db_name, $property, $values) {
@@ -240,11 +284,10 @@ function render_panel($dbc, $db_name, $property, $values) {
     echo '</div>';
     echo '<ul class="list-group">';
     foreach ($values as $value) {
-        
-        echo '<li class="list-group-item">';      
+
+        echo '<li class="list-group-item">';
         echo render_value($dbc, $db_name, $value, true);
         echo '</li>';
-        
     }
     echo '</ul>';
     echo '</div>';
@@ -252,7 +295,7 @@ function render_panel($dbc, $db_name, $property, $values) {
 
 function get_subjects($dbc, $object, $property) {
     $query = "select * from graph where value = '$object' and property = '$property'";
-    
+
     $result = mysqli_query($dbc, $query) or die('Error querying database2.');
     $types = array();
     while ($row = mysqli_fetch_array($result)) {
@@ -265,14 +308,14 @@ function get_subjects($dbc, $object, $property) {
 
 function get_values($dbc, $subject, $property) {
     $query = "select * from graph where subject='$subject' and property = '$property'";
-    
+
     $result = mysqli_query($dbc, $query) or die('Error querying database2.');
     $types = array();
     while ($row = mysqli_fetch_array($result)) {
         $value = $row[value];
         array_push($types, $value);
     }
-    
+
     return $types;
 }
 
@@ -280,17 +323,17 @@ function get_entity_link($id, $name, $db_name) {
     return "<a href=\"entity.php?id=$id&db_name=$db_name\">$name</a>";
 }
 
-function get_entity_name($dbc, $name){
-     if (strpos($name, PREFIX) === 0) {
+function get_entity_name($dbc, $name) {
+    if (strpos($name, PREFIX) === 0) {
         $id = str_replace(PREFIX, "", $name);
         $query = "select * from def where id ='$id'";
         $result = mysqli_query($dbc, $query) or die('Error querying database1.');
         if ($row = mysqli_fetch_array($result)) {
-            return $row[name];          
+            return $row[name];
         } else {
             return $name;
         }
-    } 
+    }
 
     return $name;
 }

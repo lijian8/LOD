@@ -95,29 +95,33 @@ $question_type = $_GET['question_type'];
                     </div>
                 </div>
                 <p>
+                <hr>
 
 
                 </p>
+                <!--
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <strong>回答</strong>
                     </div>
                     <div class="panel-body">
-                        <?php
-                        if ($question_type == '症状'){
-                            include('qa_symptom.php');
-                        }elseif ($question_type == '证候'){
-                            include('qa_syndrome.php');
-                        }elseif ($question_type == '疾病'){
-                            
-                        }elseif ($question_type == '证候加减'){
-                            
-                        }
-                            
-                        
-                        ?>
+                !-->
+                <?php
+                if ($question_type == '症状') {
+                    include('qa_symptom.php');
+                } elseif ($question_type == '证候') {
+                    include('qa_syndrome.php');
+                } elseif ($question_type == '疾病') {
+                    include('qa_disease.php');
+                } elseif ($question_type == '证候加减') {
+                    include('qa_syndrome_plus.php');
+                }
+                ?>
+                <!--
                     </div>
                 </div>
+                !-->
+
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <strong>问题</strong>
