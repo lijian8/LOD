@@ -37,6 +37,10 @@ and open the template in the editor.
         <meta name="author" content="">
         <link rel="shortcut icon" href="ico/favicon.png">
 
+        <link href="css/docs.css" rel="stylesheet">
+
+        <link href="css/pygments-manni.css" rel="stylesheet">
+
 
         <!-- Bootstrap core CSS -->
         <link href="css/bootstrap.css" rel="stylesheet">

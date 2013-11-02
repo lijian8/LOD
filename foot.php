@@ -9,6 +9,17 @@
 <script src="js/jquery.js"></script>
 <script src="js/bootstrap.min.js"></script>
 
+<script src="js/holder.js"></script>
+
+<script src="js/application.js"></script>
+
+
+<script src="js/less.js"></script>
+<script src="js/jszip.js"></script>
+<script src="js/uglify.js"></script>
+<script src="js/filesaver.js"></script>
+<script src="js/raw-files.js"></script>
+<script src="js/customizer.js"></script>
 
 
 </body>

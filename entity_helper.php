@@ -1,6 +1,5 @@
 <?php
 
-
 function get_classes($dbc) {
     $query = "select distinct value from graph where property='类型'";
     $result = mysqli_query($dbc, $query) or die('Error querying database1.');
@@ -19,8 +18,34 @@ function get_properties($dbc) {
     while ($row = mysqli_fetch_array($result)) {
         array_push($classes, $row[0]);
     }
-    
+
     return $classes;
+}
+
+function get_num_of_literals($dbc) {
+
+    $query = "select count(id) as c from graph where not(value like '" . PREFIX . "%')";
+
+    $result = mysqli_query($dbc, $query) or die('Error querying database1.');
+
+    if ($row = mysqli_fetch_array($result)) {
+        return $row[c];
+    } else {
+        return 0;
+    }
+}
+
+function get_num_of_relations($dbc) {
+
+    $query = "select count(id) as c from graph where value like '" . PREFIX . "%'";
+
+    $result = mysqli_query($dbc, $query) or die('Error querying database1.');
+
+    if ($row = mysqli_fetch_array($result)) {
+        return $row[c];
+    } else {
+        return 0;
+    }
 }
 
 function get_num_of_facts($dbc) {
@@ -191,16 +216,19 @@ function get_property_values($dbc, $db_name, $name, $values = array()) {
     if (mysqli_num_rows($result) != 0) {
         $values = get_property_values_from_row($dbc, $db_name, $result, $values);
     }
+    
     return $values;
 }
 
 function get_reverse_property_values($dbc, $db_name, $name, $values = array()) {
-
+    
     $query = "select * from graph where value ='$name'";
     $result = mysqli_query($dbc, $query) or die('Error querying database2.');
+    
     if (mysqli_num_rows($result) != 0) {
         $values = get_reverse_property_values_from_row($dbc, $db_name, $result, $values);
     }
+    
     return $values;
 }
 
@@ -293,6 +321,16 @@ function render_panel($dbc, $db_name, $property, $values) {
     echo '</div>';
 }
 
+function get_ids($dbc, $name) {
+    $query = "select id, def from def where name like '%$name%'";
+    $result = mysqli_query($dbc, $query) or die('Error querying database1.');
+    $ids = array();
+    while ($row = mysqli_fetch_array($result)) {
+        $ids[] = $row[id];
+    }
+    return $ids;
+}
+
 function get_subjects($dbc, $object, $property) {
     $query = "select * from graph where value = '$object' and property = '$property'";
 
@@ -340,8 +378,8 @@ function get_entity_name($dbc, $name) {
 
 function render_value($dbc, $db_name, $name, $with_def = true) {
 
-    if (strpos($name, PREFIX) === 0) {
-        $id = str_replace(PREFIX, "", $name);
+    if (strpos($name, $db_name . ':o') === 0) {
+        $id = str_replace($db_name . ':o', "", $name);
         $query = "select * from def where id ='$id'";
         $result = mysqli_query($dbc, $query) or die('Error querying database1.');
         if ($row = mysqli_fetch_array($result)) {
@@ -350,7 +388,7 @@ function render_value($dbc, $db_name, $name, $with_def = true) {
             $result = get_entity_link($id, $name, $db_name);
             if ($with_def) {
                 if ($def == '')
-                    $def = get_summary($dbc, $db_name, PREFIX . $id);
+                    $def = get_summary($dbc, $db_name, $db_name . ':o' . $id);
                 if ($def != '') {
                     $result .= '&nbsp;<em><small>(' . $def . ')' . '</small></em>';
                 }

@@ -52,8 +52,7 @@ if (isset($_GET['id'])) {
 
 <?php
 echo '<ul class="nav nav-pills">';
-echo '<li ><a  href="editor.php?name=<?php echo $name; ?>">领域本体</a></li>';
-
+echo '<li ><a  href="synthesis_lit_graph.php?name='. $name. '">综合知识</a></li>';
 foreach ($db_labels as $db => $db_label) {
     echo '<li ' . (($db == $db_name) ? 'class="disabled"' : '') . '><a href="' . $_SERVER['PHP_SELF'] . "?name=$name&db_name=" . $db . '">' . $db_label . '</a></li>';
 }
