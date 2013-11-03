@@ -74,6 +74,8 @@ if (isset($name) && $name != '' && isset($id) && $id != '') {
 
     if ($db_name == 'tcmls')
         include_once ("./entity_detail.php");
+    if ($db_name == 'tcmct')
+        include_once ("./entity_lit_graph.php");
     if ($db_name == 'formula')
         include_once ("./entity_summary.php");
     if ($db_name == 'herb')
