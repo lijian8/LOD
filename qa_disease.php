@@ -22,7 +22,7 @@ function render_syndromes($dbc, $db_name, $id) {
         //echo '<li class="list-group-item">';   
         echo '<li>';
         echo render_value($dbc, $db_name, $value, true);
-        echo '&nbsp;<a class="btn btn-xs btn-primary" href="qa.php?db_name=' . $db_name . '&keywords=' . get_entity_name($dbc, $value) . '&question_type=疾病" ><span class="glyphicon glyphicon-search"></span></a>';
+        echo '&nbsp;<a class="btn btn-xs btn-primary" href="qa.php?db_name=' . $db_name . '&keywords=' . get_entity_name($dbc, $value) . '&question_type=证候 " ><span class="glyphicon glyphicon-search"></span></a>';
         echo '<p/></li>';
     }
     echo '</ol>';

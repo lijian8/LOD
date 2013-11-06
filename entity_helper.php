@@ -1,5 +1,30 @@
 <?php
 
+function get_classes_from_sn($dbc) {
+    $query = "SELECT distinct subject FROM semantic_network";
+    
+    $result = mysqli_query($dbc, $query)  or die('Error querying database1.');
+    $arr = array();
+    while ($row = mysqli_fetch_array($result)) {
+        array_push($arr, $row[0]);
+    }
+    
+    return $arr;
+}
+
+
+function get_properties_from_sn ($dbc) {
+    $query = "select distinct property from semantic_network";
+
+    $result = mysqli_query($dbc, $query)  or die('Error querying database1.');
+    $arr = array();
+    while ($row = mysqli_fetch_array($result)) {
+        array_push($arr, $row[0]);
+    }
+
+    return $arr;
+}
+
 function get_classes($dbc) {
     $query = "select distinct value from graph where property='类型'";
     $result = mysqli_query($dbc, $query) or die('Error querying database1.');
@@ -9,6 +34,8 @@ function get_classes($dbc) {
     }
     return $classes;
 }
+
+
 
 function get_properties($dbc) {
     $query = "select distinct property from graph";
@@ -216,19 +243,19 @@ function get_property_values($dbc, $db_name, $name, $values = array()) {
     if (mysqli_num_rows($result) != 0) {
         $values = get_property_values_from_row($dbc, $db_name, $result, $values);
     }
-    
+
     return $values;
 }
 
 function get_reverse_property_values($dbc, $db_name, $name, $values = array()) {
-    
+
     $query = "select * from graph where value ='$name'";
     $result = mysqli_query($dbc, $query) or die('Error querying database2.');
-    
+
     if (mysqli_num_rows($result) != 0) {
         $values = get_reverse_property_values_from_row($dbc, $db_name, $result, $values);
     }
-    
+
     return $values;
 }
 

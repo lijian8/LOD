@@ -120,7 +120,7 @@ $question_type = $_GET['question_type'];
                 <!--
                     </div>
                 </div>
-                !-->
+               
 
                 <div class="panel panel-default">
                     <div class="panel-heading">
@@ -156,6 +156,7 @@ $question_type = $_GET['question_type'];
                         </label>
                     </div>
                 </div>
+                -->
             </div>
         </form>   
     </div>

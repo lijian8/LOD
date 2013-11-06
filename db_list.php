@@ -37,7 +37,8 @@ arsort($entity_counts);
             <tr>
                 <th>知识库</th>
                 <th>实体</th>
-                <th>陈述</th>            
+                <th>陈述</th>    
+               
             </tr>
         </thead>
         <tbody>
