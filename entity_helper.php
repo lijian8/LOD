@@ -1,5 +1,7 @@
 <?php
 
+
+
 function get_classes_from_sn($dbc) {
     $query = "SELECT distinct subject FROM semantic_network";
     

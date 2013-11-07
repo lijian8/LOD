@@ -5,22 +5,6 @@ include_once ("./appvars.php");
 include_once ("./entity_helper.php");
 include_once ("./db_helper.php");
 
-function render_class_table($dbc, $db_name, $active_class) {
-    $query = "select value,count(*) c from graph where property='类型' group by value order by c desc";
-    $result = mysqli_query($dbc, $query) or die('Error querying database1.');
-
-    while ($row = mysqli_fetch_array($result)) {
-        $value = $row[0];
-        $count = $row[1];
-        echo '<li ';
-        if (isset($active_class) && ($active_class == $value)) {
-            echo 'class = "active"';
-        }
-        echo '><a href = "db_profile.php?';
-
-        echo 'db_name=' . $db_name . '&active_class=' . $value . '">' . $value . '&nbsp;<span class="badge">' . $count . '</span>' . '</a></li>';
-    }
-}
 
 if (isset($_GET['active_class'])) {
     $active_class = $_GET['active_class'];

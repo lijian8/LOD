@@ -5,10 +5,9 @@ include_once ("./appvars.php");
 include_once ("./entity_helper.php");
 include_once ("./db_helper.php");
 
+
 function render_class_table($dbc, $db_name, $active_class) {
-
-    $query = "SELECT value, count FROM cls ORDER BY count desc";
-
+    $query = "select value,count(*) c from graph where property='类型' group by value order by c desc";
     $result = mysqli_query($dbc, $query) or die('Error querying database1.');
 
     while ($row = mysqli_fetch_array($result)) {
@@ -17,12 +16,10 @@ function render_class_table($dbc, $db_name, $active_class) {
         echo '<li ';
         if (isset($active_class) && ($active_class == $value)) {
             echo 'class = "active"';
-        } else {
-            echo 'class = "btn-xs"';
         }
-        echo '><a href = "sn_profile.php?';
+        echo '><a href = "db_profile.php?';
 
-        echo 'db_name=' . $db_name . '&active_class=' . $value . '">' . $value . '</a></li>';
+        echo 'db_name=' . $db_name . '&active_class=' . $value . '">' . $value . '&nbsp;<span class="badge">' . $count . '</span>' . '</a></li>';
     }
 }
 
@@ -52,7 +49,7 @@ $num_of_literals = get_num_of_literals($dbc);
 <div class="well-sm">
     <h1><?php echo $db_labels[$db_name]; ?></h1>
     <p>
-        知识库包括<?php echo $num_of_entities; ?>个实体，<?php echo $num_of_facts; ?>条陈述：</p>
+        该系统包括<?php echo $num_of_entities; ?>个实体，<?php echo $num_of_facts; ?>条陈述：</p>
 
     <ul class="nav nav-tabs">
         <li class="active"><a href="#">实体&nbsp;<?php echo '<span class="badge">' . $num_of_entities . '</span>' ?></a></li>
