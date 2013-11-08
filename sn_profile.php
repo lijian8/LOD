@@ -7,7 +7,7 @@ include_once ("./db_helper.php");
 
 
 function render_class_table($dbc, $db_name, $active_class) {
-    $query = "select value,count(*) c from graph where property='类型' group by value order by c desc";
+    $query = "select value, count from cls order by count desc";
     $result = mysqli_query($dbc, $query) or die('Error querying database1.');
 
     while ($row = mysqli_fetch_array($result)) {
@@ -17,7 +17,7 @@ function render_class_table($dbc, $db_name, $active_class) {
         if (isset($active_class) && ($active_class == $value)) {
             echo 'class = "active"';
         }
-        echo '><a href = "db_profile.php?';
+        echo '><a href = "sn_profile.php?';
 
         echo 'db_name=' . $db_name . '&active_class=' . $value . '">' . $value . '&nbsp;<span class="badge">' . $count . '</span>' . '</a></li>';
     }
