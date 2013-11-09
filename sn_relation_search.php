@@ -5,6 +5,25 @@ include_once ("./appvars.php");
 include_once ("./entity_helper.php");
 include_once ("./db_helper.php");
 
+function get_instance_summary($dbc, $db_name, $row) {
+    $ids = explode('|', $row['instances']);
+    $i = 0;
+    $arr = array();
+    while ($i < min(array(10, count($ids)))) {
+        $q1 = "select * from graph where id = '$ids[$i]'";
+        $r1 = mysqli_query($dbc, $q1) or die('Error querying database2.');
+        if ($row1 = mysqli_fetch_array($r1)) {
+            $s = '(' . render_value($dbc, $db_name, $row1['subject'], false) . '&nbsp';
+            $s .= $row1['property'] . '&nbsp;';
+            $s .= render_value($dbc, $db_name, $row1['value'], false) . ')';
+            $arr[] = $s;
+        }
+        $i = $i + 1;
+    }
+
+    return implode(',&nbsp;', $arr) . '<br><a class="btn btn-link" href="triple_type.php?db_name=' . $db_name . '&type=' . $row['id'] .'">更多>></a>';
+}
+
 function get_cls($dbc) {
     $query = "select value from cls order by count desc";
     $result = mysqli_query($dbc, $query) or die('Error querying database1.');
@@ -61,7 +80,7 @@ function render_objects($dbc, $db_name, $subject, $predicate, $object) {
 
     echo '<li><a href = "sn_relation_search.php?';
 
-    echo 'db_name=' . $db_name . '&subject=' . $subject . '&predicate=' . $predicate  . '">任意事物</a></li>';
+    echo 'db_name=' . $db_name . '&subject=' . $subject . '&predicate=' . $predicate . '">任意事物</a></li>';
 
 
     while ($row = mysqli_fetch_array($result)) {
@@ -76,9 +95,28 @@ function render_objects($dbc, $db_name, $subject, $predicate, $object) {
     }
 }
 
-function get_triple_ids($dbc, $subject, $predicate, $object) {
+function get_total($dbc, $subject, $predicate, $object) {
+    $query = build_query($dbc, $subject, $predicate, $object, true);
+    $result = mysqli_query($dbc, $query);
+    $row = mysqli_fetch_array($result);
+    $total = $row['count'];
+    return $total;
+}
+
+function build_query($dbc, $subject, $predicate, $object, $count_only = false) {
+
+    if ($count_only) {
+        $query = "SELECT count(*) as count FROM semantic_network";
+    } else {
+        $query = "SELECT * FROM semantic_network";
+    }
+
 
     $where_clauses = array();
+
+    $where_clauses[] = "property != '上位词'";
+    $where_clauses[] = "property != '下位词'";
+
     if (isset($subject) && ($subject != '')) {
         $where_clauses[] = "subject='$subject'";
     }
@@ -91,26 +129,20 @@ function get_triple_ids($dbc, $subject, $predicate, $object) {
         $where_clauses[] = "object='$object'";
     }
 
-    if (count($where_clauses) == 0) {
-        render_warning('请选择主体、客体或关系的类型');
-    } else {
+    if (count($where_clauses) != 0) {
         $where = implode(' and ', $where_clauses);
-        $query = "SELECT instances FROM semantic_network where " . $where;
-        echo $query;
-        $result = mysqli_query($dbc, $query) or die('Error querying database1.');
-
-        $ids = array();
-        while ($row = mysqli_fetch_array($result)) {
-            $ids = array_merge($ids, explode('|', $row[0]));
-        }
-        print_r($ids);
+        $query .= " where " . $where;
     }
+
+    $query .= " order by count desc ";
+
+    return $query;
 }
 
 function render_relation_table($dbc, $db_name, $active_relation) {
     $query = "select property, count(*) c from graph where value like '" . PREFIX . "%' group by property order by c desc";
 
-    
+
     $result = mysqli_query($dbc, $query) or die('Error querying database1.');
 
     while ($row = mysqli_fetch_array($result)) {
@@ -139,11 +171,18 @@ if (isset($_GET['object']) && ($_GET['object'] != '')) {
     $object = $_GET['object'];
 }
 
+$cur_page = isset($_GET['page']) ? $_GET['page'] : 1;
+$results_per_page = 10;  // number of results per page
+$skip = (($cur_page - 1) * $results_per_page);
+$total = get_total($dbc, $subject, $predicate, $object);
+$num_pages = ceil($total / $results_per_page);
 
 $num_of_entities = get_num_of_entities($dbc);
 $num_of_facts = get_num_of_facts($dbc);
 $num_of_relations = get_num_of_relations($dbc);
 $num_of_literals = get_num_of_literals($dbc);
+
+$url = 'sn_relation_search.php?db_name=' . $db_name . '&subject=' . $subject . '&predicate=' . $predicate . '&object=' . $object ;
 ?>
 
 <script>
@@ -183,7 +222,8 @@ $num_of_literals = get_num_of_literals($dbc);
 
     <table class="table">
         <thead>
-        <th width="35%" class="lead">
+        <th width="3%" >#</th>
+        <th width="18%" >
             <?php
             if (isset($subject)) {
                 echo '主体：' . $subject;
@@ -191,12 +231,12 @@ $num_of_literals = get_num_of_literals($dbc);
                 echo '主体：任意事物';
             }
             ?>  
-            <button type="button" class="btn btn-link" data-toggle="modal" data-target="#subjectModal">
+            <button type="button" class="btn btn-link btn-xs" data-toggle="modal" data-target="#subjectModal">
                 <span class="glyphicon glyphicon-search"></span>
             </button>
 
         </th>
-        <th width="30%" class="lead">
+        <th width="18%" >
             <?php
             if (isset($predicate)) {
                 echo '谓词：' . $predicate;
@@ -204,12 +244,12 @@ $num_of_literals = get_num_of_literals($dbc);
                 echo '谓词：任意关系';
             }
             ?>  
-            <button type="button" class="btn btn-link" data-toggle="modal" data-target="#predicateModal">
+            <button type="button" class="btn btn-link btn-xs" data-toggle="modal" data-target="#predicateModal">
                 <span class="glyphicon glyphicon-search"></span>
             </button>
         </th>
 
-        <th width="35%" class="lead">
+        <th width="18%" >
             <?php
             if (isset($object)) {
                 echo '客体：' . $object;
@@ -217,19 +257,106 @@ $num_of_literals = get_num_of_literals($dbc);
                 echo '客体：任意事物';
             }
             ?>  
-            <button type="button" class="btn btn-link" data-toggle="modal" data-target="#objectModal">
+            <button type="button" class="btn btn-link btn-xs" data-toggle="modal" data-target="#objectModal">
                 <span class="glyphicon glyphicon-search"></span>
             </button>
+        </th>
+
+        <th width="43%" >
+            实例
         </th>
 
         </thead>
         <tbody>
 
+            <?php
+            $query = build_query($dbc, $subject, $predicate, $object) . " LIMIT $skip, $results_per_page";
+            
+            $result = mysqli_query($dbc, $query) or die('Error querying database1.');
+
+            $row_num = 1;
+            $color = true;
+            while ($row = mysqli_fetch_array($result)) {
+                if ($color) {
+                    echo '<tr>';
+                } else {
+                    echo '<tr class="info">';
+                }
+                $color = !$color;
+                
+                $no = $skip + ($row_num++);
+                
+                echo '<td width = "3%">' . $no . '</td>';
+
+
+
+                echo '<td>' . $row['subject'] . '</td>';
+                echo '<td>' . $row['property'] . '</td>';
+                echo '<td>' . $row['object'] . '</td>';
+                echo '<td>' . get_instance_summary($dbc, $db_name, $row) . '</td>';
+                echo '</tr>';
+            }
+            ?>    
 
         </tbody>
     </table>
 
-    <?php get_triple_ids($dbc, $subject, $predicate, $object); ?>
+    <?php
+    if ($num_pages > 1) {
+
+        $page_links = '';
+
+        echo '<ul class="pagination">';
+
+        echo '<li><a href="' . $url . '&page=' . (1) . '">首页</a></li>';
+
+        // If this page is not the first page, generate the "previous" link
+        if ($cur_page > 1) {
+            $page_links .= '<li><a href="' . $url . '&page=' . ($cur_page - 1) . '">上一页</a></li>';
+        } else {
+            $page_links .= '<li class="disabled"><a>上一页</a></li> ';
+        }
+
+        $start = 1;
+        $end = $num_pages;
+
+        if ($num_pages > 10) {
+
+            if ($cur_page <= 5) {
+                $start = 1;
+                $end = 10;
+            } elseif ($num_pages - $cur_page < 4) {
+                $start = $num_pages - 9;
+                $end = $num_pages;
+            } else {
+                $start = $cur_page - 5;
+                $end = $cur_page + 4;
+            }
+        }
+
+
+        // Loop through the pages generating the page number links
+        for ($i = $start; $i <= $end; $i++) {
+            if ($cur_page == $i) {
+                $page_links .= ' <li class="active"><a>' . $i . '</a></li>';
+            } else {
+                $page_links .= ' <li><a href="' . $url . '&page=' . $i . '"> ' . $i . '</a></li>';
+            }
+        }
+
+        // If this page is not the last page, generate the "next" link
+        if ($cur_page < $num_pages) {
+            $page_links .= ' <li><a href="' . $url . '&page=' . ($cur_page + 1) . '">下一页</a></li>';
+        } else {
+            $page_links .= ' <li class="disabled"><a>下一页</a></li>';
+        }
+
+        echo $page_links;
+        echo '<li><a href="' . $url . '&page=' . ($num_pages) . '">尾页</a></li>';
+
+        echo '</ul>';
+    }
+    ?>
 
     <!-- Modal -->
     <div class="modal fade" id="subjectModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
