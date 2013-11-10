@@ -4,6 +4,7 @@ include_once ("./onto_array.php");
 include_once ("./appvars.php");
 include_once ("./entity_helper.php");
 include_once ("./db_helper.php");
+include_once ("./sn_helper.php");
 
 function get_instance_summary($dbc, $db_name, $row) {
     $ids = explode('|', $row['instances']);
@@ -21,7 +22,7 @@ function get_instance_summary($dbc, $db_name, $row) {
         $i = $i + 1;
     }
 
-    return implode(',&nbsp;', $arr) . '<br><a class="btn btn-link" href="triple_type.php?db_name=' . $db_name . '&type=' . $row['id'] .'">更多>></a>';
+    return implode(',&nbsp;', $arr) . '<br><a class="btn btn-link" href="triple_type.php?db_name=' . $db_name . '&type=' . $row['id'] . '">更多>></a>';
 }
 
 function get_cls($dbc) {
@@ -32,6 +33,17 @@ function get_cls($dbc) {
         array_push($classes, $row[value]);
     }
     return $classes;
+}
+
+function get_num_cls($dbc) {
+    $query = "select count(*) from cls order by count desc";
+    $result = mysqli_query($dbc, $query) or die('Error querying database1.');
+    $classes = array();
+    if ($row = mysqli_fetch_array($result)) {
+        return $row[0];
+    } else {
+        return 0;
+    }
 }
 
 function render_props($dbc, $db_name, $subject, $predicate, $object) {
@@ -177,12 +189,13 @@ $skip = (($cur_page - 1) * $results_per_page);
 $total = get_total($dbc, $subject, $predicate, $object);
 $num_pages = ceil($total / $results_per_page);
 
-$num_of_entities = get_num_of_entities($dbc);
-$num_of_facts = get_num_of_facts($dbc);
-$num_of_relations = get_num_of_relations($dbc);
-$num_of_literals = get_num_of_literals($dbc);
-
-$url = 'sn_relation_search.php?db_name=' . $db_name . '&subject=' . $subject . '&predicate=' . $predicate . '&object=' . $object ;
+//$num_of_entities = get_num_of_entities($dbc);
+//$num_of_facts = get_num_of_facts($dbc);
+//$num_of_relations = get_num_of_relations($dbc);
+//$num_of_literals = get_num_of_literals($dbc);
+$num_of_cls = get_num_cls($dbc);
+$num_of_props = sn_get_num_of_props($dbc);
+$url = 'sn_relation_search.php?db_name=' . $db_name . '&subject=' . $subject . '&predicate=' . $predicate . '&object=' . $object;
 ?>
 
 <script>
@@ -199,13 +212,13 @@ $url = 'sn_relation_search.php?db_name=' . $db_name . '&subject=' . $subject . '
 </script>
 <div class="container">
     <h1><?php echo $db_labels[$db_name]; ?></h1>
-    <p>
-        中医脾系证候知识库包括<?php echo $num_of_entities; ?>个实体，<?php echo $num_of_facts; ?>条陈述：</p>
-
+    
+    <p>该语义网络包括<?php echo $num_of_cls; ?>个语义类型，<?php echo $num_of_props; ?>种语义关系：</p>
+     
     <ul class="nav nav-tabs">
-        <li ><a href="db_profile.php?db_name=<?php echo $db_name; ?>">实体&nbsp;<?php echo '<span class="badge">' . $num_of_entities . '</span>' ?></a></li>
-        <li class="active"><a href="#">语义关系&nbsp;<?php echo '<span class="badge">' . $num_of_relations . '</span>' ?></a></li>       
-        <li><a href="db_literal_profile.php?db_name=<?php echo $db_name; ?>">文字属性&nbsp;<?php echo '<span class="badge">' . $num_of_literals . '</span>' ?></a></li>       
+        <li ><a href="sn_profile.php?db_name=<?php echo $db_name; ?>">按语义类型浏览</a></li>
+        <li><a href="#">按语义关系浏览</a></li>       
+        <li  class="active"><a href="#">搜索</a></li>       
     </ul>
 
     <!--
@@ -271,7 +284,7 @@ $url = 'sn_relation_search.php?db_name=' . $db_name . '&subject=' . $subject . '
 
             <?php
             $query = build_query($dbc, $subject, $predicate, $object) . " LIMIT $skip, $results_per_page";
-            
+
             $result = mysqli_query($dbc, $query) or die('Error querying database1.');
 
             $row_num = 1;
@@ -283,9 +296,9 @@ $url = 'sn_relation_search.php?db_name=' . $db_name . '&subject=' . $subject . '
                     echo '<tr class="info">';
                 }
                 $color = !$color;
-                
+
                 $no = $skip + ($row_num++);
-                
+
                 echo '<td width = "3%">' . $no . '</td>';
 
 
