@@ -1,7 +1,5 @@
 <?php
 
-
-
 function get_classes_from_sn($dbc) {
     $query = "SELECT distinct subject FROM semantic_network";
     
@@ -13,7 +11,6 @@ function get_classes_from_sn($dbc) {
     
     return $arr;
 }
-
 
 function get_properties_from_sn ($dbc) {
     $query = "select distinct property from semantic_network";
@@ -36,8 +33,6 @@ function get_classes($dbc) {
     }
     return $classes;
 }
-
-
 
 function get_properties($dbc) {
     $query = "select distinct property from graph";

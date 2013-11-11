@@ -40,12 +40,8 @@ $total = get_total($dbc, $type);
 
 $num_pages = ceil($total / $results_per_page);
 
-$num_of_entities = get_num_of_entities($dbc);
-$num_of_facts = get_num_of_facts($dbc);
-$num_of_relations = get_num_of_relations($dbc);
-$num_of_literals = get_num_of_literals($dbc);
 
-$url = 'triple_type.php?db_name=' . $db_name . '&type=' . $type;
+$url = $_SERVER['PHP_SELF'] . '?db_name=' . $db_name . '&type=' . $type;
 ?>
 
 <script>
@@ -63,13 +59,9 @@ $url = 'triple_type.php?db_name=' . $db_name . '&type=' . $type;
 <div class="container">
     <h1><?php echo $db_labels[$db_name]; ?></h1>
     <p>
-        中医脾系证候知识库包括<?php echo $num_of_entities; ?>个实体，<?php echo $num_of_facts; ?>条陈述：</p>
+        （<?php echo $header['subject'] . ',' . $header['property'] . ',' . $header['object']; ?>）在系统中共有<?php echo $total; ?>条实例：</p>
 
-    <ul class="nav nav-tabs">
-        <li ><a href="db_profile.php?db_name=<?php echo $db_name; ?>">实体&nbsp;<?php echo '<span class="badge">' . $num_of_entities . '</span>' ?></a></li>
-        <li class="active"><a href="#">语义关系&nbsp;<?php echo '<span class="badge">' . $num_of_relations . '</span>' ?></a></li>       
-        <li><a href="db_literal_profile.php?db_name=<?php echo $db_name; ?>">文字属性&nbsp;<?php echo '<span class="badge">' . $num_of_literals . '</span>' ?></a></li>       
-    </ul>
+   
 
     <!--
     <div class="panel panel-info">

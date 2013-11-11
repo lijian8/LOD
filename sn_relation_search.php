@@ -22,7 +22,7 @@ function get_instance_summary($dbc, $db_name, $row) {
         $i = $i + 1;
     }
 
-    return implode(',&nbsp;', $arr) . '<br><a class="btn btn-link" href="triple_type.php?db_name=' . $db_name . '&type=' . $row['id'] . '">更多>></a>';
+    return implode(',&nbsp;', $arr) . '<br><a class="btn btn-link" target="blank" href="sn_triple_type.php?db_name=' . $db_name . '&type=' . $row['id'] . '">更多>></a>';
 }
 
 function get_cls($dbc) {
@@ -35,16 +35,6 @@ function get_cls($dbc) {
     return $classes;
 }
 
-function get_num_cls($dbc) {
-    $query = "select count(*) from cls order by count desc";
-    $result = mysqli_query($dbc, $query) or die('Error querying database1.');
-    $classes = array();
-    if ($row = mysqli_fetch_array($result)) {
-        return $row[0];
-    } else {
-        return 0;
-    }
-}
 
 function render_props($dbc, $db_name, $subject, $predicate, $object) {
     $query = "select property from properties where property != '上位词' and property != '下位词' order by count desc";
@@ -193,7 +183,7 @@ $num_pages = ceil($total / $results_per_page);
 //$num_of_facts = get_num_of_facts($dbc);
 //$num_of_relations = get_num_of_relations($dbc);
 //$num_of_literals = get_num_of_literals($dbc);
-$num_of_cls = get_num_cls($dbc);
+$num_of_cls = sn_get_num_cls($dbc);
 $num_of_props = sn_get_num_of_props($dbc);
 $url = 'sn_relation_search.php?db_name=' . $db_name . '&subject=' . $subject . '&predicate=' . $predicate . '&object=' . $object;
 ?>
@@ -216,9 +206,9 @@ $url = 'sn_relation_search.php?db_name=' . $db_name . '&subject=' . $subject . '
     <p>该语义网络包括<?php echo $num_of_cls; ?>个语义类型，<?php echo $num_of_props; ?>种语义关系：</p>
      
     <ul class="nav nav-tabs">
-        <li ><a href="sn_profile.php?db_name=<?php echo $db_name; ?>">按语义类型浏览</a></li>
-        <li><a href="#">按语义关系浏览</a></li>       
-        <li  class="active"><a href="#">搜索</a></li>       
+        <li ><a href="sn_profile.php?db_name=<?php echo $db_name; ?>">按语义类型浏览</a></li>            
+        <li  class="active"><a href="#">语义关系搜索</a></li>       
+            
     </ul>
 
     <!--

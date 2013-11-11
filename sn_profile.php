@@ -4,7 +4,7 @@ include_once ("./onto_array.php");
 include_once ("./appvars.php");
 include_once ("./entity_helper.php");
 include_once ("./db_helper.php");
-
+include_once ("./sn_helper.php");
 
 function render_class_table($dbc, $db_name, $active_class) {
     $query = "select value, count from cls order by count desc";
@@ -27,11 +27,8 @@ if (isset($_GET['active_class'])) {
     $active_class = $_GET['active_class'];
 }
 
-
-$num_of_entities = get_num_of_entities($dbc);
-$num_of_facts = get_num_of_facts($dbc);
-$num_of_relations = get_num_of_relations($dbc);
-$num_of_literals = get_num_of_literals($dbc);
+$num_of_cls = sn_get_num_cls($dbc);
+$num_of_props = sn_get_num_of_props($dbc);
 ?>
 
 <script>
@@ -46,14 +43,16 @@ $num_of_literals = get_num_of_literals($dbc);
         s.parentNode.insertBefore(ga, s);
     })();
 </script>
-<div class="well-sm">
-    <h1><?php echo $db_labels[$db_name]; ?></h1>
-    <p>
-        该系统包括<?php echo $num_of_entities; ?>个实体，<?php echo $num_of_facts; ?>条陈述：</p>
 
+<div class="container">
+    <h1><?php echo $db_labels[$db_name]; ?></h1>
+    
+    <p>该语义网络包括<?php echo $num_of_cls; ?>个语义类型，<?php echo $num_of_props; ?>种语义关系：</p>
+     
     <ul class="nav nav-tabs">
-        <li class="active"><a href="#">实体&nbsp;<?php echo '<span class="badge">' . $num_of_entities . '</span>' ?></a></li>
-        <li><a href="sn_property_profile.php?db_name=<?php echo $db_name; ?>">语义关系&nbsp;<?php echo '<span class="badge">' . $num_of_relations . '</span>' ?></a></li>       
+        <li class="active"><a href="#">按语义类型浏览</a></li>
+            
+        <li><a href="sn_relation_search.php?db_name=<?php echo $db_name; ?>">语义关系搜索</a></li>       
     </ul>
     <p></p>
 
@@ -119,9 +118,9 @@ $num_of_literals = get_num_of_literals($dbc);
                                                     $r1 = mysqli_query($dbc, $q1) or die('Error querying database2.');
                                                     if ($row1 = mysqli_fetch_array($r1)) {
                                                         //echo '<p>' . $row1[0] . '</p>';
-                                                        echo '<td width = "40%">' . render_value($dbc, $db_name, $row1['subject'], false) . '</td>';
-                                                        echo '<td width = "15%">' . $row1['property'] . '</td>';
-                                                        echo '<td width = "40%">' . render_value($dbc, $db_name, $row1['value'], false) . '</td>';
+                                                        echo '<td width = "35%">' . render_value($dbc, $db_name, $row1['subject'], false) . '</td>';
+                                                        echo '<td width = "30%">' . $row1['property'] . '</td>';
+                                                        echo '<td width = "35%">' . render_value($dbc, $db_name, $row1['value'], false) . '</td>';
                                                         //echo '<td width = "12%">';
                                                         //echo '<a class="btn btn-primary btn-xs" href="relation.php?id=' . $row['id'] . '"><span class="glyphicon glyphicon-search"></span>&nbsp;查看</a>';
                                                         //echo '&nbsp
@@ -136,6 +135,7 @@ $num_of_literals = get_num_of_literals($dbc);
                                             </tbody>
                                         </table>
 
+                                        <a target="blank" href="sn_triple_type.php?type=<?php echo $row[id]; ?>">查看更多>></a>
                                     </div>
                                 </div>
                             </div>

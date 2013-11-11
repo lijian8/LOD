@@ -93,7 +93,8 @@ and open the template in the editor.
                     <ul class="nav navbar-nav">
                         <li class="active"><a href="index.php">首页</a></li>
                         <li><a href="qa_main.php">知识问答</a></li>
-                        <li><a href="db_list.php">知识资源</a></li>
+                        <li><a href="db_list.php">知识浏览</a></li>
+                        <li><a href="sn_list.php">语义网络</a></li>                        
                         <li><a href="ontology.php">顶层本体</a></li>
                         <li><a href="#contact">联系我们</a></li>
                     </ul>
