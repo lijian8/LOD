@@ -50,7 +50,7 @@ $num_of_literals = get_num_of_literals($dbc);
 <div class="container">
     <h1><?php echo $db_labels[$db_name]; ?></h1>
     <p>
-        中医脾系证候知识库包括<?php echo $num_of_entities; ?>个实体，<?php echo $num_of_facts; ?>条陈述：</p>
+        该系统包括<?php echo $num_of_entities; ?>个实体，<?php echo $num_of_facts; ?>条陈述：</p>
 
     <ul class="nav nav-tabs">
         <li class="active"><a href="#">实体&nbsp;<?php echo '<span class="badge">' . $num_of_entities . '</span>' ?></a></li>

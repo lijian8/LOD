@@ -1,15 +1,19 @@
 <?php
+/*
 include_once ("./header.php");
 include_once ("./onto_array.php");
 include_once ("./appvars.php");
 include_once ("./entity_helper.php");
+include_once ("./db_helper.php");
+*/
 
 function is_legal($value) {
     return isset($value) && $value != '' && $value != 'null' && $value != 'NULL';
 }
 
-$dbc = mysqli_connect('localhost', 'root', 'yutong', 'exp') or die('Error connecting to MySQL server.');
-
+//$dbc = mysqli_connect('localhost', 'root', 'yutong', 'exp') or die('Error connecting to MySQL server.');
+//echo $db_name;
+//echo $entity_type;
 
 $schema = array(
     "药理作用" => array(
@@ -171,7 +175,7 @@ $schema = array(
         ),
         array(
             "property" => "***组方加减",
-            "object_type" => "literal",
+            "object_type" => "中药",
             "where_clause" => " yaowulx='方剂'",
             "table" => "yanjyw",
             "subject" => "yaowumc",
@@ -194,6 +198,15 @@ $schema = array(
             "subject" => "shiydx",
             "object" => array("题目" => "title", "作者" => "author", "单位" => "unit", "年份" => "year"),
             "db" => "中药化学实验数据库"
+        ),
+        array(
+            "property" => "具有药理作用",
+            "object_type" => "药理作用",
+            "table" => "yanjyw",
+            "where_clause" => " yaowulx='方剂'",
+            "subject" => "yaowumc",
+            "object" => "yaolifl",
+            "db" => "中药药理实验数据库"
         )
     ),
     '中药化学成分' => array(
@@ -292,7 +305,6 @@ $schema = array(
         )
     ),
     '疾病' => array(
-        
         array(
             "property" => "治疗用单味药",
             "object_type" => "中药",
@@ -301,140 +313,176 @@ $schema = array(
             "subject" => "duixiangmc",
             "object" => "yaowumc",
             "db" => "中药药理实验数据库"
+        ),
+        array(
+            "property" => "治疗用化学成分",
+            "object_type" => "化学成分",
+            "where_clause" => " yaowulx='化学成分'",
+            "table" => "yaolsy_yanjyw_wenxian",
+            "subject" => "duixiangmc",
+            "object" => "yaowumc",
+            "db" => "中药药理实验数据库"
+        ),
+        array(
+            "property" => "治疗用方剂",
+            "object_type" => "方剂",
+            "where_clause" => " yaowulx='方剂'",
+            "table" => "yaolsy_yanjyw_wenxian",
+            "subject" => "duixiangmc",
+            "object" => "yaowumc",
+            "db" => "中药药理实验数据库"
+        ),
+        array(
+            "property" => "相关病理环节",
+            "object_type" => "药理作用",
+            "table" => "yaolsy_yanjyw_wenxian",
+            "subject" => "duixiangmc",
+            "object" => "yaolifl",
+            "db" => "中药药理实验数据库"
         )
     )
 );
 
-if ((!isset($_GET['name'])) || (!isset($_GET['type']))) {
+//if ((!isset($_GET['name'])) || (!isset($_GET['type']))) {
 
-    include_once("./exp_examples.php");
-} else {
-    $entity_name = $_GET['name'];
-    $entity_type = $_GET['type'];
+   // include_once("./exp_examples.php");
+//} else {
+    //$entity_name = $_GET['name'];
+    //$entity_type = $_GET['type'];
+    $entity_name = $name;
+    
     ?>
 
     <div class ="container">
+        <!--
         <a href="<?php echo $_SERVER[PHP_SELF]; ?>">查看实例>></a>
-        <h1><?php echo $entity_name . "（" . $entity_type . "）"; ?></h1>
-        <hr>
+        <h1><?php //echo $entity_name . "（" . $entity_type . "）"; ?></h1>
+        
+        -->
+<hr>
+        <?php
+        foreach ($schema[$entity_type] as $mapping) {
+            $property = $mapping["property"];
+            $table = $mapping["table"];
+            $subject = $mapping["subject"];
+            $object_type = $mapping["object_type"];
+            $object = $mapping["object"];
+            $db = $mapping["db"];
+            $where_clause = $mapping["where_clause"];
 
-    <?php
-    foreach ($schema[$entity_type] as $mapping) {
-        $property = $mapping["property"];
-        $table = $mapping["table"];
-        $subject = $mapping["subject"];
-        $object_type = $mapping["object_type"];
-        $object = $mapping["object"];
-        $db = $mapping["db"];
-        $where_clause = $mapping["where_clause"];
-
-        if (is_string($object)) {
-            $values = array();
-            $query = "SELECT $object FROM $table WHERE $subject = '$entity_name' and $object is not null";
-            if (isset($where_clause)) {
-                $query .= " and " . $where_clause;
-            }
-
-            $result = mysqli_query($dbc, $query) or die('Error querying database:' . $query);
-            while ($row = mysqli_fetch_array($result)) {
-                if (is_legal($row[0]) && (!in_array($row[0], $values))) {
-                    $values[] = $row[0];
+            if (is_string($object)) {
+                $values = array();
+                $query = "SELECT $object FROM $table WHERE $subject = '$entity_name' and $object is not null";
+                if (isset($where_clause)) {
+                    $query .= " and " . $where_clause;
                 }
-            }
 
-            if (count($values) > 0) {
-                ?>
+                $result = mysqli_query($dbc, $query) or die('Error querying database:' . $query);
+                while ($row = mysqli_fetch_array($result)) {
+                    foreach (explode('$', $row[0]) as $v){
+                        if ((is_legal($v))&&(!in_array($v, $values))){
+                            $values[] = $v;
+                        }
+                    }                  
+                }
+
+                if (count($values) > 0) {
+                    ?>
                     <div class="panel panel-info">
                         <div class="panel-heading">
                             <h3 class="panel-title"><?php echo $property; ?></h3>
                         </div>
 
                         <ul class="nav nav-pills">
-                <?php
-                foreach ($values as $value) {
+                            <?php
+                            foreach ($values as $value) {
 
-                    echo '<li >';
-                    if ($object_type == 'literal') {
-                        echo $value;
-                    } else {
-                        echo '<a href="' . $_SERVER["PHP_SELF"] . '?type=' . $object_type . '&name=' . $value . '">' . $value . '</a>';
-                    }
+                                echo '<li >';
+                                if ($object_type == 'literal') {
+                                    echo $value;
+                                } else {
+                                    echo '<a href="' . $_SERVER["PHP_SELF"] . '?db_name='. $db_name . '&type=' . $object_type . '&name=' . $value . '">' . $value . '</a>';
+                                }
 
-                    echo '</li>';
-                }
-                ?>
+                                echo '</li>';
+                            }
+                            ?>
                         </ul>
                         <div class="panel-footer">
                             (数据来源:&nbsp;<a href="#"><?php echo $db; ?></a>)
                         </div>
                     </div>
-                <?php
-            }
-        } elseif (is_array($object)) {
-            $query = "SELECT " . implode(',', $object) . " FROM $table WHERE $subject = '$entity_name' ";
-            if (isset($where_clause)) {
-                $query .= " and " . $where_clause;
-            }
-            $result = mysqli_query($dbc, $query) or die('Error querying:' . $query);
-            if (mysqli_num_rows($result) > 0) {
-                ?>
+                    <?php
+                }
+            } elseif (is_array($object)) {
+                $query = "SELECT " . implode(',', $object) . " FROM $table WHERE $subject = '$entity_name' ";
+                if (isset($where_clause)) {
+                    $query .= " and " . $where_clause;
+                }
+                $result = mysqli_query($dbc, $query) or die('Error querying:' . $query);
+                if (mysqli_num_rows($result) > 0) {
+                    ?>
                     <div class="panel panel-info">
                         <div class="panel-heading">
                             <h3 class="panel-title"><?php echo $property; ?></h3>
                         </div>
                         <div class="panel-info">
-                <?php
-                if ($object_type == 'rows') {
-                    echo " <table><thead>";
-                    foreach (array_keys($object) as $obj) {
-                        echo "<th>" . $obj . "</th>";
-                    }
-                    echo "</thead>";
-                    while ($row = mysqli_fetch_array($result)) {
-                        echo "<tr>";
-                        foreach ($object as $obj) {
-                            echo '<td>' . $row[$obj] . '</td>';
-                        }
-                        echo "</tr>";
-                    }
-                    echo " </table>";
-                } elseif ($object_type == 'av') {
-                    echo " <table>";
-                    $first = true;
+                            <?php
+                            if ($object_type == 'rows') {
+                                echo " <table><thead>";
+                                foreach (array_keys($object) as $obj) {
+                                    echo "<th>" . $obj . "</th>";
+                                }
+                                echo "</thead>";
+                                while ($row = mysqli_fetch_array($result)) {
+                                    echo "<tr>";
+                                    foreach ($object as $obj) {
+                                        echo '<td>' . $row[$obj] . '</td>';
+                                    }
+                                    echo "</tr>";
+                                }
+                                echo " </table>";
+                            } elseif ($object_type == 'av') {
+                                echo " <table>";
+                                $first = true;
 
-                    while ($row = mysqli_fetch_array($result)) {
-                        if ($first) {
-                            $first = false;
-                        } else {
-                            echo "<tr><td>&nbsp;</td><td>&nbsp;</td></tr>";
-                        }
+                                while ($row = mysqli_fetch_array($result)) {
+                                    if ($first) {
+                                        $first = false;
+                                    } else {
+                                        echo "<tr><td>&nbsp;</td><td>&nbsp;</td></tr>";
+                                    }
 
-                        foreach ($object as $attribute => $obj) {
-                            if (is_legal($row[$obj])) {
-                                echo "<tr>";
-                                echo "<th width='20%'>" . $attribute . "</th>";
-                                echo '<td>' . $row[$obj] . '</td>';
-                                echo "</tr>";
+                                    foreach ($object as $attribute => $obj) {
+                                        if (is_legal($row[$obj])) {
+                                            echo "<tr>";
+                                            echo "<th width='20%'>" . $attribute . "</th>";
+                                            echo '<td>' . $row[$obj] . '</td>';
+                                            echo "</tr>";
+                                        }
+                                    }
+                                }
+                                echo " </table>";
                             }
-                        }
-                    }
-                    echo " </table>";
-                }
-                ?>                   
+                            ?>                   
 
                         </div>
                         <div class="panel-footer">
                             (数据来源:&nbsp;<a href="#"><?php echo $db; ?></a>)
                         </div>
                     </div>
-                <?php
+                    <?php
+                }
             }
         }
-    }
-    ?>
+        ?>
     </div>
 
     <?php
-}
+//}
+/*
 include_once ("./foot.php");
+
+ * 
+ */
 ?>

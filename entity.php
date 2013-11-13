@@ -5,6 +5,8 @@ include_once ("./appvars.php");
 include_once ("./entity_helper.php");
 include_once ("./db_helper.php");
 
+
+
 $names = array('英文正名', '英文异名', '中文异名', '中文正名', '异名', '汉语拼音', '英文名', '别名');
 $type_labels = array('类型');
 
@@ -31,10 +33,20 @@ if (isset($_GET['id'])) {
         $id = $row[id];
         $def = $row[def];
     } else {
-      //  render_warning('无相关实体信息！');
+        //  render_warning('无相关实体信息！');
     }
 } else {
     //render_warning('无相关实体信息！');
+}
+
+
+if (isset($_GET['type'])) {
+    $entity_type = $_GET['type'];
+    $types_string = $entity_type;
+} else {
+    $types = get_types($dbc, $id);
+    $entity_type = $types[0];
+    $types_string = implode(',', $types);
 }
 ?>
 
@@ -46,44 +58,52 @@ if (isset($_GET['id'])) {
     </ul>
 
 
-<?php
-echo '<ul class="nav nav-pills">';
-echo '<li ><a  href="synthesis_lit_graph.php?name='. $name. '">综合知识</a></li>';
-foreach ($db_labels as $db => $db_label) {
-    echo '<li ' . (($db == $db_name) ? 'class="disabled"' : '') . '><a href="' . $_SERVER['PHP_SELF'] . "?name=$name&db_name=" . $db . '">' . $db_label . '</a></li>';
-}
-echo '<li><a href="#">更多>></a></li>';
-echo '</ul>';
-?>
+    <?php
+    echo '<ul class="nav nav-pills">';
+    echo '<li ><a  href="synthesis_lit_graph.php?name=' . $name . '">综合知识</a></li>';
+    foreach ($db_labels as $db => $db_label) {
+        echo '<li ' . (($db == $db_name) ? 'class="disabled"' : '') . '><a href="' . $_SERVER['PHP_SELF'] . "?name=$name&db_name=" . $db . '">' . $db_label . '</a></li>';
+    }
+    echo '<li><a href="#">更多>></a></li>';
+    echo '</ul>';
+    ?>
 
 
     <h1>  
         <font face="微软雅黑"><strong>
-<?php echo $name . '(' . implode(',', get_types($dbc, $id)) . ')'; ?>       
+            <?php echo $name . '(' . $types_string . ')'; ?>       
         </strong>
         </font>
     </h1>
 
-<?php
-if (isset($name) && $name != '' && isset($id) && $id != '') {
-    echo $def;
+    <?php
+    if (isset($name) && $name != '' && isset($id) && $id != '') {
+        echo $def;
 
-    if ($db_name == 'tcmls')
-        include_once ("./entity_detail.php");
-    if ($db_name == 'tcmct')
-        include_once ("./entity_lit_graph.php");
-    if ($db_name == 'formula')
-        include_once ("./entity_summary.php");
-    if ($db_name == 'herb')
-        include_once ("./entity_simple_lit_graph.php");
-    if ($db_name == 'formula_dic')
-        include_once ("./entity_detail.php");
-    if ($db_name == 'spleen')
-        include_once ("./entity_detail.php");
-    if ($db_name == 'cases')
-        include_once ("./entity_detail.php");
-}else{
-    render_warning('该库中无相关实体信息！');
-}
-include_once ("./foot.php");
-?>
+        if ($db_name == 'tcmls')
+            include_once ("./entity_detail.php");
+        if ($db_name == 'tcmct')
+            include_once ("./entity_lit_graph.php");
+        if ($db_name == 'formula')
+            include_once ("./entity_summary.php");
+        if ($db_name == 'herb')
+            include_once ("./entity_simple_lit_graph.php");
+        if ($db_name == 'formula_dic')
+            include_once ("./entity_detail.php");
+        if ($db_name == 'spleen')
+            include_once ("./entity_detail.php");
+        if ($db_name == 'cases')
+            include_once ("./entity_detail.php");
+        if ($db_name == 'herbnet') {
+            include_once ("./d2rm.php");
+        }
+    } elseif ($db_name == 'herbnet') {
+        include_once ("./d2rm.php");
+    } else {
+        render_warning('该库中无相关实体信息！');
+    }
+
+
+
+    include_once ("./foot.php");
+    ?>
