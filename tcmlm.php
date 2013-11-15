@@ -3,7 +3,6 @@ include_once ("./header.php");
 
 require 'vendor/autoload.php';
 require_once "html_tag_helpers.php";
-
 include_once ("./rdf_helper.php");
 
 
@@ -29,7 +28,7 @@ function render_property_values($graph, $me, $property) {
     }
 }
 
-$graph = new EasyRdf_Graph("http://localhost/lod/tcmls-sn.rdf");
+$graph = new EasyRdf_Graph("http://localhost/lod/tcmlm.rdf");
 $graph->load();
 ?>
 <div class="container">

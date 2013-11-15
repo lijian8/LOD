@@ -81,6 +81,7 @@ function render_treatment($dbc, $db_name, $id) {
         echo render_value($dbc, $db_name, $value, true);
         echo '<p/></li>';
     }
+    hypo_render_treatment($dbc, $db_name, $id);
     echo '</ol>';
 }
 
@@ -110,7 +111,9 @@ if (!empty($ids)) {
                 <strong><?php echo get_entity_name($dbc, PREFIX . $id); ?></strong>
             </div>
             <div class="panel-body">
-                <?php render_treatment($dbc, $db_name, $id); ?>
+                <?php render_treatment($dbc, $db_name, $id); 
+                 
+                ?>
                 <hr/>
                 <?php render_syndromes($dbc, $db_name, $id); ?>
                 <hr/>

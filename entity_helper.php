@@ -1,21 +1,36 @@
 <?php
 
+function render_triple($dbc, $db_name, $id) {
+    $query = "select * from graph where id = '$id'";
+  
+    $result = mysqli_query($dbc, $query) or die('Error querying database2.');
+    if ($row = mysqli_fetch_array($result)) {  
+        echo '<span class="glyphicon glyphicon-chevron-left"></span>';
+        echo render_value($dbc, $db_name, $row['subject'], false);
+        echo '&nbsp;';
+        echo $row['property'];      
+        echo '&nbsp;';
+        echo render_value($dbc, $db_name, $row['value'], false) ;
+        echo '<span class="glyphicon glyphicon-chevron-right"></span>';
+    }
+}
+
 function get_classes_from_sn($dbc) {
     $query = "SELECT distinct subject FROM semantic_network";
-    
-    $result = mysqli_query($dbc, $query)  or die('Error querying database1.');
+
+    $result = mysqli_query($dbc, $query) or die('Error querying database1.');
     $arr = array();
     while ($row = mysqli_fetch_array($result)) {
         array_push($arr, $row[0]);
     }
-    
+
     return $arr;
 }
 
-function get_properties_from_sn ($dbc) {
+function get_properties_from_sn($dbc) {
     $query = "select distinct property from semantic_network";
 
-    $result = mysqli_query($dbc, $query)  or die('Error querying database1.');
+    $result = mysqli_query($dbc, $query) or die('Error querying database1.');
     $arr = array();
     while ($row = mysqli_fetch_array($result)) {
         array_push($arr, $row[0]);

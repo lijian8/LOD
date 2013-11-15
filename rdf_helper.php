@@ -1,5 +1,11 @@
 <?php
 
+
+function num_of_instances($graph, $type) {
+    $instances = $graph->allOfType($type);
+    return count($instances);
+}
+
 function get_graph() {
     if (!isset($GLOBALS['rdf_graph'])) {
         echo "RDF图初始化...";

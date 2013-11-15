@@ -40,10 +40,6 @@ function render_property($graph, $me, $property) {
     echo "</p>";
 }
 
-function num_of_instances($graph, $type) {
-    $instances = $graph->allOfType($type);
-    return count($instances);
-}
 
 if (isset($_GET['localname'])) {
     $localname = $_GET['localname'];

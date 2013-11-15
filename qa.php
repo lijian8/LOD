@@ -3,6 +3,7 @@ include_once ("./header.php");
 include_once ("./appvars.php");
 include_once ("./entity_helper.php");
 include_once ("./db_helper.php");
+include_once ("./hypo_helper.php");
 
 function get_names($user_search) {
 
