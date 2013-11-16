@@ -69,6 +69,18 @@
     
 
 
+    <!-- http://www.example.com/accessRights -->
+
+    <owl:ObjectProperty rdf:about="&www;accessRights">
+        <rdfs:label xml:lang="en">Access Rights</rdfs:label>
+        <rdfs:label xml:lang="zh">访问权限</rdfs:label>
+        <rdfs:comment xml:lang="en">Information about who can access the resource or an indication of its security status.Access Rights may include information regarding access or restrictions based on privacy, security, or other policies.</rdfs:comment>
+        <rdfs:comment xml:lang="zh">关于谁可以访问某一资源的信息，或关于该资源安全状态的指示。访问权限可能根据隐私、安全或其他政策，对资源访问做出许可或限制。</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="&www;rights"/>
+    </owl:ObjectProperty>
+    
+
+
     <!-- http://www.example.com/adjacent_to -->
 
     <owl:ObjectProperty rdf:about="&www;adjacent_to">
@@ -127,6 +139,17 @@
         <rdfs:comment xml:lang="zh">有重要的或显著的关系</rdfs:comment>
         <rdfs:domain rdf:resource="&www;ClinicalFinding"/>
         <rdfs:range rdf:resource="&www;ClinicalFinding"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.example.com/audience -->
+
+    <owl:ObjectProperty rdf:about="&www;audience">
+        <rdfs:label xml:lang="en">Audience</rdfs:label>
+        <rdfs:label xml:lang="zh">受众</rdfs:label>
+        <rdfs:comment xml:lang="en">A class of entity for whom the resource is intended or useful.</rdfs:comment>
+        <rdfs:comment xml:lang="zh">某一资源所针对或被用于的群体。</rdfs:comment>
     </owl:ObjectProperty>
     
 
@@ -237,6 +260,18 @@
     
 
 
+    <!-- http://www.example.com/conformsTo -->
+
+    <owl:ObjectProperty rdf:about="&www;conformsTo">
+        <rdfs:label xml:lang="en">Conforms To</rdfs:label>
+        <rdfs:label xml:lang="zh">符合</rdfs:label>
+        <rdfs:comment xml:lang="en">An established standard to which the described resource conforms.</rdfs:comment>
+        <rdfs:comment xml:lang="zh">某一资源所符合的既定标准。</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="&www;relation"/>
+    </owl:ObjectProperty>
+    
+
+
     <!-- http://www.example.com/connected_to -->
 
     <owl:ObjectProperty rdf:about="&www;connected_to">
@@ -309,6 +344,30 @@
     
 
 
+    <!-- http://www.example.com/contributorDescription -->
+
+    <owl:ObjectProperty rdf:about="&www;contributorDescription">
+        <rdfs:label xml:lang="en">Contributor Description</rdfs:label>
+        <rdfs:label xml:lang="zh">贡献者描述</rdfs:label>
+        <rdfs:comment xml:lang="en">An account of a Contributor of the resource. Contributor Description may include but is not limited to: nationality, era, country of origin, or identity. The era of Contributor can be recorded with the reign dynasty dating or Christian era. Reign dynasty dating is recorded by the order: Dynasty (foreign countries should be indicated the name of the country), the Emperor, Annals.
+</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="&www;contributor"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.example.com/contributorResponsibility -->
+
+    <owl:ObjectProperty rdf:about="&www;contributorResponsibility">
+        <rdfs:label xml:lang="en">Contributor Responsibility</rdfs:label>
+        <rdfs:label xml:lang="zh">贡献者责任</rdfs:label>
+        <rdfs:comment xml:lang="en">The ways by which a Contributor works on the resource. Describe the relationship between a Contributor and the resource. 
+</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="&www;contributor"/>
+    </owl:ObjectProperty>
+    
+
+
     <!-- http://www.example.com/coverage -->
 
     <owl:ObjectProperty rdf:about="&www;coverage">
@@ -327,6 +386,30 @@
         <rdfs:label xml:lang="zh">创建者</rdfs:label>
         <rdfs:comment xml:lang="en">An entity primarily responsible for making the resource.</rdfs:comment>
         <rdfs:comment xml:lang="zh">主要负责创建资源的实体。</rdfs:comment>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.example.com/creatorDescription -->
+
+    <owl:ObjectProperty rdf:about="&www;creatorDescription">
+        <rdfs:label xml:lang="en">Creator Description</rdfs:label>
+        <rdfs:label xml:lang="zh">创建者描述</rdfs:label>
+        <rdfs:comment xml:lang="en">An account of a creator of the resource.  Creator Description may include but is not limited to: nationality, era, country of origin, or identity. The era of creator can be recorded with the reign dynasty dating or Christian era. Reign dynasty dating is recorded by the order: Dynasty (foreign countries should be indicated the name of the country), the Emperor, Annals. </rdfs:comment>
+        <rdfs:comment xml:lang="zh">该资源的某一创建者的描述。</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="&www;creator"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.example.com/creatorResponsibility -->
+
+    <owl:ObjectProperty rdf:about="&www;creatorResponsibility">
+        <rdfs:label xml:lang="en">Creator Responsibility</rdfs:label>
+        <rdfs:label xml:lang="en">The ways by which a creator works on the resource. Describe the relationship between a creator and the resource. For example, First author, corresponding author, translate, engrave, record, photograph, Calligraphy, compile, repair, annotate, edit, collect , paint, sort, modify, manufacture, etc. 
+</rdfs:label>
+        <rdfs:label xml:lang="zh">创建者责任</rdfs:label>
+        <rdfs:subPropertyOf rdf:resource="&www;creator"/>
     </owl:ObjectProperty>
     
 
@@ -379,6 +462,18 @@
     
 
 
+    <!-- http://www.example.com/digitalFilesFormat -->
+
+    <owl:ObjectProperty rdf:about="&www;digitalFilesFormat">
+        <rdfs:label xml:lang="en">Digital Files Format</rdfs:label>
+        <rdfs:label xml:lang="zh">数字文件格式</rdfs:label>
+        <rdfs:comment xml:lang="en">Special encoding of information in order to the computer to store information. Comments: Recommend using thesaurus such as computer media formats table defined Internet media types. [MIME] 
+</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="&www;format"/>
+    </owl:ObjectProperty>
+    
+
+
     <!-- http://www.example.com/disrupts -->
 
     <owl:ObjectProperty rdf:about="&www;disrupts">
@@ -421,6 +516,18 @@
         <rdfs:comment xml:lang="en">Shows or demonstrates.</rdfs:comment>
         <rdfs:comment xml:lang="zh">表示、出示、证明等。</rdfs:comment>
         <rdfs:subPropertyOf rdf:resource="&www;performs"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.example.com/extent -->
+
+    <owl:ObjectProperty rdf:about="&www;extent">
+        <rdfs:label xml:lang="en">Extent</rdfs:label>
+        <rdfs:label xml:lang="zh">规模</rdfs:label>
+        <rdfs:comment xml:lang="en">The size or duration of the resource.</rdfs:comment>
+        <rdfs:comment xml:lang="zh">资源的尺寸和规模。</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="&www;format"/>
     </owl:ObjectProperty>
     
 
@@ -562,48 +669,10 @@
         <rdfs:label xml:lang="zh">佐药</rdfs:label>
         <rdfs:subPropertyOf rdf:resource="&www;contains_herb"/>
     </owl:ObjectProperty>
- 
-    <owl:ObjectProperty rdf:about="&www;language">
-	    <rdfs:label xml:lang="en">Language</rdfs:label>
-        <rdfs:label xml:lang="zh">语言</rdfs:label>
-        <rdfs:comment xml:lang="en">A language of the resource.</rdfs:comment>
-        <rdfs:comment xml:lang="zh">资源的一种语言。</rdfs:comment>
-    </owl:ObjectProperty>
-	
-	<owl:ObjectProperty rdf:about="&www;relation">
-	    <rdfs:label xml:lang="en">Relation</rdfs:label>
-		<rdfs:label xml:lang="zh">关系</rdfs:label>	
-        <rdfs:comment xml:lang="en">A related resource.</rdfs:comment>
-        <rdfs:comment xml:lang="zh">一个相关资源。</rdfs:comment>
-    </owl:ObjectProperty>
-	
-	<owl:ObjectProperty rdf:about="&www;publisher">
-	    <rdfs:label xml:lang="en">Publisher</rdfs:label>
-		<rdfs:label xml:lang="zh">出版者</rdfs:label>	
-        <rdfs:comment xml:lang="en">An entity responsible for making the resource available.</rdfs:comment>
-        <rdfs:comment xml:lang="zh">负责使该资源可及的实体。</rdfs:comment>
-    </owl:ObjectProperty>
-	
-	
-    <owl:DatatypeProperty rdf:about="&www;title">
-	    <rdfs:range rdf:resource="&rdfs;Literal"/>
-        <rdfs:label xml:lang="en">Title</rdfs:label>
-        <rdfs:label xml:lang="zh">题名</rdfs:label>
-        <rdfs:comment xml:lang="en">A name given to the resource.</rdfs:comment>
-        <rdfs:comment xml:lang="zh">为资源赋予的名称。</rdfs:comment>
-    </owl:DatatypeProperty>
-
-    <!-- http://www.example.com/identifier -->
-
-    <owl:DatatypeProperty rdf:about="&www;identifier">
-	    <rdfs:range rdf:resource="&rdfs;Literal"/>
-        <rdfs:label xml:lang="en">Identifier</rdfs:label>
-        <rdfs:label xml:lang="zh">标识</rdfs:label>
-        <rdfs:comment xml:lang="en">An unambiguous reference to the resource within a given context.</rdfs:comment>
-        <rdfs:comment xml:lang="zh">资源在给定环境下无歧义的引用。</rdfs:comment>
-    </owl:DatatypeProperty>
     
-	<!-- http://www.example.com/indicates -->
+
+
+    <!-- http://www.example.com/indicates -->
 
     <owl:ObjectProperty rdf:about="&www;indicates">
         <rdfs:label xml:lang="en">indicates</rdfs:label>
@@ -687,6 +756,30 @@
     
 
 
+    <!-- http://www.example.com/language -->
+
+    <owl:ObjectProperty rdf:about="&www;language">
+        <rdfs:label xml:lang="en">Language</rdfs:label>
+        <rdfs:label xml:lang="zh">语言</rdfs:label>
+        <rdfs:comment xml:lang="en">A language of the resource.</rdfs:comment>
+        <rdfs:comment xml:lang="zh">资源的一种语言。</rdfs:comment>
+        <rdfs:range rdf:resource="&www;LinguisticSystem"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.example.com/license -->
+
+    <owl:ObjectProperty rdf:about="&www;license">
+        <rdfs:label xml:lang="en">License</rdfs:label>
+        <rdfs:label xml:lang="zh">许可</rdfs:label>
+        <rdfs:comment xml:lang="en">A legal document giving official permission to do something with the resource.</rdfs:comment>
+        <rdfs:comment xml:lang="zh">为处理该资源给予官方许可的法律文件。</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="&www;rights"/>
+    </owl:ObjectProperty>
+    
+
+
     <!-- http://www.example.com/location_of -->
 
     <owl:ObjectProperty rdf:about="&www;location_of">
@@ -743,6 +836,20 @@
         <rdfs:comment xml:lang="en">Ascertains or marks the dimensions, quantity, degree, or capacity of.</rdfs:comment>
         <rdfs:comment xml:lang="zh">确定或标记尺寸、数量、程度、容量等。</rdfs:comment>
         <rdfs:subPropertyOf rdf:resource="&www;conceptually_related_to"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.example.com/medium -->
+
+    <owl:ObjectProperty rdf:about="&www;medium">
+        <rdfs:label xml:lang="en">Medium</rdfs:label>
+        <rdfs:label xml:lang="zh">媒介</rdfs:label>
+        <rdfs:comment xml:lang="en">The material or physical carrier of the resource.</rdfs:comment>
+        <rdfs:comment xml:lang="zh">某一资源的物质或物理载体。</rdfs:comment>
+        <rdfs:range rdf:resource="&www;PhysicalMedium"/>
+        <rdfs:domain rdf:resource="&www;PhysicalResource"/>
+        <rdfs:subPropertyOf rdf:resource="&www;format"/>
     </owl:ObjectProperty>
     
 
@@ -923,6 +1030,51 @@
     
 
 
+    <!-- http://www.example.com/provenance -->
+
+    <owl:ObjectProperty rdf:about="&www;provenance">
+        <rdfs:label xml:lang="en">Provenance</rdfs:label>
+        <rdfs:label xml:lang="zh">出处</rdfs:label>
+        <rdfs:comment xml:lang="en">A statement of any changes in ownership and custody of the resource since its creation that are significant for its authenticity, integrity, and interpretation.</rdfs:comment>
+        <rdfs:comment xml:lang="zh">对某一资源的真实性、完整性和解释具有重要意义的陈述，其中记录了自资源创建以来在资源所有权和保管权方面的变更。</rdfs:comment>
+        <rdfs:range rdf:resource="&www;ProvenanceStatement"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.example.com/publisher -->
+
+    <owl:ObjectProperty rdf:about="&www;publisher">
+        <rdfs:label xml:lang="en">Publisher</rdfs:label>
+        <rdfs:label xml:lang="zh">出版者</rdfs:label>
+        <rdfs:comment xml:lang="en">An entity responsible for making the resource available.</rdfs:comment>
+        <rdfs:comment xml:lang="zh">负责使该资源可及的实体。</rdfs:comment>
+        <rdfs:range rdf:resource="&www;Agent"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.example.com/quantity -->
+
+    <owl:ObjectProperty rdf:about="&www;quantity">
+        <rdfs:comment xml:lang="en">Quantity</rdfs:comment>
+        <rdfs:comment xml:lang="zh">数量</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="&www;format"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.example.com/relation -->
+
+    <owl:ObjectProperty rdf:about="&www;relation">
+        <rdfs:label xml:lang="en">Relation</rdfs:label>
+        <rdfs:label xml:lang="zh">关系</rdfs:label>
+        <rdfs:comment xml:lang="en">A related resource.</rdfs:comment>
+        <rdfs:comment xml:lang="zh">一个相关资源。</rdfs:comment>
+    </owl:ObjectProperty>
+    
+
+
     <!-- http://www.example.com/result_of -->
 
     <owl:ObjectProperty rdf:about="&www;result_of">
@@ -942,6 +1094,19 @@
         <rdfs:label xml:lang="zh">权限</rdfs:label>
         <rdfs:comment xml:lang="en">Information about rights held in and over the resource.</rdfs:comment>
         <rdfs:comment xml:lang="zh">关于资源权限的信息。</rdfs:comment>
+        <rdfs:range rdf:resource="&www;RightsStatement"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.example.com/rightsHolder -->
+
+    <owl:ObjectProperty rdf:about="&www;rightsHolder">
+        <rdfs:label xml:lang="en">Rights Holder</rdfs:label>
+        <rdfs:label xml:lang="zh">权利人</rdfs:label>
+        <rdfs:comment xml:lang="en">A person or organization owning or managing rights over the resource.</rdfs:comment>
+        <rdfs:comment xml:lang="zh">拥有或管理某一资源的权利的人或组织。</rdfs:comment>
+        <rdfs:range rdf:resource="&www;Agent"/>
     </owl:ObjectProperty>
     
 
@@ -954,6 +1119,19 @@
         <rdfs:comment xml:lang="en"></rdfs:comment>
         <rdfs:comment xml:lang="zh"></rdfs:comment>
         <rdfs:subPropertyOf rdf:resource="&www;conceptually_related_to"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.example.com/spatial -->
+
+    <owl:ObjectProperty rdf:about="&www;spatial">
+        <rdfs:label xml:lang="en">Spatial Coverage</rdfs:label>
+        <rdfs:label xml:lang="zh">空间范围</rdfs:label>
+        <rdfs:comment xml:lang="en">Spatial characteristics of the resource.</rdfs:comment>
+        <rdfs:comment xml:lang="zh">资源的空间特性。</rdfs:comment>
+        <rdfs:range rdf:resource="&www;Location"/>
+        <rdfs:subPropertyOf rdf:resource="&www;coverage"/>
     </owl:ObjectProperty>
     
 
@@ -978,6 +1156,19 @@
         <rdfs:comment xml:lang="en">Establishes the boundaries for, or defines the limits of another physical structure. This includes limits, bounds, confines, encloses, and circumscribes.</rdfs:comment>
         <rdfs:comment xml:lang="zh">确立分界线，定义另一个物理结构的界限。包括界限，范围，界线，围住、在…周围化线。</rdfs:comment>
         <rdfs:subPropertyOf rdf:resource="&www;spatially_related_to"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.example.com/temporal -->
+
+    <owl:ObjectProperty rdf:about="&www;temporal">
+        <rdfs:label xml:lang="en">Temporal Coverage</rdfs:label>
+        <rdfs:label xml:lang="zh">时间范围</rdfs:label>
+        <rdfs:comment xml:lang="en">Temporal characteristics of the resource.</rdfs:comment>
+        <rdfs:comment xml:lang="zh">资源的时间特性。</rdfs:comment>
+        <rdfs:range rdf:resource="&www;PeriodOfTime"/>
+        <rdfs:subPropertyOf rdf:resource="&www;coverage"/>
     </owl:ObjectProperty>
     
 
@@ -1039,6 +1230,17 @@
     
 
 
+    <!-- http://www.example.com/type -->
+
+    <owl:ObjectProperty rdf:about="&www;type">
+        <rdfs:label xml:lang="en">Type</rdfs:label>
+        <rdfs:label xml:lang="zh">类型</rdfs:label>
+        <rdfs:comment xml:lang="en">The nature or genre of the resource.</rdfs:comment>
+        <rdfs:comment xml:lang="zh">资源的性质和流派。</rdfs:comment>
+    </owl:ObjectProperty>
+    
+
+
     <!-- http://www.example.com/uses -->
 
     <owl:ObjectProperty rdf:about="&www;uses">
@@ -1068,17 +1270,127 @@
     ///////////////////////////////////////////////////////////////////////////////////////
      -->
 
-      
+    
+
+
+    <!-- http://www.example.com/bibliographicCitation -->
+
+    <owl:DatatypeProperty rdf:about="&www;bibliographicCitation">
+        <rdfs:label xml:lang="en">Bibliographic Citation</rdfs:label>
+        <rdfs:label xml:lang="zh">书目引用</rdfs:label>
+        <rdfs:comment xml:lang="en">A bibliographic reference for the resource.</rdfs:comment>
+        <rdfs:comment xml:lang="zh">资源的书目引用。</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="&www;identifier"/>
+    </owl:DatatypeProperty>
+    
 
 
     <!-- http://www.example.com/date -->
 
     <owl:DatatypeProperty rdf:about="&www;date">
+        <rdfs:label xml:lang="en">Date</rdfs:label>
+        <rdfs:label xml:lang="zh">日期</rdfs:label>
+        <rdfs:comment xml:lang="en">A point or period of time associated with an event in the lifecycle of the resource.</rdfs:comment>
+        <rdfs:comment xml:lang="zh">在资源生命周期中某一事件的时间点或时间段。</rdfs:comment>
         <rdfs:range rdf:resource="&rdfs;Literal"/>
-		<rdfs:label xml:lang="en">Date</rdfs:label>
-	    <rdfs:label xml:lang="zh">日期</rdfs:label>
-       	<rdfs:comment xml:lang="en">A point or period of time associated with an event in the lifecycle of the resource.</rdfs:comment>
-        <rdfs:comment xml:lang="zh">在资源生命周期中某一事件的时间点或时间段。</rdfs:comment>      
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.example.com/identifier -->
+
+    <owl:DatatypeProperty rdf:about="&www;identifier">
+        <rdfs:label xml:lang="en">Identifier</rdfs:label>
+        <rdfs:label xml:lang="zh">标识</rdfs:label>
+        <rdfs:comment xml:lang="en">An unambiguous reference to the resource within a given context.</rdfs:comment>
+        <rdfs:comment xml:lang="zh">资源在给定环境下无歧义的引用。</rdfs:comment>
+        <rdfs:range rdf:resource="&rdfs;Literal"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.example.com/otherTitles -->
+
+    <owl:DatatypeProperty rdf:about="&www;otherTitles">
+        <rdfs:label xml:lang="en">Other Titles</rdfs:label>
+        <rdfs:comment xml:lang="en">The title for short or alias of the literature</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="&www;title"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.example.com/phoneticGuides -->
+
+    <owl:DatatypeProperty rdf:about="&www;phoneticGuides">
+        <rdfs:label xml:lang="en">Phonetic Guides</rdfs:label>
+        <rdfs:comment xml:lang="en">The title&#39;s transliteration of Chinese Phonetic Alphabet. </rdfs:comment>
+        <rdfs:comment xml:lang="zh">题名的拼音。</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="&www;title"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.example.com/title -->
+
+    <owl:DatatypeProperty rdf:about="&www;title">
+        <rdfs:label xml:lang="en">Title</rdfs:label>
+        <rdfs:label xml:lang="zh">题名</rdfs:label>
+        <rdfs:comment xml:lang="en">A name given to the resource.</rdfs:comment>
+        <rdfs:comment xml:lang="zh">为资源赋予的名称。</rdfs:comment>
+        <rdfs:range rdf:resource="&rdfs;Literal"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.example.com/titleOnForeEdge -->
+
+    <owl:DatatypeProperty rdf:about="&www;titleOnForeEdge">
+        <rdfs:label xml:lang="en">Title on Fore Edge</rdfs:label>
+        <rdfs:comment xml:lang="en">The title on fore-edge of ancient books. Type page is the page edge Relative to the spine edge 
+</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="&www;title"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.example.com/titleOnTheBookCover -->
+
+    <owl:DatatypeProperty rdf:about="&www;titleOnTheBookCover">
+        <rdfs:label xml:lang="en">Title on the Book Cover</rdfs:label>
+        <rdfs:comment xml:lang="en">The title inscribed the ancient books cover.</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="&www;title"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.example.com/titleOnTheFirstPageOfText -->
+
+    <owl:DatatypeProperty rdf:about="&www;titleOnTheFirstPageOfText">
+        <rdfs:label xml:lang="en">Title on the First Page of Text</rdfs:label>
+        <rdfs:comment xml:lang="en">The title on the first page of text.</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="&www;title"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.example.com/titleOnTheInsideCovers -->
+
+    <owl:DatatypeProperty rdf:about="&www;titleOnTheInsideCovers">
+        <rdfs:label xml:lang="en">Title on the Inside Covers</rdfs:label>
+        <rdfs:comment xml:lang="en">The title inscribed on the inside cover of ancient books. Ancient books&#39; inside cover is equivalent to the title page of modern books. 
+</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="&www;title"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.example.com/translatedTitle -->
+
+    <owl:DatatypeProperty rdf:about="&www;translatedTitle">
+        <rdfs:label xml:lang="en">Translated Title</rdfs:label>
+        <rdfs:comment xml:lang="en">Other language translations of the title.</rdfs:comment>
+        <rdfs:comment xml:lang="zh">题名在其他语言中的异名。</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="&www;title"/>
     </owl:DatatypeProperty>
     
 
@@ -1127,6 +1439,28 @@
     
 
 
+    <!-- http://www.example.com/Agent -->
+
+    <owl:Class rdf:about="&www;Agent">
+        <rdfs:label xml:lang="en">Agent</rdfs:label>
+        <rdfs:label xml:lang="zh">行动者</rdfs:label>
+        <rdfs:comment xml:lang="en">A resource that acts or has the power to act. Examples of Agent include person, organization, and software agent.</rdfs:comment>
+        <rdfs:comment xml:lang="zh">采取行动或能够采取行动的资源，如人、组织、软件代理等。</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.example.com/AgentClass -->
+
+    <owl:Class rdf:about="&www;AgentClass">
+        <rdfs:label xml:lang="en">Agent Class</rdfs:label>
+        <rdfs:label xml:lang="zh">行动者类型</rdfs:label>
+        <rdfs:comment xml:lang="en">A group of agents. Examples of Agent Class include groups seen as classes, such as students, women, charities, lecturers.</rdfs:comment>
+        <rdfs:comment xml:lang="zh">由行动者构成的群体，如学生、女人、慈善机构和演讲人等。</rdfs:comment>
+    </owl:Class>
+    
+
+
     <!-- http://www.example.com/Animal -->
 
     <owl:Class rdf:about="&www;Animal">
@@ -1168,6 +1502,17 @@
     
 
 
+    <!-- http://www.example.com/BibliographicResource -->
+
+    <owl:Class rdf:about="&www;BibliographicResource">
+        <rdfs:label xml:lang="en">Bibliographic Resource</rdfs:label>
+        <rdfs:label xml:lang="zh">书目资源</rdfs:label>
+        <rdfs:comment xml:lang="en">书籍、文章或其他文档资源。</rdfs:comment>
+        <rdfs:comment xml:lang="zh">A book, article, or other documentary resource.</rdfs:comment>
+    </owl:Class>
+    
+
+
     <!-- http://www.example.com/Blood -->
 
     <owl:Class rdf:about="&www;Blood">
@@ -1197,14 +1542,8 @@
         <rdfs:label xml:lang="zh">腑</rdfs:label>
         <rdfs:subClassOf rdf:resource="&www;VisceraBowel"/>
     </owl:Class>
-	
-	 <owl:Class rdf:about="&www;RightsStatement">
-        <rdfs:label xml:lang="en">Rights Statement</rdfs:label>
-        <rdfs:label xml:lang="zh">权利声明</rdfs:label>
-        <rdfs:comment xml:lang="en">A statement about the intellectual property rights (IPR) held in or over a Resource, a legal document giving official permission to do something with a resource, or a statement about access rights.</rdfs:comment>
-        <rdfs:comment xml:lang="zh">关于某一资源的知识产权的声明。</rdfs:comment>
-    </owl:Class>
- 
+    
+
 
     <!-- http://www.example.com/Chemical -->
 
@@ -1431,6 +1770,18 @@
     
 
 
+    <!-- http://www.example.com/FileFormat -->
+
+    <owl:Class rdf:about="&www;FileFormat">
+        <rdfs:label xml:lang="en">File Format</rdfs:label>
+        <rdfs:label xml:lang="zh">文件格式</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&www;MediaType"/>
+        <rdfs:comment xml:lang="en">A digital resource format.</rdfs:comment>
+        <rdfs:comment xml:lang="zh">某一数字资源的格式。</rdfs:comment>
+    </owl:Class>
+    
+
+
     <!-- http://www.example.com/FiveHerbalTaste -->
 
     <owl:Class rdf:about="&www;FiveHerbalTaste">
@@ -1552,6 +1903,17 @@
     
 
 
+    <!-- http://www.example.com/Frequency -->
+
+    <owl:Class rdf:about="&www;Frequency">
+        <rdfs:label xml:lang="en">Frequency</rdfs:label>
+        <rdfs:label xml:lang="zh">频率</rdfs:label>
+        <rdfs:comment xml:lang="en">A rate at which something recurs.</rdfs:comment>
+        <rdfs:comment xml:lang="zh">某事发生的速率。</rdfs:comment>
+    </owl:Class>
+    
+
+
     <!-- http://www.example.com/FunctionalBodySystem -->
 
     <owl:Class rdf:about="&www;FunctionalBodySystem">
@@ -1604,6 +1966,41 @@
     
 
 
+    <!-- http://www.example.com/Jurisdiction -->
+
+    <owl:Class rdf:about="&www;Jurisdiction">
+        <rdfs:label xml:lang="en">Jurisdiction</rdfs:label>
+        <rdfs:label xml:lang="zh">权限</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&www;LocationPeriodOrJurisdiction"/>
+        <rdfs:comment xml:lang="en">The extent or range of judicial, law enforcement, or other authority.</rdfs:comment>
+        <rdfs:comment xml:lang="zh">司法，执法或其他授权文件的程度或范围。</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.example.com/LicenseDocument -->
+
+    <owl:Class rdf:about="&www;LicenseDocument">
+        <rdfs:label xml:lang="en">License Document</rdfs:label>
+        <rdfs:label xml:lang="zh">许可文件</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&www;RightsStatement"/>
+        <rdfs:comment xml:lang="en">A legal document giving official permission to do something with a Resource.</rdfs:comment>
+        <rdfs:comment xml:lang="zh">为处理某一资源给予官方许可的法律文件。</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.example.com/LinguisticSystem -->
+
+    <owl:Class rdf:about="&www;LinguisticSystem">
+        <rdfs:label xml:lang="en">Linguistic System</rdfs:label>
+        <rdfs:label xml:lang="zh">语言系统</rdfs:label>
+        <rdfs:comment xml:lang="en">A system of signs, symbols, sounds, gestures, or rules used in communication.</rdfs:comment>
+        <rdfs:comment xml:lang="zh">一个由标志、符号、声音、手势或规则所构成的系统，用于沟通或通信之目的。</rdfs:comment>
+    </owl:Class>
+    
+
+
     <!-- http://www.example.com/LiquidAndHumor -->
 
     <owl:Class rdf:about="&www;LiquidAndHumor">
@@ -1645,6 +2042,29 @@
     
 
 
+    <!-- http://www.example.com/Location -->
+
+    <owl:Class rdf:about="&www;Location">
+        <rdfs:label xml:lang="en">Location</rdfs:label>
+        <rdfs:label xml:lang="zh">地点</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&www;LocationPeriodOrJurisdiction"/>
+        <rdfs:comment xml:lang="en">A spatial region or named place.</rdfs:comment>
+        <rdfs:comment xml:lang="zh">一个空间区域或被命名的地方。</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.example.com/LocationPeriodOrJurisdiction -->
+
+    <owl:Class rdf:about="&www;LocationPeriodOrJurisdiction">
+        <rdfs:label xml:lang="en">Location, Period, or Jurisdiction</rdfs:label>
+        <rdfs:label xml:lang="zh">地点、时期或权限</rdfs:label>
+        <rdfs:comment xml:lang="en">A location, period of time, or jurisdiction.</rdfs:comment>
+        <rdfs:comment xml:lang="zh">地点、时间区域或权限。</rdfs:comment>
+    </owl:Class>
+    
+
+
     <!-- http://www.example.com/Massage -->
 
     <owl:Class rdf:about="&www;Massage">
@@ -1652,6 +2072,29 @@
         <rdfs:label xml:lang="en">Rubbing, kneading, or percussion of the soft tissues and joints of the body with the hands, usually performed by one person on another, esp. to relieve tension or pain.</rdfs:label>
         <rdfs:label xml:lang="zh">按摩</rdfs:label>
         <rdfs:subClassOf rdf:resource="&www;Therapy"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.example.com/MediaType -->
+
+    <owl:Class rdf:about="&www;MediaType">
+        <rdfs:label xml:lang="en">Media Type</rdfs:label>
+        <rdfs:label xml:lang="zh">媒介类型</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&www;MediaTypeOrExtent"/>
+        <rdfs:comment xml:lang="en">A file format or physical medium.</rdfs:comment>
+        <rdfs:comment xml:lang="zh">一种文件格式或物理介质。</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.example.com/MediaTypeOrExtent -->
+
+    <owl:Class rdf:about="&www;MediaTypeOrExtent">
+        <rdfs:label xml:lang="en">Media Type or Extent</rdfs:label>
+        <rdfs:label xml:lang="zh">媒介类型或规模</rdfs:label>
+        <rdfs:comment xml:lang="en">A media type or extent.</rdfs:comment>
+        <rdfs:comment xml:lang="zh">一种媒介的类型或规模。</rdfs:comment>
     </owl:Class>
     
 
@@ -1797,6 +2240,18 @@
     
 
 
+    <!-- http://www.example.com/PeriodOfTime -->
+
+    <owl:Class rdf:about="&www;PeriodOfTime">
+        <rdfs:label xml:lang="en">Period of Time</rdfs:label>
+        <rdfs:label xml:lang="zh">时期</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&www;LocationPeriodOrJurisdiction"/>
+        <rdfs:comment xml:lang="en">An interval of time that is named or defined by its start and end dates.</rdfs:comment>
+        <rdfs:comment xml:lang="zh">一个被命名或被定义了起止时间的时间段。</rdfs:comment>
+    </owl:Class>
+    
+
+
     <!-- http://www.example.com/PharmacologicalEffects -->
 
     <owl:Class rdf:about="&www;PharmacologicalEffects">
@@ -1818,6 +2273,18 @@
     
 
 
+    <!-- http://www.example.com/PhysicalMedium -->
+
+    <owl:Class rdf:about="&www;PhysicalMedium">
+        <rdfs:label xml:lang="en">Physical Medium</rdfs:label>
+        <rdfs:label xml:lang="zh">物理媒介</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&www;MediaType"/>
+        <rdfs:comment xml:lang="en">A physical material or carrier. Examples include paper, canvas, or DVD.</rdfs:comment>
+        <rdfs:comment xml:lang="zh">物理材料或载体，如纸、画布、DVD等。</rdfs:comment>
+    </owl:Class>
+    
+
+
     <!-- http://www.example.com/PhysicalObject -->
 
     <owl:Class rdf:about="&www;PhysicalObject">
@@ -1825,6 +2292,17 @@
         <rdfs:label xml:lang="zh">物理对象</rdfs:label>
         <rdfs:subClassOf rdf:resource="&www;Entity"/>
         <rdfs:comment xml:lang="zh">An object perceptible to the sense of vision or touch. (UMLS)</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.example.com/PhysicalResource -->
+
+    <owl:Class rdf:about="&www;PhysicalResource">
+        <rdfs:label xml:lang="en">Physical Resource</rdfs:label>
+        <rdfs:label xml:lang="zh">物理资源</rdfs:label>
+        <rdfs:comment xml:lang="en">A material thing.</rdfs:comment>
+        <rdfs:comment xml:lang="zh">一个物质性的东西。</rdfs:comment>
     </owl:Class>
     
 
@@ -1850,6 +2328,17 @@
     
 
 
+    <!-- http://www.example.com/Policy -->
+
+    <owl:Class rdf:about="&www;Policy">
+        <rdfs:label xml:lang="en">Policy</rdfs:label>
+        <rdfs:label xml:lang="zh">政策</rdfs:label>
+        <rdfs:comment xml:lang="en">A plan or course of action by an authority, intended to influence and determine decisions, actions, and other matters.</rdfs:comment>
+        <rdfs:comment xml:lang="zh">权威机构制定的计划或程序，旨在影响和决定决策、行动和其他事项。</rdfs:comment>
+    </owl:Class>
+    
+
+
     <!-- http://www.example.com/PropertyAndFunctionOfChineseMedicinal -->
 
     <owl:Class rdf:about="&www;PropertyAndFunctionOfChineseMedicinal">
@@ -1857,6 +2346,17 @@
         <rdfs:label xml:lang="zh">中药属性和功能</rdfs:label>
         <rdfs:subClassOf rdf:resource="&www;PhenomenonAndProcess"/>
         <rdfs:comment xml:lang="en">Refer to the property, flavor, meridian entry, upbearing, downbearing, floating and sinking, toxin, and function of traditional Chinese drugs.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.example.com/ProvenanceStatement -->
+
+    <owl:Class rdf:about="&www;ProvenanceStatement">
+        <rdfs:label xml:lang="en">Provenance Statement</rdfs:label>
+        <rdfs:label xml:lang="zh">出处声明</rdfs:label>
+        <rdfs:comment xml:lang="en">A statement of any changes in ownership and custody of a resource since its creation that are significant for its authenticity, integrity, and interpretation.</rdfs:comment>
+        <rdfs:comment xml:lang="zh">对某一资源的真实性、完整性和解释具有重要意义的陈述，其中记录了自资源创建以来在资源所有权和保管权方面的变更。</rdfs:comment>
     </owl:Class>
     
 
@@ -1905,6 +2405,17 @@
     
 
 
+    <!-- http://www.example.com/RightsStatement -->
+
+    <owl:Class rdf:about="&www;RightsStatement">
+        <rdfs:label xml:lang="en">Rights Statement</rdfs:label>
+        <rdfs:label xml:lang="zh">权利声明</rdfs:label>
+        <rdfs:comment xml:lang="en">A statement about the intellectual property rights (IPR) held in or over a Resource, a legal document giving official permission to do something with a resource, or a statement about access rights.</rdfs:comment>
+        <rdfs:comment xml:lang="zh">关于某一资源的知识产权的声明。</rdfs:comment>
+    </owl:Class>
+    
+
+
     <!-- http://www.example.com/SevenEmotions -->
 
     <owl:Class rdf:about="&www;SevenEmotions">
@@ -1926,12 +2437,35 @@
     
 
 
+    <!-- http://www.example.com/SizeOrDuration -->
+
+    <owl:Class rdf:about="&www;SizeOrDuration">
+        <rdfs:label xml:lang="en">Size or Duration</rdfs:label>
+        <rdfs:label xml:lang="zh">尺寸或时长</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&www;MediaTypeOrExtent"/>
+        <rdfs:comment xml:lang="en">A dimension or extent, or a time taken to play or execute. Examples include a number of pages, a specification of length, width, and breadth, or a period in hours, minutes, and seconds.</rdfs:comment>
+        <rdfs:comment xml:lang="zh">尺寸、规模，或播放/执行所用的时间，如页数、长度、宽度、广度、以小时、分钟、秒钟计的时间段等。</rdfs:comment>
+    </owl:Class>
+    
+
+
     <!-- http://www.example.com/SmellingExamination -->
 
     <owl:Class rdf:about="&www;SmellingExamination">
         <rdfs:label xml:lang="en">smelling examination</rdfs:label>
         <rdfs:label xml:lang="zh">闻气味</rdfs:label>
         <rdfs:subClassOf rdf:resource="&www;ListeningAndSmellingExamination"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.example.com/Standard -->
+
+    <owl:Class rdf:about="&www;Standard">
+        <rdfs:label xml:lang="en">Standard</rdfs:label>
+        <rdfs:label xml:lang="zh">标准</rdfs:label>
+        <rdfs:comment xml:lang="en">A basis for comparison; a reference point against which other things can be evaluated.</rdfs:comment>
+        <rdfs:comment xml:lang="zh">用于评估其他事物的参考依据。</rdfs:comment>
     </owl:Class>
     
 
