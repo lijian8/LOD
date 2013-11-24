@@ -4,34 +4,13 @@ include_once ("./header.php");
 require 'vendor/autoload.php';
 require_once "html_tag_helpers.php";
 
-include_once ("./rdf_helper.php");
+include_once ("./onto_helper.php");
 
-
-function render_thing($o) {
-    $label = get_label($o);
-    if (!($o->isBnode())) {
-        echo "&nbsp;<a href='#" . $o->localname() . "'>" . $label . "</a>&nbsp;";
-    }
-}
-
-function render_matching_values($graph, $me, $property) {
-    $rp = $graph->resource($property);
-    foreach ($graph->resourcesMatching($rp, $me) as $r) {
-        render_thing($r);
-    }
-}
-
-function render_property_values($graph, $me, $property) {
-    $property = $graph->resource($property);
-
-    foreach ($me->all($property) as $o) {
-        render_thing($o);
-    }
-}
-
+$onto_file = "tcmdemoen.rdf";
 $graph = new EasyRdf_Graph("http://localhost/lod/tcmls-sn.rdf");
 $graph->load();
 ?>
+
 <div class="container">
     <ol class="breadcrumb">
         <li><a href="#">首页</a></li>
@@ -43,11 +22,11 @@ $graph->load();
         <tbody>
             <tr>
                 <td width='10%'><strong>当前版本：</strong></td>
-                <td>http://lod.cintcm.com/LOD/ontology.php</td>
+                <td>http://lod.cintcm.com/LOD/tcmls_sn.php</td>
             </tr>
             <tr>
                 <td width='10%'><strong>最新版本：</strong></td>
-                <td>http://lod.cintcm.com/LOD/ontology.php</td>
+                <td>http://lod.cintcm.com/LOD/tcmls_sn.php</td>
             </tr>
             <tr>
                 <td width='10%'><strong>版本号：</strong></td>
@@ -69,18 +48,18 @@ $graph->load();
                 <td width='10%'><strong>贡献者：</strong></td>
                 <td>详见<a href="#sec-ack">致谢</a></td>
             </tr>
-              <tr>
+            <tr>
                 <td width='10%'><strong>建模技术：</strong></td>
                 <td>TCMLS-SM本体基于RDF和OWL技术实现，它们是由W3C提出的开放性技术规范。</td>
             </tr>
-            
-            
+
+
         </tbody>        
     </table>
 
 
-   
-    
+
+
     <hr>
     <h2>摘要</h2>
     <p>TCMLS-SN本体为“中医药学语言系统的语义网络框架(TCMLS Semantic Network)”的OWL/RDF版本。中医药学语言系统（TCMLS）旨在实现规范化、一体化的中医药术语体系，以支持中医药文献与数据资源的合理组织和有效检索。“Health informatics--Semantic network framework of traditional Chinese medicine language system [ISO/DTS 17938]”（健康信息学—中医药学语言系统的语义网络框架）是国际标准化组织（ISO）于近期完成、正在审核的技术规范草案。它作为一个面向中医药领域的规范化顶层本体，为中医药学语言系统中的所有概念提供了一体化的概念框架，对于中医药学语言系统的规范化和国际化具有重要意义。</p>
@@ -130,26 +109,9 @@ $graph->load();
     </p>
     <h2><a name="sec-glance" id="sec-glance"></a>2. TCMLS-SN概览</h2>
     <p>目前，在TCMLS-SN这一OWL本体中，定义了&nbsp;<span class="badge"><?php echo num_of_instances($graph, 'owl:Class'); ?></span>个类（owl:Class）和&nbsp;<span class="badge"><?php echo num_of_instances($graph, 'owl:ObjectProperty'); ?></span>&nbsp;个对象属性（owl:ObjectProperty）：</p>
-    <div class="well">
-        <?php
-        echo '<p>类&nbsp;<span class="badge">' . num_of_instances($graph, 'owl:Class') . '</span>：&nbsp;|';
-//list_instances($graph, 'owl:Class');
-        foreach ($graph->allOfType('owl:Class') as $p) {
-            if (!($p->isBnode())) {
-                echo "&nbsp;" . link_to(get_label($p), '#' . $p->localname()) . "&nbsp;|";
-            }
-        }
-        echo '</p>';
 
-        echo '<p>对象属性&nbsp;<span class="badge">' . num_of_instances($graph, 'owl:ObjectProperty') . '</span>：&nbsp;|';
-//list_instances($graph, 'owl:ObjectProperty');
-        foreach ($graph->allOfType('owl:ObjectProperty') as $p) {
-            if (!($p->isBnode())) {
-                echo "&nbsp;" . link_to(get_label($p), '#' . $p->localname()) . "&nbsp;|";
-            }
-        }
-        echo '</p>';
-        ?>
+    <div class="well">
+        <?php render_nav($graph); ?>
     </div>
     <h2><a name="sec-vocab" id="sec-vocab"></a>3. TCMLS-SN描述</h2>
 
@@ -210,61 +172,8 @@ $graph->load();
     <h2><a name="sec-xref" id="sec-xref"></a>4. TCMLS-SN的类和属性列表</h2>
     TCMLS-SN定义了如下的类和属性。欲知详情，请查看<a href="tcmdemoen.rdf">TCMLS-SN的OWL/RDF文件</a>.
 
-    <?php
-    foreach ($graph->allOfType('owl:Class') as $me) {
-        if (!($me->isBnode())) {
-            echo '<div class="well-sm" id="' . $me->localName() . '">';
-            echo "<h3>类:&nbsp;<a href='individual.php?localname=" . $me->localName() . "'>" . $me->localName() . "</a></h3>";
-
-            render_literals($graph, $me, 'rdfs:comment');
-            echo "<table class=\"table table-bordered\"><tbody>";
-
-            echo "<tr><td width='10%'>中文标签:</td><td>" . $me->label('zh') . "</td></tr>";
-            echo "<tr><td>英文标签:</td><td>" . $me->label('en') . "</td></tr>";
-
-            echo "<tr><td>父类:</td><td>";
-            render_property_values($graph, $me, "rdfs:subClassOf");
-            echo "</td></tr>";
-
-            echo "<tr><td>子类:</td><td>";
-            render_matching_values($graph, $me, "rdfs:subClassOf");
-            echo "</td></tr>";
-
-            echo "</tbody></table>";
-
-
-            echo '<p style="float: right; font-size: small;">[<a href="#sec-glance">回到顶部</a>]</p>';
-            echo '</div>';
-        }
-    }
-
-    foreach ($graph->allOfType('owl:ObjectProperty') as $me) {
-        if (!($me->isBnode())) {
-            echo '<div class="well-sm" id="' . $me->localName() . '">';
-            echo "<h3>对象属性:&nbsp;<a href='individual.php?localname=" . $me->localName() . "'>" . $me->localName() . "</a></h3>";
-
-            render_literals($graph, $me, 'rdfs:comment');
-            echo "<table class=\"table table-bordered\"><tbody>";
-
-            echo "<tr><td width='10%'>中文标签:</td><td>" . $me->label('zh') . "</td></tr>";
-            echo "<tr><td>英文标签:</td><td>" . $me->label('en') . "</td></tr>";
-
-            echo "<tr><td>父属性:</td><td>";
-            echo render_property_values($graph, $me, "rdfs:subPropertyOf");
-            echo "</td></tr>";
-
-            echo "<tr><td>子属性:</td><td>";
-            render_matching_values($graph, $me, "rdfs:subPropertyOf");
-            echo "</td></tr>";
-
-            echo "</tbody></table>";
-
-
-            echo '<p style="float: right; font-size: small;">[<a href="#sec-glance">回到顶部</a>]</p>';
-            echo '</div>';
-        }
-    }
-    ?>
+    <?php render_details($graph, $onto_file);?>
+    
     <h2><a name="sec-external" id="sec-external"></a>5. 外部类和属性</h2>
     <h2><a name="sec-ack" id="sec-ack"></a>6. 致谢</h2>
     <p>本文的视觉风格和文档结构，借鉴于Dan Brickley和Libby Miller的“FOAF Vocabulary Specification”，以及Uldis Bojārs和John G. Breslin的“SIOC Core Ontology Specification”。</p>
