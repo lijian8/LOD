@@ -1421,6 +1421,20 @@
     
 
 
+    <!-- http://www.example.com/医家 -->
+
+    <owl:Class rdf:about="&www;医家">
+        <rdfs:subClassOf rdf:resource="&www;Agent"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.example.com/温度 -->
+
+    <owl:Class rdf:about="&www;温度"/>
+    
+
+
     <!-- http://www.w3.org/2002/07/owl#Thing -->
 
     <owl:Class rdf:about="&owl;Thing">
@@ -1515,6 +1529,42 @@
         <rdf:type rdf:resource="&www;Standard"/>
         <rdfs:label xml:lang="en">The Ministry of Education disciplines classification</rdfs:label>
         <rdfs:label xml:lang="zh">教育部学科分类</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.example.com/华佗 -->
+
+    <owl:NamedIndividual rdf:about="&www;华佗">
+        <rdf:type rdf:resource="&www;医家"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.example.com/摄氏37度 -->
+
+    <owl:NamedIndividual rdf:about="&www;摄氏37度">
+        <rdf:type rdf:resource="&www;温度"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.example.com/本草纲目 -->
+
+    <owl:NamedIndividual rdf:about="&www;本草纲目">
+        <rdf:type rdf:resource="&www;BibliographicResource"/>
+        <creationDate xml:lang="zh">明代</creationDate>
+        <creator rdf:resource="&www;华佗"/>
+        <temperature rdf:resource="&www;摄氏37度"/>
+        <creator rdf:resource="&www;李时珍"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.example.com/李时珍 -->
+
+    <owl:NamedIndividual rdf:about="&www;李时珍">
+        <rdf:type rdf:resource="&www;医家"/>
     </owl:NamedIndividual>
 </rdf:RDF>
 

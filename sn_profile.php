@@ -8,7 +8,7 @@ include_once ("./sn_helper.php");
 
 function render_class_table($dbc, $db_name, $active_class) {
     $query = "select value, count from cls order by count desc";
-    $result = mysqli_query($dbc, $query) or die('Error querying database1.');
+    $result = mysqli_query($dbc, $query) or die('Error querying database: ' . $query);
 
     while ($row = mysqli_fetch_array($result)) {
         $value = $row[0];
@@ -78,7 +78,7 @@ $num_of_props = sn_get_num_of_props($dbc);
 
                         $query = "select * from semantic_network where subject = '$active_class' and property != '上位词' and property != '下位词' order by count desc";
                         
-                        $result = mysqli_query($dbc, $query) or die('Error querying database2.');
+                        $result = mysqli_query($dbc, $query) or die('Error querying database: ' . $query);
                         while ($row = mysqli_fetch_array($result)) {
                             ?>
 
@@ -115,7 +115,7 @@ $num_of_props = sn_get_num_of_props($dbc);
                                                     $q1 = "select * from graph where id = '$ids[$i]'";
                                                     //$q1 = "select * from graph where id = '$ids[0]'";
 
-                                                    $r1 = mysqli_query($dbc, $q1) or die('Error querying database2.');
+                                                    $r1 = mysqli_query($dbc, $q1) or die('Error querying database:' . $q1);
                                                     if ($row1 = mysqli_fetch_array($r1)) {
                                                         //echo '<p>' . $row1[0] . '</p>';
                                                         echo '<td width = "35%">' . render_value($dbc, $db_name, $row1['subject'], false) . '</td>';

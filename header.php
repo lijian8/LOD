@@ -96,6 +96,7 @@ and open the template in the editor.
                         <li><a href="db_list.php">知识浏览</a></li>
                         <li><a href="sn_list.php">语义网络</a></li>                        
                         <li><a href="ontologies.php">领域本体</a></li>
+                        <li><a href="docs.php">文档</a></li>
                         <li><a href="#contact">联系我们</a></li>
                     </ul>
 

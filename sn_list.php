@@ -14,7 +14,7 @@ $properties_array = array();
 $properties_counts = array();
 $total_properties_counts = 0;
 
-$dbs = array("tcmls" => $tcmls);
+$dbs = array("tcmls" => $tcmls, "spleen" => $spleen);
 
 foreach ($dbs as $db_id => $db) {
 
@@ -31,6 +31,8 @@ foreach ($dbs as $db_id => $db) {
     $properties_counts[$db_id] = count($properties_array[$db_id]);
 
     $total_properties_counts = $total_properties_counts + $properties_counts[$db_id];
+    
+    $num_triples[$db_id] = sn_get_num_triples($dbc);
 }
 arsort($classes_counts);
 ?>
@@ -88,7 +90,7 @@ arsort($classes_counts);
 
 
                 echo '</td>';
-                echo '<td>' . sn_get_num_triples($dbc) . '</td>';
+                echo '<td>' . $num_triples[$db_id] . '</td>';
                 echo '</tr>';
             }
             ?>
