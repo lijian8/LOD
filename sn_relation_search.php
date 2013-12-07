@@ -27,7 +27,7 @@ function get_instance_summary($dbc, $db_name, $row) {
 
 function get_cls($dbc) {
     $query = "select value from cls order by count desc";
-    $result = mysqli_query($dbc, $query) or die('Error querying database1.');
+    $result = mysqli_query($dbc, $query) or die('Error querying database:' . $query);
     $classes = array();
     while ($row = mysqli_fetch_array($result)) {
         array_push($classes, $row[value]);
@@ -38,7 +38,7 @@ function get_cls($dbc) {
 
 function render_props($dbc, $db_name, $subject, $predicate, $object) {
     $query = "select property from properties where property != '上位词' and property != '下位词' order by count desc";
-    $result = mysqli_query($dbc, $query) or die('Error querying database1.');
+    $result = mysqli_query($dbc, $query) or die('Error querying database:' . $query);
 
     echo '<li><a href = "sn_relation_search.php?';
 
