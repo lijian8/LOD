@@ -38,7 +38,7 @@ if (isset($_GET['example'])) {
                 <p>当用户输入证候名称时，系统输出证候的治法等信息。下面是一些例子：</p>
                 <?php
                 
-                $syndromes = array('肝气犯胃证', '肺脾气虚证', '脾胃虚寒证', '胃阴虚证', '脾肾两虚证', 
+                $syndromes = array('气滞湿阻证', '肝气犯胃证', '肺脾气虚证', '脾胃虚寒证', '胃阴虚证', '脾肾两虚证', 
                     '脾肾阳虚证','心脾不足证', '肝胃不和证','外邪犯胃证','饮食伤胃证','饮食内停证','心脾不足证','土败木贼证','阳虚水泛证',
                     '湿热中阻证','湿热阻胃证','瘀血内结证','瘀血停胃证','寒邪客胃证','痰气交阻证','痰湿中阻证'
                     );
@@ -46,6 +46,13 @@ if (isset($_GET['example'])) {
                 foreach ($syndromes as $syndrome){   
                     array_push($syndrome_links, 
                      '<a target="_blank" href="qa.php?db_name=spleen&keywords=' . $syndrome . '&submit=&question_type=证候">' . $syndrome . '</a>');
+                }
+                
+                $syndrome_pluses = array('脾胃虚寒，无泛吐清水，无手足不温者');
+                
+                foreach ($syndrome_pluses as $syndrome_plus){   
+                    array_push($syndrome_links, 
+                     '<a target="_blank" href="qa.php?db_name=spleen&keywords=' . $syndrome_plus . '&submit=&question_type=证候加减">' . $syndrome_plus . '</a>');
                 }
                
                 

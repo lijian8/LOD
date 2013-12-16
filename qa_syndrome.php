@@ -1,7 +1,11 @@
 <?php
 
+function endsWith($haystack, $needle) {
+    return $needle === "" || substr($haystack, -strlen($needle)) === $needle;
+}
+
 function render_syndrome_plus($dbc, $db_name, $id) {
-    echo '<p>该证候有如下的调整/加减：</p>';
+
     $diseases = array();
     $values = array_merge(get_subjects($dbc, PREFIX . $id, "证候（调整）"));
     foreach ($values as $value) {
@@ -14,22 +18,60 @@ function render_syndrome_plus($dbc, $db_name, $id) {
 
     arsort($diseases);
 
-    $diseases = array_slice(array_keys($diseases), 0, 5);
+    if (count($diseases) != 0) {
+        echo '<hr/>';
+        echo '<p>证候治疗的加减变化：</p>';
+        //$diseases = array_slice(array_keys($diseases), 0, 5);
+        $diseases = array_keys($diseases);
 
-    echo '<ol>';
-    foreach ($diseases as $value) {
+        echo '<ol>';
+        foreach ($diseases as $value) {
 
-        //echo '<li class="list-group-item">';   
-        echo '<li>';
-        echo render_value($dbc, $db_name, $value, true);
-        echo '&nbsp;<a class="btn btn-xs btn-primary" href="qa.php?db_name=' . $db_name . '&keywords=' . get_entity_name($dbc, $value) . '&question_type=证候加减" ><span class="glyphicon glyphicon-search"></span></a>';
-        echo '<p/></li>';
+            //echo '<li class="list-group-item">';   
+            echo '<li>';
+            $sp_links = array();
+            $symptoms_plus = get_values($dbc, $value, '症状加（调整）');
+            foreach ($symptoms_plus as $symptom_plus) {
+                $sp_links[] = render_value($dbc, $db_name, $symptom_plus, false);
+            }
+            $title = '';
+            if (count($sp_links) != 0) {
+                $title .= '兼有' . implode(',&nbsp;', $sp_links);
+                ;
+            }
+
+            $sm_links = array();
+            $symptoms_minuses = get_values($dbc, $value, '症状减（调整）');
+            foreach ($symptoms_minuses as $symptoms_minus) {
+                $sm_links[] = render_value($dbc, $db_name, $symptoms_minus, false);
+            }
+
+            if (count($sm_links) != 0) {
+                if ($title != '')
+                    $title .= ',&nbsp;';
+                $title .= '无' . implode(',&nbsp;', $sm_links);
+            }
+
+            if ($title == '')
+                $title = render_value($dbc, $db_name, $value, false);
+
+            echo $title;
+            if (!endsWith($title, '者'))
+                echo '者';
+            echo '：&nbsp;';
+
+            render_solution($dbc, $db_name, $value);
+            //echo render_value($dbc, $db_name, $value, true);
+            echo '&nbsp;<a class="btn btn-xs btn-primary" href="qa.php?db_name=' . $db_name . '&keywords=' . get_entity_name($dbc, $value) . '&question_type=证候加减" ><span class="glyphicon glyphicon-search"></span></a>';
+            echo '<p/></li>';
+        }
+        echo '</ol>';
     }
-    echo '</ol>';
 }
 
+
 function render_syndromes($dbc, $db_name, $id) {
-    echo '<p>系统为您推荐如下的疾病：</p>';
+    echo '<p>相关疾病：</p>';
     $diseases = array();
     $values = array_merge(get_values($dbc, PREFIX . $id, "现象表达"));
     foreach ($values as $value) {
@@ -42,7 +84,8 @@ function render_syndromes($dbc, $db_name, $id) {
 
     arsort($diseases);
 
-    $diseases = array_slice(array_keys($diseases), 0, 5);
+    $diseases = array_keys($diseases);
+
 
     echo '<ol>';
     foreach ($diseases as $value) {
@@ -111,15 +154,12 @@ if (!empty($ids)) {
                 <strong><?php echo get_entity_name($dbc, PREFIX . $id); ?></strong>
             </div>
             <div class="panel-body">
-                <?php render_treatment($dbc, $db_name, $id); 
-                 
-                ?>
-                <hr/>
-                <?php render_syndromes($dbc, $db_name, $id); ?>
-                <hr/>
-                <?php render_syndrome_plus($dbc, $db_name, $id); ?>
-            </div>
+                <?php render_treatment($dbc, $db_name, $id); ?>
 
+        <?php render_syndrome_plus($dbc, $db_name, $id); ?>
+                <hr/>
+        <?php render_syndromes($dbc, $db_name, $id); ?>               
+            </div>
         </div>
         <?php
     }

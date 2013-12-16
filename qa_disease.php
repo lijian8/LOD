@@ -1,7 +1,7 @@
 <?php
 
 function render_syndromes($dbc, $db_name, $id) {
-    echo '<p>系统为您推荐如下的证候：</p>';
+    echo '<p>相关证候：</p>';
     $diseases = array();
     $values = array_merge(get_subjects($dbc, PREFIX . $id, "现象表达"));
     foreach ($values as $value) {
@@ -14,7 +14,8 @@ function render_syndromes($dbc, $db_name, $id) {
 
     arsort($diseases);
 
-    $diseases = array_slice(array_keys($diseases), 0, 5);
+    //$diseases = array_slice(array_keys($diseases), 0, 5);
+    $diseases = array_keys($diseases);
 
     echo '<ol>';
     foreach ($diseases as $value) {
@@ -43,7 +44,8 @@ function render_treatment($dbc, $db_name, $id) {
 
     arsort($formulas);
 
-    $formulas = array_slice(array_keys($formulas), 0, 5);
+    //$formulas = array_slice(array_keys($formulas), 0, 5);
+    $formulas = array_keys($formulas);
 
     echo '<ol>';
     foreach ($formulas as $value) {

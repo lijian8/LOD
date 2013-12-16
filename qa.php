@@ -4,6 +4,7 @@ include_once ("./appvars.php");
 include_once ("./entity_helper.php");
 include_once ("./db_helper.php");
 include_once ("./hypo_helper.php");
+include_once ("./qa_helper.php");
 
 function get_names($user_search) {
 
@@ -74,7 +75,7 @@ $question_type = $_GET['question_type'];
                         <p></p>
 
                         <label>
-                            <input type="radio" name="question_type" id="question_type" value="症状" <?php if (isset($question_type) && ($question_type == '症状')) echo 'checked'; ?>>&nbsp;症状
+                            <input type="radio" name="question_type" id="question_type" value="症状" <?php if (isset($question_type) && ($question_type == '症状')) echo 'checked'; ?>>&nbsp;症状集合
                         </label>
                         &nbsp;&nbsp;
 

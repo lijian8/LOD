@@ -14,24 +14,26 @@ function render_syndrome($dbc, $db_name, $id) {
 
     arsort($diseases);
 
-    $diseases = array_slice(array_keys($diseases), 0, 5);
+    //$diseases = array_slice(array_keys($diseases), 0, 5);
+    $diseases = array_keys($diseases);
 
-    
+    echo '<ul>';
     foreach ($diseases as $value) {
 
         //echo '<li class="list-group-item">';   
-      
+        echo '<li>';
         echo render_value($dbc, $db_name, $value, true);
         echo '&nbsp;<a class="btn btn-xs btn-primary" href="qa.php?db_name=' . $db_name . '&keywords=' . get_entity_name($dbc, $value) . '&question_type=证候" ><span class="glyphicon glyphicon-search"></span></a>';
         echo '&nbsp;';
+        echo '<p/></li>';
     }
-   echo '</p>';
+   echo '</ul>';
 }
 
 function render_symptom($dbc, $db_name, $id) {
     echo '<p>症状：</p>';
     $diseases = array();
-    $values = array_merge(get_values($dbc, PREFIX . $id, "症状加（调整）"));
+    $values = array_merge(get_values($dbc, PREFIX . $id, "症状加（调整）"), get_values($dbc, PREFIX . $id, "症状减（调整）"));
     foreach ($values as $value) {
         if (array_key_exists($value, $diseases)) {
             $diseases[$value] = $diseases[$value] + 1;
@@ -42,9 +44,10 @@ function render_symptom($dbc, $db_name, $id) {
 
     arsort($diseases);
 
-    $diseases = array_slice(array_keys($diseases), 0, 5);
+    //$diseases = array_slice(array_keys($diseases), 0, 5);
+    $diseases = array_keys($diseases);
 
-    echo '<ol>';
+    echo '<ul>';
     foreach ($diseases as $value) {
 
         //echo '<li class="list-group-item">';   
@@ -53,11 +56,15 @@ function render_symptom($dbc, $db_name, $id) {
         echo '&nbsp;<a class="btn btn-xs btn-primary" href="qa.php?db_name=' . $db_name . '&keywords=' . get_entity_name($dbc, $value) . '&question_type=症状" ><span class="glyphicon glyphicon-search"></span></a>';
         echo '<p/></li>';
     }
-    echo '</ol>';
+    echo '</ul>';
 }
 
 function render_treatment($dbc, $db_name, $id) {
-    echo '<p>系统为您推荐如下的方剂：</p>';
+    echo '<p>系统为您推荐如下的方剂：</p>' ;
+    echo '<ul><li>';
+    render_solution($dbc, $db_name, PREFIX . $id) ;
+    echo '</li></ul>';
+    /*
     $formulas = array();
 
     $values = array_merge(get_values($dbc, PREFIX . $id, "方剂加（调整）"), get_values($dbc, PREFIX . $id, "方剂（调整）"));
@@ -82,6 +89,8 @@ function render_treatment($dbc, $db_name, $id) {
         echo '<p/></li>';
     }
     echo '</ol>';
+     * 
+     */
 }
 
 $ids = array();
