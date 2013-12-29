@@ -135,7 +135,7 @@ $num_of_props = sn_get_num_of_props($dbc);
                                             </tbody>
                                         </table>
 
-                                        <a target="blank" href="sn_triple_type.php?type=<?php echo $row[id]; ?>">查看更多>></a>
+                                        <a target="blank" href="sn_triple_type.php?db_name=<?php echo $db_name;?>&type=<?php echo $row[id]; ?>">查看更多>></a>
                                     </div>
                                 </div>
                             </div>
