@@ -193,7 +193,7 @@ function render_info_by_property($dbc, $db_name, $name, $property, $with_def = t
 
 function get_summary($dbc, $db_name, $name) {
     $s = '';
-    $query = "select * from graph where subject ='$name' limit 20";
+    $query = "select * from graph where subject ='$name' limit 10";
     $result = mysqli_query($dbc, $query) or die('Error querying database2.');
     if (mysqli_num_rows($result) != 0) {
         $r = get_property_values_from_row($dbc, $db_name, $result, array(), false);
@@ -239,21 +239,30 @@ function get_property_values_from_row($dbc, $db_name, $result, $values, $with_de
     while ($row = mysqli_fetch_array($result)) {
         $property = $row[property];
         $value = $row[value];
+         
         if (array_key_exists($property, $values)) {
             array_push($values[$property], render_value($dbc, $db_name, $value, $with_def));
         } else {
             $values[$property] = array(render_value($dbc, $db_name, $value, $with_def));
         }
     }
+    
     return $values;
 }
 
 function get_property_values($dbc, $db_name, $name, $values = array()) {
 
     $query = "select * from graph where subject ='$name'";
+
+    
     $result = mysqli_query($dbc, $query) or die('Error querying database2.');
-    if (mysqli_num_rows($result) != 0) {
-        $values = get_property_values_from_row($dbc, $db_name, $result, $values);
+    $n = mysqli_num_rows($result);
+    if ($n != 0) {
+        if   ($n < 20){ 
+            $values = get_property_values_from_row($dbc, $db_name, $result, $values);
+        }else{
+            $values = get_property_values_from_row($dbc, $db_name, $result, $values, false);
+        }
     }
 
     return $values;
@@ -262,10 +271,16 @@ function get_property_values($dbc, $db_name, $name, $values = array()) {
 function get_reverse_property_values($dbc, $db_name, $name, $values = array()) {
 
     $query = "select * from graph where value ='$name'";
+    
     $result = mysqli_query($dbc, $query) or die('Error querying database2.');
-
-    if (mysqli_num_rows($result) != 0) {
-        $values = get_reverse_property_values_from_row($dbc, $db_name, $result, $values);
+    
+    $n = mysqli_num_rows($result);
+    if ($n != 0) {
+        if   ($n < 20){ 
+            $values = get_reverse_property_values_from_row($dbc, $db_name, $result, $values);
+        }else{
+            $values = get_reverse_property_values_from_row($dbc, $db_name, $result, $values, false);
+        }
     }
 
     return $values;
@@ -433,12 +448,12 @@ function render_value($dbc, $db_name, $name, $with_def = true) {
                 }
             }
         } else {
-            $result = $name;
+            $result = "<a>\"" . $name . "\"</a>";
         }
     } else {
-        $result = $name;
+        $result = "<a>\"" . $name . "\"</a>";
     }
-
+   
     return $result;
 }
 
