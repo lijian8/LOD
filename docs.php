@@ -8,7 +8,7 @@ if (isset($_GET['example'])) {
     <div class="container">
 
         <div class="jumbotron">
-            <h1>中医药术语与本体服务平台</h1>
+            <h1>中医药知识图谱</h1>
             <p class="lead">该平台集成了中医药领域的术语、本体和知识库资源。通过一些相对简单但较为完整的中医临床案例，分析中医辨证论治的思维过程，探讨基于本体推理和问答系统来支持中医临床决策的方法。</p>
         </div>
         <!-- Example row of columns -->

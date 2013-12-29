@@ -93,7 +93,7 @@ and open the template in the editor.
                     <ul class="nav navbar-nav">
                         <li class="active"><a href="index.php">首页</a></li>
                         <li><a href="qa_main.php">知识问答</a></li>
-                        <li><a href="db_list.php">知识浏览</a></li>
+                        <li><a href="db_list.php">知识资源</a></li>
                         
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">语义网络<b class="caret"></b></a>

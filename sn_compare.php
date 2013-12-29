@@ -7,6 +7,8 @@ include_once ("./db_array.php");
 include_once ("./sn_helper.php");
 
 function render_cls_list($cls, $active_class, $url) {
+    if (count($cls) == 0) echo '<li>无</li>';
+                        
     foreach ($cls as $value) {
         echo '<li ';
         if (isset($active_class) && ($active_class == $value)) {
@@ -142,9 +144,9 @@ $url = $_SERVER[PHP_SELF] . '?sdb_name=' . $sdb_name . '&tdb_name=' . $tdb_name;
                         $common_pv_pairs = array_intersect($s_pv_pairs, $t_pv_pairs);
                         $only_s_pv_pairs = array_diff($s_pv_pairs, $t_pv_pairs);
                         $only_t_pv_pairs = array_diff($t_pv_pairs, $s_pv_pairs);
-                        ?>
-                        <p>在<?php echo $db_labels[$sdb_name]; ?>和<?php echo $db_labels[$tdb_name]; ?>中均出现的语义关系:</p>
-                        <?php
+                        
+                        echo '<p>在"' . $db_labels[$sdb_name] . '"和"' . $db_labels[$tdb_name] . '"中均出现的语义关系&nbsp;<span class="badge">' . count($common_pv_pairs) . '</span>:</p>';
+                        
                         if (count($common_pv_pairs) == 0) {
                             echo '<li>无</li>';
                         } else {
@@ -169,14 +171,18 @@ $url = $_SERVER[PHP_SELF] . '?sdb_name=' . $sdb_name . '&tdb_name=' . $tdb_name;
                         ?>
 
                         <hr>
-                        <p>仅在<?php echo $db_labels[$sdb_name]; ?>中出现的语义关系:</p>                  
+                        <?php 
+                        echo '<p>仅在' . $db_labels[$sdb_name] . '中出现的语义关系&nbsp;<span class="badge">' . count($only_s_pv_pairs) . '</span>:</p>';                  
+                        
+                        ?>
                         <ul  class="nav nav-pills">  
                             <?php
                             render_pvs($only_s_pv_pairs, '');
                             ?>
                         </ul>
                         <hr>
-                        <p>仅在<?php echo $db_labels[$tdb_name]; ?>中出现的语义关系:</p>                 
+                        
+                        <?php echo '<p>仅在' . $db_labels[$tdb_name] . '中出现的语义关系&nbsp;<span class="badge">' . count($only_t_pv_pairs) . '</span>:</p>'; ?>                 
                         <ul  class="nav nav-pills">  
                             <?php
                             render_pvs($only_t_pv_pairs, '');
