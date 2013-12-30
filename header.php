@@ -87,16 +87,30 @@ and open the template in the editor.
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="#">TCMBase</a>
+                    <a class="navbar-brand" href="main.php">TCMBase</a>
                 </div>
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav">
                         <!--<li class="active"><a href="index.php">首页</a></li>-->
                         <li><a href="main.php">首页</a></li>
-                        <li><a href="index.php">知识检索</a></li>
 
-                        <li><a href="qa_main.php">知识问答</a></li>
-                        <li><a href="db_list.php">知识资源</a></li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">知识服务<b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="index.php">知识检索</a></li>
+                                <li><a href="qa_main.php">知识问答</a></li>
+                                <li><a href="db_list.php">知识浏览</a></li>
+                            </ul>
+                        </li>        
+
+
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">知识资源<b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="ontologies.php">领域本体</a></li>
+                                <li><a href="db_list.php">知识资源</a></li>                                
+                            </ul>
+                        </li>                       
 
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">语义网络<b class="caret"></b></a>
@@ -105,7 +119,16 @@ and open the template in the editor.
                                 <li><a href="sn_compare_main.php">语义网络比较</a></li>                                
                             </ul>
                         </li>
-                        <li><a href="ontologies.php">领域本体</a></li>
+                        
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">相关项目<b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="doc_herbnet.php">面向中药领域的数据库集成框架研究</a></li>
+                                <li><a href="doc_spleen.php">构建中医脾系证候知识体系研究</a></li>                                
+                            </ul>
+                        </li>
+                       
+                         
                         <li><a href="docs.php">文档</a></li>
                         <li><a href="#contact">联系我们</a></li>
                     </ul>
