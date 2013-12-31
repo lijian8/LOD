@@ -13,7 +13,7 @@ function get_types($dbc, $id) {
 function get_values($dbc, $subject, $property) {
     $query = "select * from graph where subject='$subject' and property = '$property'";
 
-    $result = mysqli_query($dbc, $query) or die('Error querying database2.');
+    $result = mysqli_query($dbc, $query) or die('Error querying database:' . $query);
     $types = array();
     while ($row = mysqli_fetch_array($result)) {
         $value = $row[value];
@@ -30,7 +30,7 @@ function get_entity_link($id, $name) {
 function get_summary($dbc, $db_name, $db_label, $name) {
     $s = '';
     $query = "select * from graph where subject ='$name' limit 20";
-    $result = mysqli_query($dbc, $query) or die('Error querying database2.');
+    $result = mysqli_query($dbc, $query) or die('Error querying database:' . $query);
     if (mysqli_num_rows($result) != 0) {
         $r = get_property_values_from_row($dbc, $db_name, $db_label, $result, array(), false);
         foreach ($r as $property => $value) {
@@ -48,7 +48,7 @@ function render_value($dbc, $db_name, $db_label, $name, $with_def = true) {
     if (strpos($name, $db_name . ':o') === 0) {
         $id = str_replace($db_name . ':o', "", $name);
         $query = "select * from def where id ='$id'";
-        $result = mysqli_query($dbc, $query) or die('Error querying database1.');
+        $result = mysqli_query($dbc, $query) or die('Error querying database:' . $query);
         if ($row = mysqli_fetch_array($result)) {
             $name = $row[name];
             $def = $row[def];
@@ -66,12 +66,11 @@ function render_value($dbc, $db_name, $db_label, $name, $with_def = true) {
     } else {
         $result = $name;
     }
-    if ($with_def) {
-        
-        
-        
+   if ($with_def) {
+
+
         $result .= '&nbsp;(来源：<a href="db_profile.php?db_name=' . $db_name . '">' . $db_label . '</a>)';
-    }
+   }
 
     return $result;
 }
@@ -109,9 +108,15 @@ function get_property_values_from_row($dbc, $db_name, $db_label, $result, $value
 function get_property_values($dbc, $db_name, $db_label, $name, $values = array()) {
 
     $query = "select * from graph where subject ='$name'";
-    $result = mysqli_query($dbc, $query) or die('Error querying database2.');
+    $result = mysqli_query($dbc, $query) or die('Error querying database:' . $query);
     if (mysqli_num_rows($result) != 0) {
         $values = get_property_values_from_row($dbc, $db_name, $db_label, $result, $values);
+        /**
+        if (mysqli_num_rows($result) < 10) {
+            
+        } else {
+            $values = get_property_values_from_row($dbc, $db_name, $db_label, $result, $values, false);
+        }*/
     }
 
     return $values;
@@ -120,10 +125,16 @@ function get_property_values($dbc, $db_name, $db_label, $name, $values = array()
 function get_reverse_property_values($dbc, $db_name, $db_label, $name, $values = array()) {
 
     $query = "select * from graph where value ='$name'";
-    $result = mysqli_query($dbc, $query) or die('Error querying database2.');
+    $result = mysqli_query($dbc, $query) or die('Error querying database:' . $query);
 
     if (mysqli_num_rows($result) != 0) {
         $values = get_reverse_property_values_from_row($dbc, $db_name, $db_label, $result, $values);
+        /**
+        if (mysqli_num_rows($result) < 10) {
+            $values = get_reverse_property_values_from_row($dbc, $db_name, $db_label, $result, $values);
+        } else {
+            $values = get_reverse_property_values_from_row($dbc, $db_name, $db_label, $result, $values, false);
+        }*/
     }
 
     return $values;
@@ -135,7 +146,7 @@ $type_labels = array('类型');
 if (isset($_GET['name'])) {
     $name = $_GET['name'];
     $query = "select id, def from def where name ='$name'";
-    $result = mysqli_query($dbc, $query) or die('Error querying database1.');
+    $result = mysqli_query($dbc, $query) or die('Error querying database:' . $query);
     if ($row = mysqli_fetch_array($result)) {
         $id = $row[id];
         $def = $row[def];
@@ -155,52 +166,56 @@ if (isset($_GET['name'])) {
     </ul>
 
 
-<?php
-echo '<ul class="nav nav-pills">';
-echo '<li ><a  href="synthesis_lit_graph.php?name=' . $name . '">综合知识</a></li>';
+    <?php
+    echo '<ul class="nav nav-pills">';
+    echo '<li ><a  href="synthesis_lit_graph.php?name=' . $name . '">综合知识</a></li>';
 
-foreach ($db_labels as $db => $db_label) {
-    echo '<li ' . (($db == $db_name) ? 'class="disabled"' : '') . '><a href="' . $_SERVER['PHP_SELF'] . "?name=$name&db_name=" . $db . '">' . $db_label . '</a></li>';
-}
-echo '<li><a href="#">更多>></a></li>';
-echo '</ul>';
-?>
+    foreach ($db_labels as $db => $db_label) {
+        echo '<li ' . (($db == $db_name) ? 'class="disabled"' : '') . '><a href="' . $_SERVER['PHP_SELF'] . "?name=$name&db_name=" . $db . '">' . $db_label . '</a></li>';
+    }
+    echo '<li><a href="#">更多>></a></li>';
+    echo '</ul>';
+    ?>
 
 
     <h1>  
         <font face="微软雅黑"><strong>
-<?php echo $name . '(' . implode(',', get_types($dbc, $id)) . ')'; ?>       
+            <?php echo $name . '(' . implode(',', get_types($dbc, $id)) . ')'; ?>       
         </strong>
         </font>
     </h1>
 
-<?php
-if (isset($name) && $name != '') {
-    $values = array();
-
-    foreach ($db_labels as $db_name => $db_label) {
-
-        $db = $dbs["$db_name"];
-        $dbc = mysqli_connect($db[0], $db[1], $db[2], $db[3]) or die('Error connecting to MySQL server.');
+    <?php
+    if (isset($name) && $name != '') {
+        $values = array();
+        $db_labels = array( "tcmls" => "TCMLS", "tcmct" => "TCMCT", "clan" => "古籍语言", "spleen" => "证候库");
 
 
-        $query = "select id from def where name ='$name'";
+        foreach ($db_labels as $db_name => $db_label) {
 
-        $result = mysqli_query($dbc, $query) or die('Error querying database1.');
+            $db = $dbs["$db_name"];
+            $dbc = mysqli_connect($db[0], $db[1], $db[2], $db[3]) or die('Error connecting to MySQL server.');
 
-        while ($row = mysqli_fetch_array($result)) {
 
-            $values = get_property_values($dbc, $db_name, $db_label, $db_name . ':o' . $row[id], $values);
+            $query = "select id from def where name ='$name'";
 
-            $values = get_reverse_property_values($dbc, $db_name, $db_label, $db_name . ':o' . $row[id], $values);
+            $result = mysqli_query($dbc, $query) or die('Error querying database:' . $query);
+
+            while ($row = mysqli_fetch_array($result)) {
+
+                $values = get_property_values($dbc, $db_name, $db_label, $db_name . ':o' . $row[id], $values);
+
+                $values = get_reverse_property_values($dbc, $db_name, $db_label, $db_name . ':o' . $row[id], $values);
+            }
         }
-    }
 
 
 
-    echo '<hr>';
-    foreach ($values as $property => $value) {
-        ?>
+        echo '<hr>';
+        //include("pv_panel.php");
+        
+        foreach ($values as $property => $value) {
+            ?>
 
             <div class="panel panel-info">
                 <div class="panel-heading">
@@ -208,20 +223,20 @@ if (isset($name) && $name != '') {
                 </div>
 
                 <ul class="list-group">
-        <?php
-        foreach ($value as $v) {
-            echo '<li class="list-group-item">' . $v . '</li>';
-        }
-        ?>
+                    <?php
+                    foreach ($value as $v) {
+                        echo '<li class="list-group-item">' . $v . '</li>';
+                    }
+                    ?>
                 </ul>
             </div>
-                    <?php
-                }
-            } else {
-                render_warning('该库中无相关实体信息！');
-            }
-            include_once ("./foot.php");
-            ?>
+            <?php
+        }
+    } else {
+        render_warning('该库中无相关实体信息！');
+    }
+    include_once ("./foot.php");
+    ?>
 
 
 
