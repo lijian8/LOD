@@ -20,32 +20,38 @@ if (isset($_GET['example'])) {
             <div class="panel-heading lead">关于本站</div>
             <div class="panel-body">
                 <p class="lead">中国中医科学院中医药信息研究所长期致力于中医药领域数字资源的建设与利用工作，成功研制了中医药学语言系统、中医临床术语集等大型术语系统，以及结构性文献数据库(方剂数据库,医案数据库)。本网站集成了中医药领域的领域本体、术语资源（包括中医药学语言系统、中医临床术语集、中医古籍语言系统等），以及证候、中药、方剂等领域的知识库，面向中医专家提供知识检索、知识问答、知识浏览等服务。
-                <p align="right"><a class="btn btn-link" href="http://v3.bootcss.com/examples/justified-nav/#" role="button">查看详情 »</a></p>
+                <p align="right"><a class="btn btn-link" href="about.php" target="_blank" role="button">查看详情 »</a></p>
             </div>
         </div>    
 
         <div class="panel panel-default">
-            <div class="panel-heading lead">中医药标准和本体</div>
+            <div class="panel-heading lead">中医药标准和本体
+                <a class="btn btn-link pull-right" href="ontologies.php"  target="_blank">
+                    查看更多&nbsp;»
+                </a>
+            </div>
             <div class="panel-body">
 
 
                 <div class="row"  >
                     <div class="col-lg-2">
-                        <a class="btn btn-link" href="ontologies.php"  target="_blank">
+                        <a class="btn btn-link" href="tcmls_sn.php"  target="_blank">
                             <img class="media-object" width="100%" src="img/iso-tcmls-sn.jpg"  alt="...">
                         </a>
                     </div>
                     <div class="col-lg-4">
-                        <p class="lead"><a href="doc_spleen.php" target="_blank">中医药学语言系统的语义网络框架</a></p>                      
+                        <p class="lead"><a href="tcmls_sn.php" target="_blank">中医药学语言系统的语义网络框架</a></p>                      
                         <p> “Health informatics--Semantic network framework of traditional Chinese medicine language system [ISO/DTS 17938]”
                             （健康信息学—中医药学语言系统的语义网络框架）是国际标准化组织（ISO）于近期完成、正在审核的技术规范草案。</p>
 
                     </div>
                     <div class="col-lg-2">
-                        <img class="media-object" width="100%" src="img/iso-tcmlm.jpg"  alt="...">
+                        <a class="btn btn-link" href="tcmlm.php"  target="_blank">
+                           <img class="media-object" width="100%" src="img/iso-tcmlm.jpg"  alt="...">                         
+                        </a>
                     </div>
                     <div class="col-lg-4">
-                        <p class="lead"><a href="ontologies.php" target="_blank">中医药文献元数据</a></p>
+                        <p class="lead"><a href="tcmlm.php" target="_blank">中医药文献元数据</a></p>
                         <p>目前国际上尚缺乏一部面向中医药领域的文献元数据技术规范，这不利于中医药文献的标引和检索。“ISO/DTS 17948 Traditional Chinese medicine literature metadata（中医药文献元数据）”是国际标准化组织（ISO）正在审核的技术规范草案。</p>
 
                     </div>

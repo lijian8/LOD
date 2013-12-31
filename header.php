@@ -132,6 +132,7 @@ and open the template in the editor.
                        
                          
                         <li><a href="docs.php">文档</a></li>
+                        <li><a href="about.php">关于本站</a></li>
                         <li><a href="#contact">联系我们</a></li>
                     </ul>
 
