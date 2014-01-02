@@ -5,9 +5,11 @@ include_once ("./entity_helper.php");
 include_once ("./db_array.php");
 ?>
 <div class="container">
-    <div class="jumbotron" align ="center">
-        <h1>语义网络比较</h1>       
-    </div>
+    <?php
+    $sn_name = 'sn_compare';
+    include_once ("sn_header.php");
+    ?>  
+    <br>
     <?php
     if (isset($_GET['first']) && isset($_GET['second'])) {
         $first = $_GET['first'];
@@ -29,10 +31,10 @@ include_once ("./db_array.php");
         <form role="form" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="get" class="form-horizontal"
               enctype="multipart/form-data">
 
-    <?php
-    if (isset($_GET['first'])) {
-        $first = $_GET['first'];
-        ?>
+            <?php
+            if (isset($_GET['first'])) {
+                $first = $_GET['first'];
+                ?>
                 <input  type="hidden" id="first" name="first" value = "<?php echo $first; ?>" >
                 <p class="lead">请选择与"<?php echo $db_labels[$first]; ?>"相比较的语义网络：</p>
                 <?php
@@ -43,26 +45,26 @@ include_once ("./db_array.php");
 
 
             <p class="lead">
-            <?php
-            foreach ($db_labels as $db_id => $db_label) {
-                //echo $db_id;
-                //echo $db_label;
-                if ($first != $db_id) {
-                    $input_name = isset($first) ? 'second' : 'first';
-                    echo '<label><input type="radio" id="' . $input_name . '" name="' . $input_name . '" value="' . $db_id . '" >&nbsp;'
-                    . $db_label . '</label>&nbsp;&nbsp;';
+                <?php
+                foreach ($db_labels as $db_id => $db_label) {
+                    //echo $db_id;
+                    //echo $db_label;
+                    if ($first != $db_id) {
+                        $input_name = isset($first) ? 'second' : 'first';
+                        echo '<label><input type="radio" id="' . $input_name . '" name="' . $input_name . '" value="' . $db_id . '" >&nbsp;'
+                        . $db_label . '</label>&nbsp;&nbsp;';
+                    }
                 }
-            }
-            ?>
+                ?>
             </p>
             <input class="btn btn-large btn-primary" type="submit" name="submit" value="提交" />    
 
         </form>
-    <?php
-}
-?>
+        <?php
+    }
+    ?>
     <hr>
 </div>
-    <?php
-    include_once ("./foot.php");
-    ?>
+<?php
+include_once ("./foot.php");
+?>

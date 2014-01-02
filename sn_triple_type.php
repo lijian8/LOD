@@ -8,7 +8,7 @@ include_once ("./db_helper.php");
 function get_header($dbc, $type) {
     $query = "SELECT * FROM semantic_network where id=" . $type;
     $result = mysqli_query($dbc, $query) or die('Error querying database1.');
-    return mysqli_fetch_array($result); 
+    return mysqli_fetch_array($result);
 }
 
 function get_total($dbc, $type) {
@@ -22,11 +22,11 @@ function get_total($dbc, $type) {
 function build_query($dbc, $type, $count_only = false) {
 
     if ($count_only) {
-        $query = "SELECT count(*) as count FROM triple_type WHERE type = " . $type ;
+        $query = "SELECT count(*) as count FROM triple_type WHERE type = " . $type;
     } else {
         $query = "SELECT * FROM triple_type t, graph g where t.triple = g.id and t.type = " . $type . " order by subject, value";
     }
- 
+
     return $query;
 }
 
@@ -57,11 +57,35 @@ $url = $_SERVER['PHP_SELF'] . '?db_name=' . $db_name . '&type=' . $type;
     })();
 </script>
 <div class="container">
-    <h1><?php echo $db_labels[$db_name]; ?></h1>
+    <?php
+    $sn_name = $db_name;
+    include_once ("sn_header.php");
+    ?>  
+    <p></p>
+    <nav class="navbar navbar-default" role="navigation">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#"><?php echo $db_labels[$db_name]; ?></a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li ><a href="sn_profile.php?db_name=<?php echo $db_name; ?>">按语义类型浏览</a></li>
+                <li><a href="sn_relation_search.php?db_name=<?php echo $db_name; ?>">语义关系搜索</a></li>                   
+            </ul>          
+        </div><!-- /.navbar-collapse -->
+    </nav>
     <p>
         （<?php echo $header['subject'] . ',' . $header['property'] . ',' . $header['object']; ?>）在系统中共有<?php echo $total; ?>条实例：</p>
 
-   
+
 
     <!--
     <div class="panel panel-info">
@@ -81,7 +105,7 @@ $url = $_SERVER['PHP_SELF'] . '?db_name=' . $db_name . '&type=' . $type;
         <th width="32%" ><?php echo $header['subject']; ?></th>
         <th width="32%" ><?php echo $header['property']; ?></th>
         <th width="32%" ><?php echo $header['object']; ?></th> 
-      
+
 
         </thead>
         <tbody>
@@ -110,7 +134,7 @@ $url = $_SERVER['PHP_SELF'] . '?db_name=' . $db_name . '&type=' . $type;
                 echo '<td>' . render_value($dbc, $db_name, $row['subject'], true) . '</td>';
                 echo '<td>' . $row['property'] . '</td>';
                 echo '<td>' . render_value($dbc, $db_name, $row['value'], true) . '</td>';
-                
+
                 echo '</tr>';
             }
             ?>    

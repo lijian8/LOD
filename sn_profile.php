@@ -45,15 +45,36 @@ $num_of_props = sn_get_num_of_props($dbc);
 </script>
 
 <div class="container">
-    <h1><?php echo $db_labels[$db_name]; ?></h1>
-    
-    <p>该语义网络包括<?php echo $num_of_cls; ?>个语义类型，<?php echo $num_of_props; ?>种语义关系：</p>
-     
-    <ul class="nav nav-tabs">
-        <li class="active"><a href="#">按语义类型浏览</a></li>
-            
-        <li><a href="sn_relation_search.php?db_name=<?php echo $db_name; ?>">语义关系搜索</a></li>       
-    </ul>
+    <?php
+    $sn_name = $db_name;
+    include_once ("sn_header.php");
+    ?>  
+   
+    <br>
+   
+
+    <nav class="navbar navbar-default" role="navigation">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#"><?php echo $db_labels[$db_name]; ?></a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="#">按语义类型浏览</a></li>
+        <li><a href="sn_relation_search.php?db_name=<?php echo $db_name; ?>">语义关系搜索</a></li>                   
+            </ul>          
+        </div><!-- /.navbar-collapse -->
+    </nav>
+ <p>该语义网络包括<?php echo $num_of_cls; ?>个语义类型，<?php echo $num_of_props; ?>种语义关系：</p>
+
     <p></p>
 
 
@@ -77,7 +98,7 @@ $num_of_props = sn_get_num_of_props($dbc);
                     if (isset($active_class)) {
 
                         $query = "select * from semantic_network where subject = '$active_class' and property != '上位词' and property != '下位词' order by count desc";
-                        
+
                         $result = mysqli_query($dbc, $query) or die('Error querying database: ' . $query);
                         while ($row = mysqli_fetch_array($result)) {
                             ?>
@@ -111,7 +132,7 @@ $num_of_props = sn_get_num_of_props($dbc);
                                                     }
                                                     $color = !$color;
 
-                                                    
+
                                                     $q1 = "select * from graph where id = '$ids[$i]'";
                                                     //$q1 = "select * from graph where id = '$ids[0]'";
 
@@ -131,11 +152,11 @@ $num_of_props = sn_get_num_of_props($dbc);
                                                 }
                                                 ?>
 
-                                            
+
                                             </tbody>
                                         </table>
 
-                                        <a target="blank" href="sn_triple_type.php?db_name=<?php echo $db_name;?>&type=<?php echo $row[id]; ?>">查看更多>></a>
+                                        <a target="blank" href="sn_triple_type.php?db_name=<?php echo $db_name; ?>&type=<?php echo $row[id]; ?>">查看更多>></a>
                                     </div>
                                 </div>
                             </div>
@@ -143,12 +164,12 @@ $num_of_props = sn_get_num_of_props($dbc);
 
 
 
-        <?php
-    }
-} else {
-    render_warning('<<请在右侧选择类型以查看其实例');
-}
-?>
+                            <?php
+                        }
+                    } else {
+                        render_warning('<<请在右侧选择类型以查看其实例');
+                    }
+                    ?>
                 </div>
 
 

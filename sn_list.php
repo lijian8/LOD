@@ -31,7 +31,7 @@ foreach ($dbs as $db_id => $db) {
     $properties_counts[$db_id] = count($properties_array[$db_id]);
 
     $total_properties_counts = $total_properties_counts + $properties_counts[$db_id];
-    
+
     $num_triples[$db_id] = sn_get_num_triples($dbc);
 }
 arsort($classes_counts);
@@ -39,12 +39,11 @@ arsort($classes_counts);
 
 
 <div class="container">
-
-
-    <div class="jumbotron" align ="center">
-        <h1><?php echo $total_classes_counts; ?>个类型,<?php echo $total_properties_counts ?>个属性</h1>       
-    </div>
-    <h1>该系统已集成了如下的语义网络：</h1>
+    <?php 
+    $sn_name = 'sn_list';
+    include_once ("sn_header.php");    
+    ?>  
+    <h1>该系统已集成了如下的语义网络（共<?php echo $total_classes_counts; ?>个类型,<?php echo $total_properties_counts ?>个属性）：</h1>
     <hr>
     <table class="table">
         <thead>

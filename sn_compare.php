@@ -104,6 +104,10 @@ $url = $_SERVER[PHP_SELF] . '?sdb_name=' . $sdb_name . '&tdb_name=' . $tdb_name;
 </script>
 
 <div class="container">
+    <?php
+    $sn_name = 'sn_compare';
+    include_once ("sn_header.php");
+    ?>  
     <h1><?php echo $db_labels[$sdb_name] . '&nbsp;vs.&nbsp;' . $db_labels[$tdb_name]; ?></h1>
     <div>
         <div class="row">

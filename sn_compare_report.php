@@ -101,6 +101,10 @@ $url = $_SERVER[PHP_SELF] . '?sdb_name=' . $sdb_name . '&tdb_name=' . $tdb_name;
 </script>
 
 <div class="container">
+    <?php
+    $sn_name = 'sn_compare';
+    include_once ("sn_header.php");
+    ?>  
     <h1><?php echo $db_labels[$sdb_name] . '与' . $db_labels[$tdb_name]; ?>语义网络比较报表</h1>
     <table class="table-bordered" width="100%">
         <thead>
