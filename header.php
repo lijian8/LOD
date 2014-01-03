@@ -116,7 +116,8 @@ and open the template in the editor.
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">相关项目<b class="caret"></b></a>
                             <ul class="dropdown-menu">
                                 <li><a href="doc_herbnet.php">面向中药领域的数据库集成框架研究</a></li>
-                                <li><a href="doc_spleen.php">构建中医脾系证候知识体系研究</a></li>                                 
+                                <li><a href="doc_spleen.php">构建中医脾系证候知识体系研究</a></li>   
+                                <li><a href="doc_tcmls_text_mining.php">基于文本的中医药语义关系发现研究</a></li>
                             </ul>
                         </li>                                                
                         <li><a href="docs.php">文档</a></li>
