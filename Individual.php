@@ -4,6 +4,14 @@ include_once ("./header.php");
 require 'vendor/autoload.php';
 require_once "html_tag_helpers.php";
 include_once ("./rdf_helper.php");
+    
+function get_title($me){
+    $labels = array(); 
+    $labels[] = $me->label('zh');
+    $labels[] = $me->label('en');
+    $title = implode(' ', $labels);
+    return $title;
+}
 
 function render_thing($o, $onto_file) {
     if ($o instanceof EasyRdf_Resource) {
@@ -76,7 +84,9 @@ if (!isset($localname)) {
     <?php
     $me = $graph->resource('http://www.example.com/' . $localname);
 
-    echo "<h1>" . $localname . "</h1>";
+    //echo "<h1>" . $localname . "</h1>";
+    echo "<h1>" . get_title($me) . "</h1>";
+    
 
     render_literals($graph, $me, 'rdfs:comment');
 

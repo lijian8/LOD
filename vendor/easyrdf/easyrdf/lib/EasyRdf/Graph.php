@@ -209,6 +209,7 @@ class EasyRdf_Graph
      */
     public function parse($data, $format=null, $uri=null)
     {
+       
         $this->checkResourceParam($uri, true);
 
         if (empty($format) or $format == 'guess') {
@@ -224,6 +225,7 @@ class EasyRdf_Graph
             );
 
         $parser = $format->newParser();
+       
         return $parser->parse($this, $data, $format, $uri);
     }
 
@@ -261,14 +263,14 @@ class EasyRdf_Graph
      * @return integer          The number of triples added to the graph
      */
     public function load($uri=null, $format=null)
-    {
+    {   
         $this->checkResourceParam($uri, true);
 
         if (!$uri)
             throw new EasyRdf_Exception(
                 "No URI given to load() and the graph does not have a URI."
             );
-
+          
         // Setup the HTTP client
         $client = EasyRdf_Http::getDefaultHttpClient();
         $client->resetParameters(true);
@@ -295,6 +297,7 @@ class EasyRdf_Graph
             $this->_loaded[] = $requestUrl;
 
             if ($response->isRedirect() and $location = $response->getHeader('location')) {
+               
                 // Avoid problems with buggy servers that add whitespace
                 $location = trim($location);
 
@@ -311,13 +314,17 @@ class EasyRdf_Graph
 
                 ++$redirectCounter;
             } elseif ($response->isSuccessful()) {
+               
                 // If we didn't get any location, stop redirecting
                 break;
             } else {
+                
                 throw new EasyRdf_Exception(
                     "HTTP request for $requestUrl failed: ".$response->getMessage()
                 );
+                
             }
+           
         } while ($redirectCounter < $this->_maxRedirects);
 
         if (!$format or $format == 'guess') {

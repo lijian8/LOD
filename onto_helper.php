@@ -12,12 +12,21 @@ function render_details($graph, $onto_file){
     render_object_property_list($graph, $onto_file);
 }
 
+function get_title($me){
+    $labels = array(); 
+    $labels[] = $me->label('zh');
+    $labels[] = $me->label('en');
+    $title = implode(' ', $labels);
+    return $title;
+}
+
 function render_class_list($graph, $onto_file){
     foreach ($graph->allOfType('owl:Class') as $me) {
         if (!($me->isBnode())) {
             echo '<div class="well-sm" id="' . $me->localName() . '">';
-            echo "<h3>类:&nbsp;<a href='individual.php?onto_file=" . $onto_file . "&localname=" . $me->localName() . "'>" . $me->localName() . "</a></h3>";
-
+           
+            //echo "<h3>类:&nbsp;<a href='individual.php?onto_file=" . $onto_file . "&localname=" . $me->localName() . "'>" . $me->localName() . "</a></h3>";
+            echo "<h3>类:&nbsp;<a href='individual.php?onto_file=" . $onto_file . "&localname=" . $me->localName() . "'>" . get_title($me) . "</a></h3>";
             render_literals($graph, $me, 'rdfs:comment');
             echo "<table class=\"table table-bordered\"><tbody>";
 
@@ -45,7 +54,7 @@ function render_object_property_list($graph, $onto_file){
      foreach ($graph->allOfType('owl:ObjectProperty') as $me) {
         if (!($me->isBnode())) {
             echo '<div class="well-sm" id="' . $me->localName() . '">';
-            echo "<h3>对象属性:&nbsp;<a href='individual.php?onto_file=" . $onto_file . "&localname=" . $me->localName() . "'>" . $me->localName() . "</a></h3>";
+            echo "<h3>对象属性:&nbsp;<a href='individual.php?onto_file=" . $onto_file . "&localname=" . $me->localName() . "'>" . get_title($me) . "</a></h3>";
 
             render_literals($graph, $me, 'rdfs:comment');
             echo "<table class=\"table table-bordered\"><tbody>";

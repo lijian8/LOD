@@ -4,9 +4,17 @@ include_once ("./header.php");
 require 'vendor/autoload.php';
 require_once "html_tag_helpers.php";
 include_once ("./onto_helper.php");
-$onto_file = 'tcmlm.rdf';
+//$onto_file = 'tcmlm.rdf';
+$onto_file = 'tcmlm-zhuling.rdf';
+
 $graph = new EasyRdf_Graph("http://localhost/lod/" . $onto_file);
-$graph->load();
+echo "hello";
+try {
+
+    $graph->load();
+} catch (Exception $e) {
+    echo 'Message: ' . $e->getMessage();
+}
 ?>
 <div class="container">
     <ol class="breadcrumb">
@@ -119,7 +127,7 @@ $graph->load();
     <h2><a name="sec-glance" id="sec-glance"></a>2. TCMLM概览</h2>
     <p>目前，在TCMLM这一OWL本体中，定义了&nbsp;<span class="badge"><?php echo num_of_instances($graph, 'owl:Class'); ?></span>个类（owl:Class）和&nbsp;<span class="badge"><?php echo num_of_instances($graph, 'owl:ObjectProperty'); ?></span>&nbsp;个对象属性（owl:ObjectProperty）：</p>
     <div class="well">   
-        <?php render_nav($graph); ?>   
+<?php render_nav($graph); ?>   
     </div>
     <h2><a name="sec-vocab" id="sec-vocab"></a>3. TCMLM的技术特点与主要内容</h2>
 
@@ -186,7 +194,7 @@ $graph->load();
     <h2><a name="sec-xref" id="sec-xref"></a>4. TCMLM的类和属性列表</h2>
     TCMLS-SN定义了如下的类和属性。欲知详情，请查看<a href="tcmdemoen.rdf">TCMLS-SN的OWL/RDF文件</a>.
 
-    <?php render_details($graph, $onto_file); ?>
+<?php render_details($graph, $onto_file); ?>
 
     <h2><a name="sec-comparison" id="sec-comparison"></a>5. TCMLM与相关标准的比较分析</h2>
     <p>

@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <catalog prefer="public" xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog">
     <group id="Folder Repository, directory=, recursive=true, Auto-Update=true, version=2" prefer="public" xml:base="">
-        <uri id="Automatically generated entry, Timestamp=1385299016684" name="duplicate:http://www.example.com/" uri="tcmdemo.rdf"/>
-        <uri id="Automatically generated entry, Timestamp=1385299016684" name="duplicate:http://www.example.com/" uri="tcmdemoen.rdf"/>
-        <uri id="Automatically generated entry, Timestamp=1385299016684" name="duplicate:http://www.example.com/" uri="tcmdemoen_bac.rdf"/>
-        <uri id="Automatically generated entry, Timestamp=1385299016684" name="duplicate:http://www.example.com/" uri="tcmlm.rdf"/>
-        <uri id="Automatically generated entry, Timestamp=1385299016684" name="duplicate:http://www.example.com/" uri="tcmls-sn.rdf"/>
+        <uri id="Automatically generated entry, Timestamp=1389097803784" name="duplicate:http://www.example.com/" uri="tcmdemo.rdf"/>
+        <uri id="Automatically generated entry, Timestamp=1389097803784" name="duplicate:http://www.example.com/" uri="tcmdemoen.rdf"/>
+        <uri id="Automatically generated entry, Timestamp=1389097803784" name="duplicate:http://www.example.com/" uri="tcmdemoen_bac.rdf"/>
+        <uri id="Automatically generated entry, Timestamp=1389097803784" name="duplicate:http://www.example.com/" uri="tcmlm-zhuling.owl"/>
+        <uri id="Automatically generated entry, Timestamp=1389097803784" name="duplicate:http://www.example.com/" uri="tcmlm-zhuling.rdf"/>
+        <uri id="Automatically generated entry, Timestamp=1389097803784" name="duplicate:http://www.example.com/" uri="tcmlm-zhuling1.owl"/>
+        <uri id="Automatically generated entry, Timestamp=1389097803784" name="duplicate:http://www.example.com/" uri="tcmlm-zhuling2.owl"/>
+        <uri id="Automatically generated entry, Timestamp=1389097803784" name="duplicate:http://www.example.com/" uri="tcmlm-zhuling3.rdf.owl"/>
+        <uri id="Automatically generated entry, Timestamp=1389097803784" name="duplicate:http://www.example.com/" uri="tcmlm.rdf"/>
+        <uri id="Automatically generated entry, Timestamp=1389097803784" name="duplicate:http://www.example.com/" uri="tcmls-sn.rdf"/>
     </group>
 </catalog>
