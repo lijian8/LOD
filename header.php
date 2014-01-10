@@ -111,18 +111,26 @@ and open the template in the editor.
                                 <li><a href="db_list.php">知识浏览</a></li>
                             </ul>
                         </li>        
-                        
+
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">相关项目<b class="caret"></b></a>
                             <ul class="dropdown-menu">
-                                <li><a href="doc_herbnet.php">面向中药领域的数据库集成框架研究</a></li>
-                                <li><a href="doc_spleen.php">构建中医脾系证候知识体系研究</a></li>   
-                                <li><a href="doc_tcmls_text_mining.php">基于文本的中医药语义关系发现研究</a></li>
+                                <?php
+                                $query = "select * from projects";
+
+                                $result = mysqli_query($dbc, $query) or die('Error querying database: ' . $query);
+                                while ($row = mysqli_fetch_array($result)) {
+                                    ?>                         
+                                    <li><a href="<?php echo $row[uri]; ?>"><?php echo $row[title]; ?></a></li>
+                                    <?php
+                                }
+                                ?>                                
+                               <li class="divider"></li>
+                                <li><a href="projects.php">更多 》</a></li>
                             </ul>
                         </li>                                                
                         <li><a href="docs.php">文档</a></li>
-                        <li><a href="about.php">关于本站</a></li>
-                        <li><a href="about.php">联系我们</a></li>
+                        <li><a href="about.php">关于</a></li>
                     </ul>
 
                     <?php

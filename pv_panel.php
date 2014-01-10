@@ -1,6 +1,6 @@
 <?php
 foreach ($values as $property => $value) {
-    if (count($values) < 20) {
+    if (count($value) < 20) {
         ?>
 
         <div class="panel panel-info">

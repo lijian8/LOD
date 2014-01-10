@@ -258,7 +258,7 @@ function get_property_values($dbc, $db_name, $name, $values = array()) {
     $result = mysqli_query($dbc, $query) or die('Error querying database2.');
     $n = mysqli_num_rows($result);
     if ($n != 0) {
-        if   ($n < 20){ 
+        if   ($n < 100){ 
             $values = get_property_values_from_row($dbc, $db_name, $result, $values);
         }else{
             $values = get_property_values_from_row($dbc, $db_name, $result, $values, false);
@@ -276,7 +276,7 @@ function get_reverse_property_values($dbc, $db_name, $name, $values = array()) {
     
     $n = mysqli_num_rows($result);
     if ($n != 0) {
-        if   ($n < 20){ 
+        if   ($n < 100){ 
             $values = get_reverse_property_values_from_row($dbc, $db_name, $result, $values);
         }else{
             $values = get_reverse_property_values_from_row($dbc, $db_name, $result, $values, false);

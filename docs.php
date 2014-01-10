@@ -10,7 +10,7 @@ if (isset($_GET['example'])) {
     </div>
     <br>
     <div class="container">       
-        <h1>相关科研项目</h1>
+        <h1>相关文档</h1>       
         <hr>
         <div class="panel-group" id="accordion">
             <div class="panel panel-default">
