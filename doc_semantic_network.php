@@ -32,6 +32,8 @@ include_once ("./header.php");
                 <?php include_once ("./term_fusion.php"); ?>
             </div>
         </div>
+        举例：
+        
         <hr>
         <p class="lead"><strong>中医药复杂语义网络工作台</strong></p> 
         “中医药复杂语义网络工作台”，是正在开发中的一套面向中医药复杂语义网络的工具集。目前，已初步实现了语义网络的浏览和比较功能，将进一步实现语义网络的图形化展示和分析等功能。

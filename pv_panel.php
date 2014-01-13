@@ -1,6 +1,7 @@
 <?php
 foreach ($values as $property => $value) {
-    if (count($value) < 20) {
+    
+    //if (count($values) < 100) {
         ?>
 
         <div class="panel panel-info">
@@ -16,23 +17,25 @@ foreach ($values as $property => $value) {
                 ?>
             </ul>
         </div>
-        <?php
-    } else {
-        ?>
+       <?php
+}
+    //} else {
+    ?>
+<!--
         <div class="panel panel-info">
             <div class="panel-heading">
-                <h3 class="panel-title"><?php echo $property; ?></h3>
+                <h3 class="panel-title"> //echo $property; </h3>
             </div>
 
             <ul class="nav nav-pills">
-                <?php
-                foreach ($value as $v) {
-                    echo '<li>' . $v . '</li>';
-                }
+                ?php
+                //foreach ($value as $v) {
+                  //  echo '<li>' . $v . '</li>';
+                //}
                 ?>
             </ul>
         </div>
-        <?php
-    }
+       
+   // }
 }
 ?>
