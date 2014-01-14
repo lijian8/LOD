@@ -6,6 +6,7 @@ include_once ("./header.php");
         <img width ="100%" src ="img/herbnet-logo.jpg"></img>    
     </div>
     <br>
+  
     <div class="container">
         <p class="lead"><strong>项目介绍</strong></p>
         <p>随着互联网技术的迅猛发展，日积月累并不断涌现大量内容丰富、种类各异的数据，结构化、半结构化、非结构化数据并存的混合型数据具有海量、异构、个性化、复杂的特点。当前应用中，对信息个性化增值服务方面存在广泛需求。本项目基于我所构建的12个中药相关数据库，分析数据库集成信息与结构，将已存、分布、自治、异构的数据库系统连接起来，抽取信息形成规范化数据模型，提出数据库与数据模型之间映射的数据集成方法，建立基于语义web的中药数据库集成框架。
@@ -40,22 +41,26 @@ include_once ("./header.php");
         </ul>
 
 
-        <p class="lead"><strong>面向中药领域的规范化数据模型</strong></p>
+        <p class="lead"><strong>中药数据库集成框架</strong></p>
         <p>
             中药各个数据库虽然内容丰富，且已经建立了良好的关系，但是各个数据库之间缺乏信息关联，仅反映了某一类数据的专业特点，试想可以在这些专业型数据库基础上建立一个内容相对完整规范、不同领域内容相互关联、方便用户整体掌握并有效应用的中药规范化数据模型，模型元素包括中药单味药属性、化学成分属性及相关药理活性、化学实验信息等知识。
         </p>
         <p>
             中药数据库集成框架需要包含中药基础信息、中药化学成分属性信息、方剂信息、药理作用、中药化学实验信息等。中药数据库集成建设要考虑多个数据来源信息的关联性，在进行的中药药理实验与中药化学实验数据库调查问卷研究中，其中约50-70%用户在中药药理实验方面数据关注较广泛，其中相对突出的关注点包括中药化学成分、研究对象、相关毒理实验信息等。在检索方式上更加注重关联信息查询，如中药相关疾病、中药基础信息、化学实验信息等。一些基础科研用户更加注重在数据之间相互关联产生的一些信息中进行知识发现与知识推理，目的在于寻求其中的某种关联甚至是推理衍生的规律，知识等。深入调查用户需求，有效的将这些中药数据库之间的联系完美织构，对中药科研工作者甚至是对整个中药信息学的发展都具有重要意义。
         </p>
-        <p>
-            本研究分析用户需求，将中药数据库群进行解析、比合，尝试中药不同类型数据之间的最大有效关联，将中药信息数据库中关注度较高的中药化学成分作为轴心，关联中药单味药信息、方剂信息、药理作用、中药化学成分相关化学实验等信息，另外将与这些字段都能相联的作者信息一共设置为6个不同的检索入口，每个检索入口都可以进行相互关联信息的展示与查询，并尽可能将这些关联结果文献来源进行标注，使用户在进行相关文献分析的同时可以明确数据信息来源的可靠性。
-        </p>
-
         <div class="panel panel-default">
             <div class="panel-body" align="center">
                 <img width ="60%" src ="img/herbnet_model.jpg"></img>  
             </div>
+        </div>
+        <p>
+            本研究分析用户需求，将中药数据库群进行解析、比合，尝试中药不同类型数据之间的最大有效关联，将中药信息数据库中关注度较高的中药化学成分作为轴心，关联中药单味药信息、方剂信息、药理作用、中药化学成分相关化学实验等信息，另外将与这些字段都能相联的作者信息一共设置为6个不同的检索入口，每个检索入口都可以进行相互关联信息的展示与查询，并尽可能将这些关联结果文献来源进行标注，使用户在进行相关文献分析的同时可以明确数据信息来源的可靠性。下面对这6个检索入口进行介绍和举例:
+        </p>
+
+
+        <div class="panel panel-default">
             <div class="container">
+                <br>
 
                 <div class="row" align="center">
                     <div class="col-lg-4">
@@ -90,14 +95,14 @@ include_once ("./header.php");
                     <div class="col-lg-4">
                         <p class="lead"><a>方剂</a></p>
                         <p>方剂，方剂学名。简称方。方指医方。《隋书.经籍志》：“医方者，所以除疾疢保性命之术者也。”剂，古作齐，指调剂。方剂是治法的体现，是根据配伍原则，总结临床经验，以若干药物配合组成的药方。下面是一些例子：
-                        <?php
-                        $formulae = array('丹参素注射液', '茯苓泽泻加山楂汤','川芎葛根人参方','复方丹参','健脾方','芪黄胶囊');
-                        foreach ($formulae as $v) {
-                            echo '<a target="_blank" href="entity.php?name=' . $v . '&db_name=herbnet">' . $v . '</a>&nbsp; ';
-                        }
-                        ?>
+                            <?php
+                            $formulae = array('丹参素注射液', '茯苓泽泻加山楂汤', '川芎葛根人参方', '复方丹参', '健脾方', '芪黄胶囊', '黄连解毒汤');
+                            foreach ($formulae as $v) {
+                                echo '<a target="_blank" href="entity.php?name=' . $v . '&db_name=herbnet">' . $v . '</a>&nbsp; ';
+                            }
+                            ?>
 
-                       </p>
+                        </p>
 
                     </div>
                 </div>
@@ -107,7 +112,7 @@ include_once ("./header.php");
                         <p class="lead"><a>药理作用</a></p>
                         <p>药理作用可被定义为通过一个在治疗浓度中的药物在体内所产生的生理和/或生物化学的变化。仅有单一的药理作用的药物是不存在的，一种药物通常会产生多种药理作用。下面是一些例子：
                             <?php
-                            $effects = array('降脂药', '');
+                            $effects = array('降脂药', '降糖药', '益智药', '抗脑缺血药', '降血糖药');
                             foreach ($effects as $v) {
                                 echo '<a target="_blank" href="entity.php?name=' . $v . '&db_name=herbnet">' . $v . '</a>&nbsp; ';
                             }
@@ -118,18 +123,24 @@ include_once ("./header.php");
                     <div class="col-lg-4">
                         <p class="lead"><a>中药化学成分</a></p>
                         <p>中草药所含化学成分很复杂，通常有糖类、氨基酸、蛋白质、油脂、蜡、酶、色素、维生素、有机酸、鞣质、无机盐、挥发油、生物碱、甙类等。每一种中草药都可能含有多种成分。下面是一些例子：
-                         <?php
-                            $effects = array('降脂药', '');
-                            foreach ($effects as $v) {
+                            <?php
+                            $chemicals = array('小檗碱', '大黄素', '牛磺酸', '三七提取物', '葛根素');
+                            foreach ($chemicals as $v) {
                                 echo '<a target="_blank" href="entity.php?name=' . $v . '&db_name=herbnet">' . $v . '</a>&nbsp; ';
                             }
                             ?>
                         </p>
                     </div>
-                    
+
                     <div class="col-lg-4">
                         <p class="lead"><a>化学实验方法</a></p>
                         <p>中药化学是一门结合中医药基本理论，运用现代科学技术，特别是运用化学及物理学的理论和方法研究中药化学成分的学科，是中药类专业的一门专业课。下面是一些例子：</p>
+                        <?php
+                        $methods = array('柱层析法', '硅胶柱色谱法', '薄层层析法', '理化鉴别法', '红外光谱法');
+                        foreach ($methods as $v) {
+                            echo '<a target="_blank" href="entity.php?name=' . $v . '&db_name=herbnet">' . $v . '</a>&nbsp; ';
+                        }
+                        ?>
                     </div>
 
 
@@ -140,9 +151,196 @@ include_once ("./header.php");
 
         </div>
 
+        <p class="lead"><strong>系统功能介绍</strong></p>
+        <div class="panel panel-default">
+            <div class="panel-body" align="center">
+                <div class="row" align="center">
+                    <div class="col-lg-offset-1 col-sm-6 col-md-5"> 
+                        <div class="well-lg"></div>
+                        <div class="well-lg"> <p class="lead"><strong>1. 进入项目主页</strong></p> 
+                            在系统主页中选择“中药数据库集成框架”，或在上方“相关项目”中选择“面向中药领域的数据库集成框架研究”，进入项目页面。
+                        </div>
+
+                    </div>
+                    <div class="col-sm-6 col-md-5">              
+                        <a href="main.php" target="_blank"><img width ="100%" src ="img/herbnet_main.jpg"></img></a> 
+                    </div>
+                </div>
+                <hr>  
+                <div class="row" align="center">
+                    <div class="col-lg-offset-1 col-sm-6 col-md-5"> 
+                        <div class="well-lg"></div>
+                        <div class="well-lg"> <p class="lead"><strong>2. 进入知识检索界面</strong></p> 
+                            在系统主页中的“中药数据库集成框架”项目介绍的下方，选择“知识检索”，进入HerbNet的检索界面。
+                        </div>
+
+                    </div>
+                    <div class="col-sm-6 col-md-5">              
+                        <a href="main.php" target="_blank"><img width ="100%" src ="img/对Herbnet检索.jpg"></img></a> 
+                    </div>
+                </div>
+                <hr>  
+                <div class="row" align="center">
+                    <div class="col-lg-offset-1 col-sm-6 col-md-5"> 
+                        <div class="well-lg"></div>
+                        <div class="well-lg"> <p class="lead"><strong>3. 在TCMBase中选择HerbNet进行检索</strong></p> 
+                            在TCMBase系统中选择“HerbNet”，则可对HerbNet的知识内容进行检索。
+                        </div>
+
+                    </div>
+                    <div class="col-sm-6 col-md-5">              
+                        <a href="index.php?db=herbnet" target="_blank"><img width ="100%" src ="img/选择HerbNet.jpg"></img></a> 
+                    </div>
+                </div>                
+                <hr>  
+                <div class="row" align="center">
+                    <div class="col-lg-offset-1 col-sm-6 col-md-5"> 
+                        <div class="well-lg"></div>
+                        <div class="well-lg"> <p class="lead"><strong>4. 输入关键词进行检索</strong></p> 
+                            系统支持用户输入关键词进行检索。用户输入关键词“大黄素”，则可检出HerbNet中与“大黄素”相关的实体。
+                        </div>
+
+                    </div>
+                    <div class="col-sm-6 col-md-5">              
+                        <a href="index.php?db=herbnet" target="_blank"><img width ="100%" src ="img/tcmbase-herbnet-大黄素1.jpg"></img></a> 
+                    </div>
+                </div>
+
+                <hr>  
+                <div class="row" align="center">
+                    <div class="col-lg-offset-1 col-sm-6 col-md-5"> 
+                        <div class="well-lg"></div>
+                        <div class="well-lg"> <p class="lead"><strong>5. 系统列出相关的实体</strong></p> 
+                            系统列出与用户输入的关键词相关的领域实体，点击链接可进入相关实体的信息页面。
+                        </div>
+
+                    </div>
+                    <div class="col-sm-6 col-md-5">              
+                        <a href="search.php?db_name=herbnet&keywords=大黄&submit=" target="_blank"><img width ="100%" src ="img/herbnet-search-大黄.jpg"></img></a> 
+                    </div>
+                </div>
+                <hr>  
+
+                <div class="row" align="center">
+                    <div class="col-lg-offset-1 col-sm-6 col-md-5"> 
+                        <div class="well-lg"></div>
+                        <div class="well-lg"> <p class="lead"><strong>6. 实体信息的综合展示</strong></p> 
+                            系统会将中药科技基础信息数据库、中药药理实验数据库等多个数据库中的实体信息进行集中展示，并标出了信息来源。
+                            用户可通过其中的超链接转到相关实体的信息展示页面。
+                        </div>
+
+                    </div>
+                    <div class="col-sm-6 col-md-5">              
+                        <a href="entity.php?name=大黄素&db_name=herbnet" target="_blank"><img width ="100%" src ="img/herbnet-大黄素.jpg"></img></a> 
+                    </div>
+                </div>
+                <hr>  
+                <div class="row" align="center">
+                    <div class="col-lg-offset-1 col-sm-6 col-md-5"> 
+                        <div class="well-lg"></div>
+                        <div class="well-lg"> <p class="lead"><strong>7. 实体相关文献的展示</strong></p> 
+                            系统不仅展示实体的结构性信息，而且列出了实体的相关文献。例如，对于某个中药“大黄”，系统会给出对该中药进行实验的相关文献。
+                        </div>
+
+                    </div>
+                    <div class="col-sm-6 col-md-5">              
+                        <a href="entity.php?name=大黄&db_name=herbnet" target="_blank"><img width ="100%" src ="img/herbnet-大黄.jpg"></img></a> 
+                    </div>
+                </div>
+
+
+            </div>
+
+        </div>
+        <p class="lead"><strong>系统界面截图</strong></p>
+
+        <div class="panel panel-default">
+            <div class="panel-body" align="center">
+
+
+                <ul class="nav nav-tabs">
+                    <li class="active"><a href="#p12" data-toggle="tab">人参</a></li>
+                    <li><a href="#p2" data-toggle="tab">大黄</a></li>
+                    <li><a href="#p13" data-toggle="tab">六味地黄汤</a></li>
+
+
+                    <li><a href="#p9" data-toggle="tab">糖尿病</a></li>
+                    <li><a href="#p10" data-toggle="tab">脑缺血</a></li>
+                    <li><a href="#p11" data-toggle="tab">高脂血症</a></li>                  
+
+                    <li><a href="#p1" data-toggle="tab">小檗碱</a></li> 
+                    <!--<li><a href="#p3" data-toggle="tab">大黄素</a></li>-->
+                    <li><a href="#p7" data-toggle="tab">葛根素</a></li>  
+
+                    <li><a href="#p4" data-toggle="tab">柱层析法</a></li>
+                    <li><a href="#p5" data-toggle="tab">硅胶柱色谱法</a></li>
+
+                    <li><a href="#p6" data-toggle="tab">抗脑缺血药</a></li>                     
+                    <li><a href="#p8" data-toggle="tab">降血糖药</a></li>
+
+
+
+                </ul>
+                <br>
+                <div class="container">
+                    <!-- Tab panes -->
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="p1">
+                            <a href="entity.php?name=小檗碱&db_name=herbnet" target="_blank"><img width ="100%" src ="img/herbnet-小檗碱.jpg"></img></a> 
+                        </div>
+                        <div class="tab-pane" id="p2">
+                            <a href="entity.php?name=大黄&db_name=herbnet" target="_blank"><img width ="100%" src ="img/herbnet-大黄.jpg"></img></a> 
+                        </div>
+                        <!--
+                        <div class="tab-pane" id="p3">
+                            <a href="entity.php?name=大黄素&db_name=herbnet" target="_blank"><img width ="100%" src ="img/herbnet-大黄素.jpg"></img></a> 
+                        </div>-->
+                        <div class="tab-pane" id="p4">
+                            <a href="entity.php?name=柱层析法&db_name=herbnet" target="_blank"><img width ="100%" src ="img/herbnet-柱层析法.jpg"></img></a>                         
+                        </div>
+                        <div class="tab-pane" id="p5">
+                            <a href="entity.php?name=硅胶柱色谱法&db_name=herbnet" target="_blank"><img width ="100%" src ="img/herbnet-硅胶柱色谱法.jpg"></img></a>                         
+                        </div>
+                        <div class="tab-pane" id="p6">
+                            <a href="entity.php?name=抗脑缺血药&db_name=herbnet" target="_blank"><img width ="100%" src ="img/herbnet-抗脑缺血药.jpg"></img></a>                         
+                        </div>
+                        <div class="tab-pane" id="p7">
+                            <a href="entity.php?name=葛根素&db_name=herbnet" target="_blank"><img width ="100%" src ="img/herbnet-葛根素.jpg"></img></a>                         
+                        </div>
+                        <div class="tab-pane" id="p8">
+                            <a href="entity.php?name=降血糖药&db_name=herbnet" target="_blank"><img width ="100%" src ="img/herbnet-降血糖药.jpg"></img></a>                         
+                        </div>
+                        <div class="tab-pane" id="p9">
+                            <a href="entity.php?name=糖尿病&db_name=herbnet" target="_blank"><img width ="100%" src ="img/herbnet-糖尿病.jpg"></img></a>                         
+                        </div>
+                        <div class="tab-pane" id="p10">
+                            <a href="entity.php?name=脑缺血&db_name=herbnet" target="_blank"><img width ="100%" src ="img/herbnet-脑缺血.jpg"></img></a>                         
+                        </div>
+                        <div class="tab-pane" id="p11">
+                            <a href="entity.php?name=高脂血症&db_name=herbnet" target="_blank"><img width ="100%" src ="img/herbnet-高脂血症.jpg"></img></a>                         
+                        </div>
+                        <div class="tab-pane" id="p12">
+                            <a href="entity.php?name=人参&db_name=herbnet" target="_blank"><img width ="100%" src ="img/herbnet-人参.jpg"></img></a>                         
+                        </div>
+                        <div class="tab-pane" id="p13">
+                            <a href="entity.php?name=六味地黄汤&db_name=herbnet" target="_blank"><img width ="100%" src ="img/herbnet-六味地黄汤.jpg"></img></a>                         
+                        </div>
+
+
+
+                    </div>
+                </div>
+
+
+
+            </div>
+        </div>
+
         <div class="well-lg" align ="center">
-            <p><a class="btn btn-lg btn-success" href="ontologies/spleen-1.0.owl" role="button"><span class="glyphicon glyphicon-download"></span>&nbsp;下载本体</a>
-                <a class="btn btn-lg btn-primary" href="docs/spleen.docx" role="button"><span class="glyphicon glyphicon-download"></span>&nbsp;下载技术报告</a></p>
+              <p><a class="btn btn-lg btn-success" href="db_profile.php?db_name=herbnet" role="button"><span class="glyphicon glyphicon-search"></span>&nbsp;知识库浏览</a>
+            <a class="btn btn-lg btn-primary" href="index.php?db=herbnet" role="button"><span class="glyphicon glyphicon-search"></span>&nbsp;知识检索</a></p>
+           <!-- <p><a class="btn btn-lg btn-success" href="ontologies/spleen-1.0.owl" role="button"><span class="glyphicon glyphicon-download"></span>&nbsp;下载本体</a>
+                <a class="btn btn-lg btn-primary" href="docs/spleen.docx" role="button"><span class="glyphicon glyphicon-download"></span>&nbsp;下载技术报告</a></p>-->
         </div>
         <hr>
 
