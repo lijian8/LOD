@@ -56,7 +56,7 @@ arsort($classes_counts);
         </thead>
         <tbody>
             <?php
-            foreach ($classes_array as $db_id => $classes) {
+            foreach ($classes_array as $db_id => $values) {
                 echo '<tr>';
                 echo '<td><a href="sn_profile.php?db_name=' . $db_id . '">' . $db_labels[$db_id] . '</a></td>';
                 echo '<td>';

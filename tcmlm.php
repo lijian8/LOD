@@ -8,7 +8,7 @@ include_once ("./onto_helper.php");
 $onto_file = 'tcmlm-zhuling.rdf';
 
 $graph = new EasyRdf_Graph("http://localhost/lod/" . $onto_file);
-echo "hello";
+
 try {
 
     $graph->load();

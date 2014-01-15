@@ -33,7 +33,7 @@ function build_query($user_search, $count_only = false) {
 
         // Add the keyword WHERE clause to the search query
         if (!empty($where_clause)) {
-            $search_query .= " WHERE $where_clause";
+            $search_query .= " WHERE name != '$user_search' and ($where_clause)";
         }
     }
 
