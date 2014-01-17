@@ -13,8 +13,7 @@ include_once ("./header.php");
         <p>在本项目中，我们主要完成了3项工作：
         <ol>
             <li>基于TCMLS从文本中抽取语义关系，构成了一个“文献库”；</li>                
-            <li>从“文献库”和TCMLS中，分别归纳出基于语义类型的语义网络(即“顶层语义网络”)；</li>
-            <li>将“文献库”和TCMLS的顶层语义网络进行比较。</li>  
+            <li>从“文献库”和TCMLS中，分别归纳出基于语义类型的语义网络(即“顶层语义网络”), 对<a href="sn_profile.php?db_name=docs" target="_blank">“文献库”的顶层语义网络</a>和<a href="sn_profile.php?db_name=tcmls" target="_blank">TCMLS的顶层语义网络</a>进行比较。</li>  
         </ol> 
         在此介绍语义网络的归纳、浏览和比较的方法和结果，欲知从文本中抽取语义关系的方法请点击&nbsp;<a href="/docs/project_relation.php">这里&nbsp;》</a>
         </p>
@@ -54,7 +53,7 @@ include_once ("./header.php");
         </p>
         <hr>
         <p class="lead"><strong>语义网络比较工具</strong></p>
-        我们对TCMLS的语义网络与从文献文本中实际抽取的语义网络进行了比较。如下图所示，我们开发了 <a  href="sn_compare.php?sdb_name=docs&tdb_name=tcmls" target="_blank">语义网络的比较界面</a>，它能够比较两个语义网络中类型的差异。其核心功能是在用户选定某个类后，比较该类在两个语义网络中的“用法”。系统首先列出了两个语义网络共有的语义类型，仅在文献库中出现的语义类型，以及仅在TCMLS中出现的语义类型。当用户选择一个语义类型（如：中药化学成分），系统会列出在两个语义网络中均出现的语义关系，以及仅出现在TCMLS或文献库中的语义关系。
+        我们对TCMLS的语义网络与从<a href="sn_profile.php?db_name=docs" target="_blank">文献文本中实际抽取的语义网络</a>进行了比较。如下图所示，我们开发了 <a  href="sn_compare.php?sdb_name=docs&tdb_name=tcmls" target="_blank">语义网络的比较界面</a>，它能够比较两个语义网络中类型的差异。其核心功能是在用户选定某个类后，比较该类在两个语义网络中的“用法”。系统首先列出了两个语义网络共有的语义类型，仅在文献库中出现的语义类型，以及仅在TCMLS中出现的语义类型。当用户选择一个语义类型（如：中药化学成分），系统会列出在两个语义网络中均出现的语义关系，以及仅出现在TCMLS或文献库中的语义关系。
         <p align="center" >
             <a  href="sn_compare.php?sdb_name=docs&tdb_name=tcmls" target="_blank">
                 <img width="60%" src ="img/语义网络比较-文献库vsTCMLS1.jpg"></img> 

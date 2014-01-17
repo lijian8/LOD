@@ -23,14 +23,15 @@ arsort($entity_counts);
 ?>
 
 
-<div class="container">
+<div class="container" align="center">
 
 
     <div class="jumbotron" align ="center">
-        <h1><?php echo $total_entity_counts; ?>个实体,<?php echo $total_fact_counts ?>条陈述</h1>
-        <p>一个关于中医药领域人、事、物的知识整合平台。</p>
+         <h1>世界上最大的中医药知识图谱！</h1>
+         <h2>The world's <em>biggest</em> knowledge graph for Traditonal Chinese Medicine!</h2>
+         
     </div>
-    <h1>该系统已集成了如下的知识资源：</h1>
+    <p  class="lead">现有<?php echo $total_entity_counts; ?>个实体，<?php echo $total_fact_counts ?>条陈述：</p>      
     <hr>
     <table class="table">
         <thead>

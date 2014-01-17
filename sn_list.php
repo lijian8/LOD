@@ -14,7 +14,7 @@ $properties_array = array();
 $properties_counts = array();
 $total_properties_counts = 0;
 
-$dbs = array("tcmls" => $tcmls, "tcmct" => $tcmct, "clan" => $clan, "spleen" => $spleen);
+$dbs = array("tcmls" => $tcmls, "tcmct" => $tcmct, "clan" => $clan, "spleen" => $spleen, "docs" => $docs);
 
 foreach ($dbs as $db_id => $db) {
 

@@ -101,7 +101,7 @@ and open the template in the editor.
                             </ul>
                         </li>
                         <li><a href="ontologies.php">领域本体</a></li>
-                        <li><a href="db_list.php">知识资源</a></li> 
+                        <li><a href="db_list.php">知识图谱</a></li> 
 
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">知识服务<b class="caret"></b></a>
