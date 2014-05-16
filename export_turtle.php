@@ -32,10 +32,10 @@ function startsWith($haystack, $needle) {
 
 set_time_limit(0);
 if (isset($_POST['submit'])) {
+    
     $id_array = $_POST['keyword_array'];
 
     $ids = explode("$", $id_array);
-    //$copy_of_ids = $ids;
     $properties = array();
     $classes = array();
 
@@ -70,15 +70,15 @@ if (isset($_POST['submit'])) {
                 $ttl_segment .= "rdf:type :c" . $c_id[0] . "; \n";
             }elseif ($row[property] == '注释') {
                 $ttl_segment .= " rdfs:comment \"" . $row[value] . "\"; \n";
-            }elseif ($row[property] == '中文正名') {
+            } elseif ($row[property] == '中文正名') {
                 $ttl_segment .= " rdfs:label \"" . $row[value] . "\";  \n";
-            }elseif ($row[property] == '英文异名') {
+            } elseif ($row[property] == '英文异名') {
                 $ttl_segment .= " rdfs:label \"" . $row[value] . "\"@en;  \n";
-            }elseif ($row[property] == '中文异名') {
+            } elseif ($row[property] == '中文异名') {
                 $ttl_segment .= " rdfs:label \"" . $row[value] . "\";  \n";
-            }elseif ($row[property] == '英文正名') {
+            } elseif ($row[property] == '英文正名') {
                 $ttl_segment .= " rdfs:label \"" . $row[value] . "\"@en;  \n";
-            }elseif ($row[property] == '定义') {
+            } elseif ($row[property] == '定义') {
                 $ttl_segment .= " rdfs:comment \"" . $row[value] . "\";  \n";
             }
         }
@@ -125,11 +125,15 @@ if (isset($_POST['submit'])) {
     }
 
     fclose($fp);
-    echo "finished";
-
-    // print_r($ids);
-    // print_r($classes);
+    echo '<div class="container">';
+    echo '<h1><font face="微软雅黑">中医药子本体抽取工具</font></h1>';
+    echo '<hr>';
+    echo '<p><a href = "subontology.owl">下载文件</a></p>';     
+    echo '<p><a href = "subontology.php">返回</a></p>';
+    echo '</div>';
 }
+
+
 
 include_once ("./foot.php");
 ?>
