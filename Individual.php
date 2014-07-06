@@ -58,6 +58,9 @@ if (isset($_GET['onto_file'])) {
     $onto_file = "tcmdemoen.rdf";
 }
 
+$namespace = 'http://www.semanticweb.org/ontologies/2014/3/Ontology1397720026234.owl#';
+//$namespace = 'http://www.example.com/';
+
 $graph = new EasyRdf_Graph("http://localhost/lod/" . $onto_file);
 $graph->load();
 
@@ -82,7 +85,7 @@ if (!isset($localname)) {
 
 
     <?php
-    $me = $graph->resource('http://www.example.com/' . $localname);
+    $me = $graph->resource($namespace . $localname);
 
     //echo "<h1>" . $localname . "</h1>";
     echo "<h1>" . get_title($me) . "</h1>";
@@ -134,7 +137,7 @@ if (!isset($localname)) {
         echo '</div>';
         echo '<div class="panel-body">';
         
-        foreach ($graph->allOfType('http://www.example.com/' . $localname) as $p) {
+        foreach ($graph->allOfType($namespace . $localname) as $p) {
             render_thing($p, $onto_file);
         }
 
