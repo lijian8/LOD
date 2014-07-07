@@ -194,7 +194,7 @@ try {
     <h2><a name="sec-xref" id="sec-xref"></a>4. TCMLM的类和属性列表</h2>
     TCMLS-SN定义了如下的类和属性。欲知详情，请查看<a href="tcmdemoen.rdf">TCMLS-SN的OWL/RDF文件</a>.
 
-<?php render_details($graph, $onto_file); ?>
+<?php render_details($graph, "tcmlm"); ?>
 
     <h2><a name="sec-comparison" id="sec-comparison"></a>5. TCMLM与相关标准的比较分析</h2>
     <p>

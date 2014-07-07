@@ -172,7 +172,7 @@ $graph->load();
     <h2><a name="sec-xref" id="sec-xref"></a>4. TCMLS-SN的类和属性列表</h2>
     TCMLS-SN定义了如下的类和属性。欲知详情，请查看<a href="tcmdemoen.rdf">TCMLS-SN的OWL/RDF文件</a>.
 
-    <?php render_details($graph, $onto_file);?>
+    <?php render_details($graph, "tcmls");?>
     
     <h2><a name="sec-external" id="sec-external"></a>5. 外部类和属性</h2>
     <h2><a name="sec-ack" id="sec-ack"></a>6. 致谢</h2>
