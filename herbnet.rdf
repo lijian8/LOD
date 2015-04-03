@@ -552,7 +552,7 @@
 
     <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/ontologies/2014/3/Ontology1397720026234.owl#药理作用">
         <rdfs:label xml:lang="en">Pharmacological action</rdfs:label>
-        <rdfs:label xml:lang="zh">中药药理作用</rdfs:label>
+        <rdfs:label xml:lang="zh">药理作用</rdfs:label>
         <rdfs:comment xml:lang="en">Based on the basic theory of Chinese medicine, used modern scientific methods to study the interaction between the body and the role of traditional Chinese medicine and the law.</rdfs:comment>
         <rdfs:comment xml:lang="zh">是以中医药基本理论为指导，运用现代科学方法，研究中药和机体相互作用及作用规律。</rdfs:comment>
     </owl:DatatypeProperty>
@@ -578,43 +578,13 @@
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologies/2014/3/Ontology1397720026234.owl#OWLClassImpl_00000282219648191110"/>
         <rdfs:subClassOf>
             <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.semanticweb.org/ontologies/2014/3/Ontology1397720026234.owl#药理作用"/>
-                <owl:someValuesFrom rdf:resource="&rdfs;Literal"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:subClassOf>
-            <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.semanticweb.org/ontologies/2014/3/Ontology1397720026234.owl#OWLDataPropertyImpl_00000282219650228311"/>
                 <owl:someValuesFrom rdf:resource="&rdfs;Literal"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <rdfs:subClassOf>
             <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.semanticweb.org/ontologies/2014/3/Ontology1397720026234.owl#consists_of"/>
-                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/ontologies/2014/3/Ontology1397720026234.owl#OWLClassImpl_00000282219619544662"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.semanticweb.org/ontologies/2014/3/Ontology1397720026234.owl#OWLDataPropertyImpl_00000282219651084355"/>
-                <owl:someValuesFrom rdf:resource="&rdfs;Literal"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.semanticweb.org/ontologies/2014/3/Ontology1397720026234.owl#has_ingredient"/>
-                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/ontologies/2014/3/Ontology1397720026234.owl#中药"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.semanticweb.org/ontologies/2014/3/Ontology1397720026234.owl#功效"/>
-                <owl:someValuesFrom rdf:resource="&rdfs;Literal"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.semanticweb.org/ontologies/2014/3/Ontology1397720026234.owl#OWLDataPropertyImpl_00000282219660459290"/>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/ontologies/2014/3/Ontology1397720026234.owl#药理作用"/>
                 <owl:someValuesFrom rdf:resource="&rdfs;Literal"/>
             </owl:Restriction>
         </rdfs:subClassOf>
@@ -626,7 +596,37 @@
         </rdfs:subClassOf>
         <rdfs:subClassOf>
             <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/ontologies/2014/3/Ontology1397720026234.owl#consists_of"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/ontologies/2014/3/Ontology1397720026234.owl#OWLClassImpl_00000282219619544662"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/ontologies/2014/3/Ontology1397720026234.owl#OWLDataPropertyImpl_00000282219660459290"/>
+                <owl:someValuesFrom rdf:resource="&rdfs;Literal"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.semanticweb.org/ontologies/2014/3/Ontology1397720026234.owl#OWLDataPropertyImpl_00000282219666297113"/>
+                <owl:someValuesFrom rdf:resource="&rdfs;Literal"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/ontologies/2014/3/Ontology1397720026234.owl#has_ingredient"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/ontologies/2014/3/Ontology1397720026234.owl#中药"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/ontologies/2014/3/Ontology1397720026234.owl#OWLDataPropertyImpl_00000282219651084355"/>
+                <owl:someValuesFrom rdf:resource="&rdfs;Literal"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/ontologies/2014/3/Ontology1397720026234.owl#功效"/>
                 <owl:someValuesFrom rdf:resource="&rdfs;Literal"/>
             </owl:Restriction>
         </rdfs:subClassOf>
@@ -644,30 +644,6 @@
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologies/2014/3/Ontology1397720026234.owl#OWLClassImpl_00000282219648191110"/>
         <rdfs:subClassOf>
             <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.semanticweb.org/ontologies/2014/3/Ontology1397720026234.owl#OWLDataPropertyImpl_00000282219647739866"/>
-                <owl:someValuesFrom rdf:resource="&rdfs;Literal"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.semanticweb.org/ontologies/2014/3/Ontology1397720026234.owl#OWLDataPropertyImpl_00000282219657058578"/>
-                <owl:someValuesFrom rdf:resource="&rdfs;Literal"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.semanticweb.org/ontologies/2014/3/Ontology1397720026234.owl#OWLDataPropertyImpl_00000282219664614357"/>
-                <owl:someValuesFrom rdf:resource="&rdfs;Literal"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.semanticweb.org/ontologies/2014/3/Ontology1397720026234.owl#constitutes"/>
-                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/ontologies/2014/3/Ontology1397720026234.owl#中药"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:subClassOf>
-            <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.semanticweb.org/ontologies/2014/3/Ontology1397720026234.owl#OWLDataPropertyImpl_00000282219659252223"/>
                 <owl:someValuesFrom rdf:resource="&rdfs;Literal"/>
             </owl:Restriction>
@@ -681,25 +657,7 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.semanticweb.org/ontologies/2014/3/Ontology1397720026234.owl#constitutes"/>
-                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/ontologies/2014/3/Ontology1397720026234.owl#OWLClassImpl_00000282219619249862"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.semanticweb.org/ontologies/2014/3/Ontology1397720026234.owl#OWLDataPropertyImpl_00000282219665010846"/>
-                <owl:someValuesFrom rdf:resource="&xsd;double"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.semanticweb.org/ontologies/2014/3/Ontology1397720026234.owl#OWLDataPropertyImpl_00000282219654859067"/>
-                <owl:someValuesFrom rdf:resource="&rdfs;Literal"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.semanticweb.org/ontologies/2014/3/Ontology1397720026234.owl#OWLDataPropertyImpl_00000282219660821556"/>
-                <owl:someValuesFrom rdf:resource="&rdfs;Literal"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/ontologies/2014/3/Ontology1397720026234.owl#中药"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <rdfs:subClassOf>
@@ -710,7 +668,49 @@
         </rdfs:subClassOf>
         <rdfs:subClassOf>
             <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/ontologies/2014/3/Ontology1397720026234.owl#OWLDataPropertyImpl_00000282219665010846"/>
+                <owl:someValuesFrom rdf:resource="&xsd;double"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/ontologies/2014/3/Ontology1397720026234.owl#OWLDataPropertyImpl_00000282219660821556"/>
+                <owl:someValuesFrom rdf:resource="&rdfs;Literal"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.semanticweb.org/ontologies/2014/3/Ontology1397720026234.owl#OWLDataPropertyImpl_00000282219655552311"/>
+                <owl:someValuesFrom rdf:resource="&rdfs;Literal"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/ontologies/2014/3/Ontology1397720026234.owl#constitutes"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/ontologies/2014/3/Ontology1397720026234.owl#OWLClassImpl_00000282219619249862"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/ontologies/2014/3/Ontology1397720026234.owl#OWLDataPropertyImpl_00000282219654859067"/>
+                <owl:someValuesFrom rdf:resource="&rdfs;Literal"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/ontologies/2014/3/Ontology1397720026234.owl#OWLDataPropertyImpl_00000282219664614357"/>
+                <owl:someValuesFrom rdf:resource="&rdfs;Literal"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/ontologies/2014/3/Ontology1397720026234.owl#OWLDataPropertyImpl_00000282219657058578"/>
+                <owl:someValuesFrom rdf:resource="&rdfs;Literal"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/ontologies/2014/3/Ontology1397720026234.owl#OWLDataPropertyImpl_00000282219647739866"/>
                 <owl:someValuesFrom rdf:resource="&rdfs;Literal"/>
             </owl:Restriction>
         </rdfs:subClassOf>
@@ -744,13 +744,7 @@
         <rdfs:label xml:lang="zh">疾病</rdfs:label>
         <rdfs:subClassOf>
             <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.semanticweb.org/ontologies/2014/3/Ontology1397720026234.owl#OWLDataPropertyImpl_00000282219649380088"/>
-                <owl:someValuesFrom rdf:resource="&rdfs;Literal"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.semanticweb.org/ontologies/2014/3/Ontology1397720026234.owl#OWLDataPropertyImpl_00000282219652839467"/>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/ontologies/2014/3/Ontology1397720026234.owl#OWLDataPropertyImpl_00000282219661191645"/>
                 <owl:someValuesFrom rdf:resource="&rdfs;Literal"/>
             </owl:Restriction>
         </rdfs:subClassOf>
@@ -762,13 +756,19 @@
         </rdfs:subClassOf>
         <rdfs:subClassOf>
             <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.semanticweb.org/ontologies/2014/3/Ontology1397720026234.owl#OWLDataPropertyImpl_00000282219661191645"/>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/ontologies/2014/3/Ontology1397720026234.owl#OWLDataPropertyImpl_00000282219649380088"/>
                 <owl:someValuesFrom rdf:resource="&rdfs;Literal"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.semanticweb.org/ontologies/2014/3/Ontology1397720026234.owl#OWLDataPropertyImpl_00000282219666297113"/>
+                <owl:someValuesFrom rdf:resource="&rdfs;Literal"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/ontologies/2014/3/Ontology1397720026234.owl#OWLDataPropertyImpl_00000282219652839467"/>
                 <owl:someValuesFrom rdf:resource="&rdfs;Literal"/>
             </owl:Restriction>
         </rdfs:subClassOf>
@@ -848,19 +848,19 @@
         </rdfs:subClassOf>
         <rdfs:subClassOf>
             <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.semanticweb.org/ontologies/2014/3/Ontology1397720026234.owl#consists_of"/>
-                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/ontologies/2014/3/Ontology1397720026234.owl#OWLClassImpl_00000282219619544662"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.semanticweb.org/ontologies/2014/3/Ontology1397720026234.owl#归经"/>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/ontologies/2014/3/Ontology1397720026234.owl#OWLDataPropertyImpl_00000282219657529378"/>
                 <owl:someValuesFrom rdf:resource="&rdfs;Literal"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <rdfs:subClassOf>
             <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.semanticweb.org/ontologies/2014/3/Ontology1397720026234.owl#OWLDataPropertyImpl_00000282219666297113"/>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/ontologies/2014/3/Ontology1397720026234.owl#ingredient_of"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/ontologies/2014/3/Ontology1397720026234.owl#OWLClassImpl_00000282219619249862"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/ontologies/2014/3/Ontology1397720026234.owl#归经"/>
                 <owl:someValuesFrom rdf:resource="&rdfs;Literal"/>
             </owl:Restriction>
         </rdfs:subClassOf>
@@ -878,43 +878,13 @@
         </rdfs:subClassOf>
         <rdfs:subClassOf>
             <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.semanticweb.org/ontologies/2014/3/Ontology1397720026234.owl#OWLDataPropertyImpl_00000282219651084355"/>
-                <owl:someValuesFrom rdf:resource="&rdfs;Literal"/>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/ontologies/2014/3/Ontology1397720026234.owl#consists_of"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/ontologies/2014/3/Ontology1397720026234.owl#OWLClassImpl_00000282219619544662"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <rdfs:subClassOf>
             <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.semanticweb.org/ontologies/2014/3/Ontology1397720026234.owl#英文名"/>
-                <owl:someValuesFrom rdf:resource="&rdfs;Literal"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.semanticweb.org/ontologies/2014/3/Ontology1397720026234.owl#药理作用"/>
-                <owl:someValuesFrom rdf:resource="&rdfs;Literal"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.semanticweb.org/ontologies/2014/3/Ontology1397720026234.owl#OWLDataPropertyImpl_00000282219650631155"/>
-                <owl:someValuesFrom rdf:resource="&rdfs;Literal"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.semanticweb.org/ontologies/2014/3/Ontology1397720026234.owl#ingredient_of"/>
-                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/ontologies/2014/3/Ontology1397720026234.owl#OWLClassImpl_00000282219619249862"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.semanticweb.org/ontologies/2014/3/Ontology1397720026234.owl#OWLDataPropertyImpl_00000282219657529378"/>
-                <owl:someValuesFrom rdf:resource="&rdfs;Literal"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.semanticweb.org/ontologies/2014/3/Ontology1397720026234.owl#药性"/>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/ontologies/2014/3/Ontology1397720026234.owl#OWLDataPropertyImpl_00000282219666297113"/>
                 <owl:someValuesFrom rdf:resource="&rdfs;Literal"/>
             </owl:Restriction>
         </rdfs:subClassOf>
@@ -926,13 +896,43 @@
         </rdfs:subClassOf>
         <rdfs:subClassOf>
             <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.semanticweb.org/ontologies/2014/3/Ontology1397720026234.owl#OWLDataPropertyImpl_00000282219662669068"/>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/ontologies/2014/3/Ontology1397720026234.owl#药性"/>
                 <owl:someValuesFrom rdf:resource="&rdfs;Literal"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.semanticweb.org/ontologies/2014/3/Ontology1397720026234.owl#基原"/>
+                <owl:someValuesFrom rdf:resource="&rdfs;Literal"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/ontologies/2014/3/Ontology1397720026234.owl#英文名"/>
+                <owl:someValuesFrom rdf:resource="&rdfs;Literal"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/ontologies/2014/3/Ontology1397720026234.owl#OWLDataPropertyImpl_00000282219650631155"/>
+                <owl:someValuesFrom rdf:resource="&rdfs;Literal"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/ontologies/2014/3/Ontology1397720026234.owl#OWLDataPropertyImpl_00000282219651084355"/>
+                <owl:someValuesFrom rdf:resource="&rdfs;Literal"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/ontologies/2014/3/Ontology1397720026234.owl#药理作用"/>
+                <owl:someValuesFrom rdf:resource="&rdfs;Literal"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/ontologies/2014/3/Ontology1397720026234.owl#OWLDataPropertyImpl_00000282219662669068"/>
                 <owl:someValuesFrom rdf:resource="&rdfs;Literal"/>
             </owl:Restriction>
         </rdfs:subClassOf>
@@ -946,7 +946,7 @@
 
     <owl:Class rdf:about="http://www.semanticweb.org/ontologies/2014/3/Ontology1397720026234.owl#药理作用">
         <rdfs:label xml:lang="en">Pharmacological action</rdfs:label>
-        <rdfs:label xml:lang="zh">中药药理作用</rdfs:label>
+        <rdfs:label xml:lang="zh">药理作用</rdfs:label>
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.semanticweb.org/ontologies/2014/3/Ontology1397720026234.owl#property_of"/>
