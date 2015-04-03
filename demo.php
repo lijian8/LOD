@@ -49,8 +49,11 @@ if ($_POST['submit'] == '登录') {
         $_POST['rememberMe'] = (int) $_POST['rememberMe'];
 
         // Escaping all input data
+        
 
-        $row = mysql_fetch_assoc(mysql_query("SELECT id,usr,real_name FROM users WHERE usr='{$_POST['username']}' AND pass='" . md5($_POST['password']) . "'"));
+        $sql = "SELECT id,usr,real_name FROM users WHERE usr='{$_POST['username']}' AND pass='" . md5($_POST['password']) . "'";
+        
+        $row = mysql_fetch_assoc(mysql_query($sql));
 
         if ($row['usr']) {
             // If everything is OK login
@@ -66,7 +69,7 @@ if ($_POST['submit'] == '登录') {
             setcookie('tzRemember', $_POST['rememberMe']);
         }
         else
-            $err[] = '错误的用户名和/或密码!';
+            $err[] = '错误的用户名和/或密码!'.$sql;
     }
 
     if ($err)
@@ -306,6 +309,7 @@ if ($_SESSION['msg']) {
                 </div>
 
                 <div class="container">
+                    
 
                     <p><strong>简介：</strong>
                         <?php

@@ -5,7 +5,7 @@ include_once ("./appvars.php");
 include_once ("./entity_helper.php");
 include_once ("./db_helper.php");
 
-
+set_time_limit(0);
 
 $names = array('英文正名', '英文异名', '中文异名', '中文正名', '异名', '汉语拼音', '英文名', '别名');
 $type_labels = array('类型');
